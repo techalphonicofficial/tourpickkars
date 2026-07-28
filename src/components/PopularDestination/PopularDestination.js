@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Autoplay, EffectCoverflow } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
+import "swiper/css/navigation";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PopularCard from "./PopularCard";
@@ -11,6 +12,9 @@ import { getHomeDestination } from "@/services/destinationApi";
 
 const mainpage = await getPagewithSection(1, "destination");
 const homeDestination = await getHomeDestination();
+
+// console.log("homeDestination", homeDestination);
+
 
 export default function PopularDestination() {
   return (
@@ -36,9 +40,10 @@ export default function PopularDestination() {
             modifier: 1,
             slideShadows: false,
           }}
-          modules={[Autoplay, EffectCoverflow]}
+          modules={[Autoplay, EffectCoverflow, Navigation]}
+          navigation={true}
           breakpoints={{
-            0: { slidesPerView: 1 },
+            0: { slidesPerView: 1.1 },
             576: { slidesPerView: 2 },
             992: { slidesPerView: 3 },
             1200: { slidesPerView: 3 },

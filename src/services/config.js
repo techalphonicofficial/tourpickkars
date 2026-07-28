@@ -13,7 +13,24 @@
 
 import axios from "axios";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const trimTrailingSlash = (value = "") => value.replace(/\/+$/, "");
+
+export const API_URL = trimTrailingSlash(
+  process.env.NEXT_PUBLIC_API_URL || "https://dashboard.tourpickkars.in/api"
+);
+export const MEDIA_URL = trimTrailingSlash(
+  process.env.NEXT_PUBLIC_MEDIA_PATH || "https://dashboard.tourpickkars.in/storage"
+);
+
+export const apiEndpoint = (path = "") => {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${API_URL}${normalizedPath}`;
+};
+
+export const mediaUrl = (path = "") => {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${MEDIA_URL}${normalizedPath}`;
+};
 
 // ✅ axios instance with timeout
 export const api = axios.create({
@@ -21,14 +38,14 @@ export const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 10000, // 10 second timeout
+  timeout: 60000, // 60 second timeout
 });
 
 // ✅ Add request interceptor for better error handling
 api.interceptors.request.use( 
   (config) => {
     // Add timeout to every request
-    config.timeout = config.timeout || 10000;
+    config.timeout = config.timeout || 60000;
     return config;
   },
   (error) => {

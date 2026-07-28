@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+// import { Geist, Geist_Mono } from "next/font/google";
 // import { Geist, Geist_Mono } from "next/font/google";
 import { Montez, Manrope } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,7 +13,9 @@ config.autoAddCss = false;
 
 import Header from "@/components/Partials/Header";
 import Footer from "@/components/Partials/Footer";
-import Head from "next/head";
+import { getPagewithSection } from "@/services/pageSection";
+import { tripsWithPackagecount } from "@/services/tripsApi";
+import Script from "next/script";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -38,11 +40,21 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
+const GTM_ID = "GTM-NG5CWV9S";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+
+
+export const viewport = {
+  themeColor: "#00c18d",
+};
 
 export const metadata = {
- 
-   title: "Tour Pickkars",
+
+  title: "Tour Pickkars",
   description: "Tour Pickkars - Book your tours and travel experiences with us.",
   authors: [{ name: "Tour Pickkars" }],
   keywords: [
@@ -53,17 +65,16 @@ export const metadata = {
     "Holiday Booking"
   ],
   robots: "index, follow",
-  themeColor: "#00c18d",
 
   // 🔹 Open Graph (Facebook, LinkedIn, WhatsApp, etc.)
   openGraph: {
     title: "Tour Pickkars",
     description: "Book your tours and travel experiences with Tour Pickkars.",
-    url: "https://tourpickkars.com",   // replace with your actual domain
+    url: "https://tourpicker.in",   // replace with your actual domain
     siteName: "Tour Pickkars",
     images: [
       {
-        url: "/img/logo.svg", // put og-image.jpg in /public/assets/img/
+        url: "/img/logo.webp", // put og-image.jpg in /public/assets/img/
         width: 1200,
         height: 630,
         alt: "Tour Pickkars",
@@ -79,41 +90,67 @@ export const metadata = {
     title: "Tour Pickkars",
     description: "Plan your dream vacation with Tour Pickkars, your trusted travel partner.",
     creator: "@tourpickkars",
-    images: ["/img/logo.svg"],
+    images: ["/img/logo.webp"],
   },
 
   // 🔹 Favicons
   icons: {
     icon: [
-      { url: "/img/logo.svg", sizes: "32x32" },
-      { url: "/img/logo.svg", sizes: "96x96" },
-      { url: "/img/logo.svg", sizes: "16x16" },
+      { url: "/img/logo.webp", sizes: "32x32" },
+      { url: "/img/logo.webp", sizes: "96x96" },
+      { url: "/img/logo.webp", sizes: "16x16" },
     ],
     apple: [
-      { url: "/img/logo.svg", sizes: "57x57" },
-      { url: "/img/logo.svg", sizes: "60x60" },
-      { url: "/img/logo.svg", sizes: "72x72" },
-      { url: "/img/logo.svg", sizes: "76x76" },
-      { url: "/img/logo.svg", sizes: "114x114" },
-      { url: "/img/logo.svg", sizes: "120x120" },
-      { url: "/img/logo.svg", sizes: "144x144" },
-      { url: "/img/logo.svg", sizes: "152x152" },
-      { url: "/img/logo.svg", sizes: "180x180" },
+      { url: "/img/logo.webp", sizes: "57x57" },
+      { url: "/img/logo.webp", sizes: "60x60" },
+      { url: "/img/logo.webp", sizes: "72x72" },
+      { url: "/img/favicon.webp", sizes: "76x76" },
+      { url: "/img/favicon.webp", sizes: "114x114" },
+      { url: "/img/favicon.webp", sizes: "120x120" },
+      { url: "/img/favicon.webp", sizes: "144x144" },
+      { url: "/img/favicon.webp", sizes: "152x152" },
+      { url: "/img/favicon.webp", sizes: "180x180" },
     ],
     other: [
-      { rel: "manifest", url: "/img/favicons/manifest.json" },
-      { rel: "msapplication-TileImage", url: "/img/logo.svg" },
+      { rel: "msapplication-TileImage", url: "/img/favicon.webp" },
     ],
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const [mainpage, tripsWithcount, footerData] = await Promise.all([
+    getPagewithSection(6),
+    tripsWithPackagecount(),
+    getPagewithSection(6, "footer"),
+  ]);
+
   return (
     <html lang="en">
+      <head>
+        <Script
+          id="google-tag-manager"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
+      </head>
       <body className={`${montez.variable} ${manrope.variable}`}>
-        <Header/>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        <Header mainpage={mainpage} tripsWithcount={tripsWithcount} />
         {children}
-        <Footer/>
+        <Footer footer={footerData} />
       </body>
     </html>
   );

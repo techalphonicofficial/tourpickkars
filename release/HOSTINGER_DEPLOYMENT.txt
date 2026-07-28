@@ -1,0 +1,38 @@
+Hostinger PM2 deployment
+
+Upload the contents of this release folder into:
+
+/home/tourpickkars.in/public_html
+
+The public_html folder should contain:
+
+.next/
+node_modules/
+public/
+.env
+.htaccess
+ecosystem.config.cjs
+server.js
+package.json
+package-lock.json
+next.config.mjs
+
+Start or restart the app:
+
+cd /home/tourpickkars.in/public_html
+pm2 delete all
+pm2 start ecosystem.config.cjs
+pm2 save
+
+Test the Node app:
+
+curl http://127.0.0.1:3000
+
+If the curl command returns HTML but the domain does not work, check that the
+LiteSpeed vhost proxy points to 127.0.0.1:3000.
+
+Important:
+- server.js is the standalone Next.js production server.
+- The app name in PM2 is tourpickkars.
+- Package, blog, destination, trip, sitemap, header, and footer data are now
+  rendered dynamically so dashboard changes can appear without rebuilding.

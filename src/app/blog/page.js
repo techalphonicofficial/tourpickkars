@@ -1,5 +1,7 @@
 // import { useEffect, useState } from "react";
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +19,9 @@ export async function generateMetadata({ params }) {
     title: mainpage.meta_title,
     description: mainpage.meta_description,
     keywords: mainpage.meta_description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+    },
     openGraph: {
       type: "article",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
@@ -50,10 +55,9 @@ export default async function Blog({ searchParams }) {
       <div
         className="breadcumb-wrapper"
         style={{
-          backgroundImage: `url('${
-            process.env.NEXT_PUBLIC_MEDIA_PATH +
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_MEDIA_PATH +
             mainpage.sections[0].section[1].data.image
-          }')`,
+            }')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -34,7 +34,7 @@
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.5rem) !important;
   line-height: 1.1;
   text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   margin-top: 20px;
@@ -53,7 +53,7 @@
 /* --- Professional Search Bar --- */
 .hero-search-container {
   max-width: 750px;
-  margin-top: 40px;
+  margin-top: 16px;
   position: relative;
 }
 
@@ -207,6 +207,11 @@
   font-weight: 600;
 }
 
+.hero-stats-row-mob {
+  display: none;
+
+}
+
 /* --- Responsiveness --- */
 @media (max-width: 991px) {
   .hero-stats-row {
@@ -233,6 +238,52 @@
 }
 
 @media (max-width: 767px) {
+  .hero-section-Home {
+    height: 72vh !important;
+    min-height: 620px;
+    overflow: hidden;
+  }
+
+  .hero-content-wrapper {
+    top: 45%;
+    padding-top: 0;
+  }
+
+  .hero-search-container {
+    width: calc(100% - 24px);
+    max-width: 100%;
+  }
+
+  .search-input-group {
+    padding: 6px;
+  }
+
+  .search-icon-left {
+    padding-left: 12px;
+    font-size: 1rem;
+  }
+
+  .hero-input {
+    min-width: 0;
+    font-size: 0.95rem;
+    padding: 10px 8px !important;
+  }
+
+  .hero-search-btn {
+    flex: 0 0 auto;
+    padding: 8px 18px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+  }
+
   .hero-search-btn {
     padding: 8px 20px !important;
     font-size: 1rem !important;
@@ -241,5 +292,48 @@
   .hero-stats-row {
     display: none;
     /* Hide on mobile for cleaner look if requested, or keep simpler */
+  }
+
+  .hero-stats-row-mob {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    z-index: 11;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 14px !important;
+    width: 100%;
+    --bs-gutter-x: 0.5rem;
+  }
+
+  .stat-card {
+    gap: 5px;
+    padding: 8px 5px;
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .stat-icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .stat-icon-wrapper img {
+    padding: 5px;
+  }
+
+  .stat-number {
+    font-size: 1rem;
+    color: #fff;
+    line-height: 0.8rem;
+  }
+
+  .stat-label {
+    color: #fff;
+    font-size: .5rem;
+    opacity: 0.85;
   }
 }

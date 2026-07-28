@@ -1,4 +1,6 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 import { getPagewithSection } from '@/services/pageSection';
 import Link from 'next/link'
 import React from 'react'

@@ -51,6 +51,7 @@
 }
 
 .tour-badge {
+  min-width: 75px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(5px);
   color: var(--title-color);
@@ -64,6 +65,13 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   transition: all 0.3s ease;
+  line-clamp: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: flex;
 }
 
 .tour-badge i {

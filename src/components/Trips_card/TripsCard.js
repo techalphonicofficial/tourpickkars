@@ -86,17 +86,17 @@ export default function Trips() {
               {trips.map((trip) => (
                 <div key={trip.id} className="col-6 col-md-6 col-lg-4 col-xl-3">
                   <div className="card h-100 shadow-sm">
-      <img
-        src={trip.image}
-        className="card-img-top"
-        alt={trip.title}
-        style={{ height: "180px", objectFit: "cover" }}
-      />
-      <div className="card-body">
-        <h5 className="card-title">{trip.title}</h5>
-        <p className="card-text text-muted">{trip.description}</p>
-      </div>
-    </div>
+                    <img
+                      src={trip.image}
+                      className="card-img-top"
+                      alt={trip.title}
+                      style={{ height: "180px", objectFit: "cover" }}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{trip.title}</h5>
+                      <p className="card-text text-muted">{trip.description}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

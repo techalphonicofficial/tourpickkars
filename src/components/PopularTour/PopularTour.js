@@ -44,7 +44,8 @@ return (
 
         <div className="slider-area tour-slider">
           <Swiper
-            modules={Autoplay}
+            navigation={true}
+            modules={[Autoplay, Navigation]}
             spaceBetween={20}
             loop={true}
             autoplay={{ delay: 3000, pauseOnMouseEnter: true }}
@@ -60,7 +61,7 @@ return (
           >
             {trendingPkg.map((tourpackage) => (
               <SwiperSlide  key={tourpackage.id}  className="swiper-slide">
-                <TourCard data={tourpackage} onRequestCallback={() => setOpen(tourpackage.id)} />
+                <TourCard data={tourpackage} onRequestCallback={(data) => setOpen(data)} />
               </SwiperSlide>
             ))}
           </Swiper>

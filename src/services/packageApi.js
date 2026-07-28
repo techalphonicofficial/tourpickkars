@@ -22,6 +22,7 @@ export async function allPackage() {
 export async function singlePackage(slug) {
   try {
     const res = await api.get(`/packages/single/${slug}`);
+    // console.log("single package res", res.data);
     if (!res.data.hasOwnProperty("id")) {
       return notFound();
     }

@@ -5,6 +5,11 @@ import { singleTrips } from "@/services/tripsApi";
 import Link from "next/link";
 // import TripContent from "@/components/TripContent"; // import client component
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+export const dynamicParams = true;
+
 const getTrips = async (slug) => {
   return await singleTrips(slug);
 };
@@ -16,6 +21,9 @@ export async function generateMetadata({ params }) {
     title: trips.trip.meta_title,
     description: trips.trip.meta_description,
     keywords: trips.trip.meta_description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/trips/${slug}`,
+    },
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/trips/${slug}`,

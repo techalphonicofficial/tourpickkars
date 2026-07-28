@@ -1,42 +1,58 @@
-export const dynamic = 'force-static';
-import { api } from "@/services/config";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
-
-// app/robots.txt/route.js
 export async function GET() {
-  try {
-    // Laravel API se data fetch karo
-    const res = await api.get('robots-text');
-    
-    // Response data access karo
-    const robotsContent = res.data?.robots_txt ||
-      `
+  const robotsContent = `
 User-agent: *
 Allow: /
 
-Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'}/sitemap.xml
-      `.trim();
+# Important pages
+Allow: /wp-content/uploads/
+Allow: /assets/
+Allow: /images/
 
-    return new Response(robotsContent, {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    });
-  } catch (error) {
-    console.error('Error fetching robots.txt:', error);
-    
-    // Fallback content
-    const fallbackContent = `
-User-agent: *
+# Disallow sensitive/system paths
+Disallow: /admin/
+Disallow: /login/
+Disallow: /dashboard/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /private/
+Disallow: /shopdetail/
+
+# Allow AI crawlers
+User-agent: GPTBot
 Allow: /
 
-Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'}/sitemap.xml
-    `.trim();
+User-agent: ChatGPT-User
+Allow: /
 
-    return new Response(fallbackContent, {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    });
-  }
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tourpickkars.in'}/sitemap.xml
+`.trim();
+
+  return new Response(robotsContent, {
+    headers: {
+      "Content-Type": "text/plain",
+      "Cache-Control": "no-store",
+    },
+  });
 }

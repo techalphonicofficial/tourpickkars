@@ -3,11 +3,12 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { getPagewithSection } from "@/services/pageSection";
 import { getBlogs } from "@/services/blogApi";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "./BlogSection.css";
 
 const mainpage = await getPagewithSection(1, "blogs");
@@ -57,7 +58,8 @@ export default function BlogSection() {
         {/* ── Slider ── */}
         <div className="blog-slider-wrap">
           <Swiper
-            modules={[Autoplay]}
+            modules={[Autoplay, Navigation]}
+            navigation={true}
             loop={true}
             autoplay={{
               delay: 3500,

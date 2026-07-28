@@ -2,13 +2,14 @@
 import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faSolidStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faRegularStar } from "@fortawesome/free-regular-svg-icons";
 import { getPagewithSection } from "@/services/pageSection";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "./TestimonialSection.css";
 
 const mainpage = await getPagewithSection(1, "testimonials");
@@ -45,7 +46,8 @@ export default function TestimonialSection() {
         {/* ── Slider ── */}
         <div className="testi-slider-wrap">
           <Swiper
-            modules={[Autoplay, Pagination]}
+            modules={[Autoplay, Pagination, Navigation]}
+            navigation={true}
             loop={true}
             autoplay={{
               delay: 3000,

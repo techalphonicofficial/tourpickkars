@@ -11,15 +11,13 @@ import {
 import {
   faEnvelope,
 } from "@fortawesome/free-regular-svg-icons";
-import { getPagewithSection } from "@/services/pageSection";
 import HeaderMob from "./HeaderMob";
-import { tripsWithPackagecount } from "@/services/tripsApi";
 import Popup from "../HelpingCompnents/Popup";
 
-const mainpage = await getPagewithSection(6);
-const tripsWithcount = await tripsWithPackagecount();
+const replaceOldPhone = (value = "") =>
+  String(value).replace(/9876543210/g, "9679945077");
 
-export default function Header() {
+export default function Header({ mainpage, tripsWithcount }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -43,7 +41,7 @@ export default function Header() {
                 <ul>
                   <li>
                     <FontAwesomeIcon icon={faPhone} className="dropdown-icon" />
-                    <span>{mainpage.sections[0].section[0].data.Text}</span>
+                    <span>{replaceOldPhone(mainpage.sections[0].section[0].data.Text)}</span>
                   </li>
                   <li>
                     <FontAwesomeIcon icon={faEnvelope} className="dropdown-icon" />
@@ -86,7 +84,7 @@ export default function Header() {
                       mainpage.sections[1].section[0].data.image
                     }
                     alt="Tour Pickkars"
-                    width={100}
+                    width={120}
                     height={60}
                     style={{ objectFit: "contain" }}
                   />
@@ -96,6 +94,9 @@ export default function Header() {
               {/* Desktop Menu */}
               <nav className="main-menu d-none d-xl-block">
                 <ul>
+                  <li>
+                    <Link href="/custom-trips">Custom Trips</Link>
+                  </li>
                   {mainpage.sections[1].section[1].data.trip_items.map(
                     (item, index) => (
                       <li key={index}>
@@ -111,13 +112,29 @@ export default function Header() {
                   <li className="menu-item-has-children">
                     <span className="asdfasd">Domestic Trips</span>
                     <ul className="sub-menu">
-                      {tripsWithcount.map((item) => (
-                        <li key={item.id}>
-                          <Link href={`/trips/${item.slug}`}>
-                            {item.heading}
-                          </Link>
-                        </li>
-                      ))}
+                      {tripsWithcount
+                        .filter((item) => item.international === 0)
+                        .map((item) => (
+                          <li key={item.id}>
+                            <Link href={`/trips/${item.slug}`}>
+                              {item.heading}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </li>
+                  <li className="menu-item-has-children">
+                    <span className="asdfasd">International Trips</span>
+                    <ul className="sub-menu">
+                      {tripsWithcount
+                        .filter((item) => item.international === 1)
+                        .map((item) => (
+                          <li key={item.id}>
+                            <Link href={`/trips/${item.slug}`}>
+                              {item.heading}
+                            </Link>
+                          </li>
+                        ))}
                     </ul>
                   </li>
                   <li>

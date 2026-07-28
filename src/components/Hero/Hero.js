@@ -20,7 +20,7 @@ const mainpage = await getPagewithSection(1, "hero");
 export default function Hero() {
   const arr = mainpage.section[2].data.content.split("|");
   const [results, setResults] = useState([]);
-
+  // console.log("mainpage", mainpage)
   let newArr = arr.reduce((acc, item, index) => {
     acc.push(item);
     acc.push(1000); // index ke hisaab se nayi value
@@ -60,34 +60,35 @@ export default function Hero() {
     setSearchTerm(value);
   };
   return (
-    <div className="position-relative w-100 z-2" style={{ height: "90vh" }}>
-      {/* Swiper */}
-      <Swiper
-        // modules={[Autoplay, EffectFade]}
-        // autoplay={{ delay: 5000, disableOnInteraction: false }}
-        // speed={1000}
-        // effect="fade"
-        // loop={true}
-        // onSwiper={(swiper) => {
-        //   swiperRef.current = swiper;   // ✅ works fine now
-        // }}
-        // slidesPerView={1}
-        className="h-100"
-      >
-        <SwiperSlide className="position-relative">
-          <video
-            className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-            src={
-              process.env.NEXT_PUBLIC_MEDIA_PATH +
-              mainpage.section[6].data.video
-            }
-            autoPlay
-            muted
-            playsInline
-          />
-        </SwiperSlide>
-      </Swiper>
-      {/* <Swiper
+    <>
+      <div className="position-relative w-100 z-2 hero-section-Home" style={{ height: "90vh" }}>
+        {/* Swiper */}
+        <Swiper
+          // modules={[Autoplay, EffectFade]}
+          // autoplay={{ delay: 5000, disableOnInteraction: false }}
+          // speed={1000}
+          // effect="fade"
+          // loop={true}
+          // onSwiper={(swiper) => {
+          //   swiperRef.current = swiper;   // ✅ works fine now
+          // }}
+          // slidesPerView={1}
+          className="h-100"
+        >
+          <SwiperSlide className="position-relative">
+            <video
+              className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+              src={
+                process.env.NEXT_PUBLIC_MEDIA_PATH +
+                mainpage.section[6].data.video
+              }
+              autoPlay
+              muted
+              playsInline
+            />
+          </SwiperSlide>
+        </Swiper>
+        {/* <Swiper
         modules={[Autoplay, EffectFade]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         speed={1000}
@@ -124,67 +125,97 @@ export default function Hero() {
         ))}
       </Swiper> */}
 
-      {/* Overlay */}
-      <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 z-1"></div>
+        {/* Overlay */}
+        <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 z-1"></div>
 
-      {/* Hero Content */}
-      <div className="hero-content-wrapper container">
-        <div className="hero-main-content">
-          <span className="hero-subtitle mb-3 d-inline-block">
-            {mainpage.section[0].data.Text}
-          </span>
-          <h1 className="hero-title display-3 fw-bold mb-3">
-            {mainpage.section[1].data.Text.replace(/Enlive/g, "Tour Pickkars")}
-          </h1>
+        {/* Hero Content */}
+        <div className="hero-content-wrapper container">
+          <div className="hero-main-content">
+            <span className="hero-subtitle mb-3 d-inline-block">
+              {mainpage.section[0].data.Text}
+            </span>
+            <h1 className="hero-title display-3 fw-bold mb-3 mt-0">
+              {mainpage.section[1].data.Text.replace(/Enlive/g, "Tour Pickkars")}
+            </h1>
 
-          {/* Typing Animation */}
-          <div className="hero-typing-animation mb-4">
-            <TypeAnimation
-              sequence={newArr}
-              wrapper="span"
-              speed={50}
-              className="typing-text"
-              repeat={Infinity}
-            />
-          </div>
-
-          {/* Professional Search Bar */}
-          <div className="hero-search-container mx-auto">
-            <div className="search-input-group">
-              <div className="search-icon-left">
-                <FontAwesomeIcon icon={faSearch} />
-              </div>
-              <input
-                type="text"
-                className="form-control hero-input"
-                placeholder="Where do you want to go?"
-                onChange={(e) => handleSearch(e.target.value)}
+            {/* Typing Animation */}
+            <div className="hero-typing-animation mb-2">
+              <TypeAnimation
+                sequence={newArr}
+                wrapper="span"
+                speed={50}
+                className="typing-text"
+                repeat={Infinity}
               />
-              <button className="btn hero-search-btn">
-                Search
-              </button>
             </div>
 
-            {searchTerm && results.length > 0 && (
-              <div className="search-results-dropdown shadow-lg">
-                {results.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={`/${item.slug}`}
-                    className="search-result-item"
-                  >
-                    <div className="result-info">
-                      <span className="result-title">{item.title}</span>
-                    </div>
-                  </Link>
-                ))}
+            {/* Professional Search Bar */}
+            <div className="hero-search-container mx-auto">
+              <div className="search-input-group">
+                <div className="search-icon-left">
+                  <FontAwesomeIcon icon={faSearch} />
+                </div>
+                <input
+                  type="text"
+                  className="form-control hero-input"
+                  placeholder="Where do you want to go?"
+                  onChange={(e) => handleSearch(e.target.value)}
+                />
+                <button className="btn hero-search-btn">
+                  Search
+                </button>
               </div>
-            )}
+
+              {searchTerm && results.length > 0 && (
+                <div className="search-results-dropdown shadow-lg">
+                  {results.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={`/${item.slug}`}
+                      className="search-result-item"
+                    >
+                      <div className="result-info">
+                        <span className="result-title">{item.title}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Professional Stats Row */}
+          <div className="hero-stats-row row g-4 mt-3 pb-4">
+            {mainpage.section.slice(3, 6).map((item, index) => (
+              <div className="col-md-4 col-4" key={index}>
+                <div className="stat-card">
+                  <div className="stat-icon-wrapper">
+                    <Image
+                      src={
+                        process.env.NEXT_PUBLIC_MEDIA_PATH +
+                        item.data.section[0].data.image
+                      }
+                      alt={item.data.section[2].data.Text}
+                      height={40}
+                      width={40}
+                    />
+                  </div>
+                  <div className="stat-info">
+                    <h3 className="stat-number">
+                      <CountUp
+                        end={Number(item.data.section[1].data.Text)}
+                        duration={3}
+                      />
+                      +
+                    </h3>
+                    <p className="stat-label">{item.data.section[2].data.Text}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Professional Stats Row */}
-        <div className="hero-stats-row row g-4 mt-4 pb-4">
+        <div className="hero-stats-row-mob row g-4 mt-3 pb-4">
           {mainpage.section.slice(3, 6).map((item, index) => (
             <div className="col-md-4 col-4" key={index}>
               <div className="stat-card">
@@ -214,6 +245,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

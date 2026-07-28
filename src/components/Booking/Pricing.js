@@ -619,7 +619,7 @@ export default function Pricing({
 
       {isLoading && (
         <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-          style={{ backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 9999, backdropFilter: 'blur(5px)' }}>
+          style={{ backgroundColor: 'rgba(255, 255, 255, 1)', zIndex: 9999, backdropFilter: 'blur(5px)' }}>
           <div className="text-center text-white">
             <div className="spinner-grow text-primary mb-3" style={{ width: '3rem', height: '3rem' }} role="status"></div>
             <h4 className="fw-bold">Securing Your Trip...</h4>

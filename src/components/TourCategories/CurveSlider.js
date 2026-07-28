@@ -5,13 +5,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { CategoriesCard } from "./CategoriesCard";
 import { homeTrips } from "@/services/tripsApi";
 
-const CurveSlider = ({trips}) => {
+const CurveSlider = ({ trips }) => {
 
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
@@ -44,9 +45,8 @@ const CurveSlider = ({trips}) => {
           rect.width * multiplier.translate;
         if (ty < 0) ty = 0;
         const transformOrigin = r < 0 ? "left top" : "right top";
-        slide.style.transform = `translateY(${ty}px) rotate(${
-          -r * multiplier.rotate
-        }deg)`;
+        slide.style.transform = `translateY(${ty}px) rotate(${-r * multiplier.rotate
+          }deg)`;
         slide.style.transformOrigin = transformOrigin;
       });
     };
@@ -77,27 +77,29 @@ const CurveSlider = ({trips}) => {
         grabCursor={true}
         simulateTouch={true}
         draggable={true}
-        spaceBetween={50}
+        spaceBetween={30}
         touchRatio={1.2}
         speed={1000}
-        modules={[Autoplay, Pagination]}
-        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        modules={[Autoplay, Pagination, Navigation]}
+        navigation={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         pagination={{ clickable: true, el: ".slider-pagination" }}
         breakpoints={{
-          0: { slidesPerView: 1 },
-          576: { slidesPerView: 1 },
+          0: { slidesPerView: 1.1 },
+          576: { slidesPerView: 1.1 },
           768: { slidesPerView: 2 },
           992: { slidesPerView: 3 },
           1200: { slidesPerView: 3 },
           1400: { slidesPerView: 5 },
         }}
-      > 
+      >
         {trips.map((item, index) => (
-            <SwiperSlide key={index}>
-              <CategoriesCard image={item.thumbnail} title={item.heading} slug={item.slug} />
-            </SwiperSlide>
-          ))}
+          <SwiperSlide key={index}>
+            <CategoriesCard image={item.thumbnail} title={item.heading} slug={item.slug} />
+          </SwiperSlide>
+        ))}
       </Swiper>
+      
       <div className="slider-pagination"></div>
     </div>
   );

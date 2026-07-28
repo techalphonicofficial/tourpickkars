@@ -3,6 +3,10 @@ import Link from 'next/link'
 import React from 'react'
 // const mainpage = await getPagewithSection(7);
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const mainpage = await getPagewithSection(7);

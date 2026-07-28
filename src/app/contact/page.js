@@ -146,12 +146,23 @@
 // }
 
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 import Image from "next/image";
 import ContactUsForm from "@/components/Contact/ContactUsForm";
 import Link from "next/link";
 import { getPagewithSection } from "@/services/pageSection";
+
+const replaceOldPhone = (value = "") =>
+  String(value).replace(/9876543210/g, "9679945077");
+
+const normalizePhoneData = (phone = {}) => ({
+  ...phone,
+  button_label: replaceOldPhone(phone.button_label),
+  button_link: replaceOldPhone(phone.button_link),
+});
 
 export async function generateMetadata({ params }) {
   try {
@@ -159,26 +170,29 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
     return {
       title: mainpage?.meta_title || "Contact Us",
-      description: mainpage?.meta_description || "Contact Enlivetrips",
+      description: mainpage?.meta_description || "Contact Tour Pickkars",
       keywords: mainpage?.meta_description || "",
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/contact`,
+      },
       openGraph: {
         type: "website",
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/contact`,
         title: mainpage?.meta_title || "Contact Us",
-        description: mainpage?.meta_description || "Contact Enlivetrips",
+        description: mainpage?.meta_description || "Contact Tour Pickkars",
         keywords: mainpage?.meta_description || "",
       },
       twitter: {
         card: "summary_large_image",
         title: mainpage?.meta_title || "Contact Us",
-        description: mainpage?.meta_description || "Contact Enlivetrips",
+        description: mainpage?.meta_description || "Contact Tour Pickkars",
       },
     };
   } catch (error) {
     console.error("Error generating metadata:", error);
     return {
       title: "Contact Us",
-      description: "Contact Enlivetrips",
+      description: "Contact Tour Pickkars",
     };
   }
 }
@@ -214,8 +228,8 @@ export default async function Contact() {
   const breadcrumbTitle = mainpage?.sections?.[0]?.section?.[1]?.data?.Text || "Contact Us";
 
   const address = mainpage?.sections?.[1]?.section?.[0]?.data?.Text || "Your address here";
-  const phone1 = mainpage?.sections?.[1]?.section?.[1]?.data || {};
-  const phone2 = mainpage?.sections?.[1]?.section?.[2]?.data || {};
+  const phone1 = normalizePhoneData(mainpage?.sections?.[1]?.section?.[1]?.data || {});
+  const phone2 = normalizePhoneData(mainpage?.sections?.[1]?.section?.[2]?.data || {});
   const email1 = mainpage?.sections?.[1]?.section?.[3]?.data || {};
   const email2 = mainpage?.sections?.[1]?.section?.[4]?.data || {};
   const formHeading = mainpage?.sections?.[1]?.section?.[5]?.data?.Text || "Send Message";

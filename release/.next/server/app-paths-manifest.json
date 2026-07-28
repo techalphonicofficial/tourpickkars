@@ -1,0 +1,22 @@
+{
+  "/[slug]/page": "app/[slug]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/booking-detail/page": "app/booking-detail/page.js",
+  "/booking/[slug]/page": "app/booking/[slug]/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/custom-trips/page": "app/custom-trips/page.js",
+  "/destination/[slug]/page": "app/destination/[slug]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/privacy-policy/page": "app/privacy-policy/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/terms-and-conditions/page": "app/terms-and-conditions/page.js",
+  "/thankyou/page": "app/thankyou/page.js",
+  "/trips/[slug]/page": "app/trips/[slug]/page.js",
+  "/upcoming-trips/page": "app/upcoming-trips/page.js"
+}

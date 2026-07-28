@@ -41,7 +41,7 @@ export default function TourCard({ data, onRequestCallback }) {
               </span>
             )}
             {data.duration && (
-              <span className="tour-badge">
+              <span className="tour-badge" style={{ whiteSpace: 'nowrap', width: "75px", padding: "6px 6px" }}>
                 <i><FontAwesomeIcon icon={faClock} /></i>
                 {data.duration}
               </span>
@@ -55,7 +55,7 @@ export default function TourCard({ data, onRequestCallback }) {
         <h3 className="box-title">
           <Link href={`/${data.slug}`}>{data.title}</Link>
         </h3>
-        
+
         <div className="tour-meta-info">
           <div className="tour-date">
             <i><FontAwesomeIcon icon={faCalendarDays} /></i>
@@ -73,8 +73,8 @@ export default function TourCard({ data, onRequestCallback }) {
         <Link href="tel:8287828267" className="btn-call-outline" title="Call Us">
           <FontAwesomeIcon icon={faPhone} />
         </Link>
-        <button 
-          onClick={onRequestCallback} 
+        <button
+          onClick={() => onRequestCallback(data)}
           className="btn-request-callback"
         >
           <span>Request CallBack</span>

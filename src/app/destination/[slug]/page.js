@@ -5,6 +5,11 @@ import { singleDestination } from "@/services/destinationApi";
 import Link from "next/link";
 // import TripContent from "@/components/TripContent"; // import client component
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+export const dynamicParams = true;
+
 const getDestination = async (slug) => {
   return await singleDestination(slug);
 };
@@ -12,11 +17,14 @@ const getDestination = async (slug) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const trips = await getDestination(slug);
-  console.log(trips)
+  // console.log(trips)
   return {
     title: trips.trip.meta_title,
     description: trips.trip.meta_description,
     keywords: trips.trip.meta_description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/destination/${slug}`,
+    },
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/destination/${slug}`,

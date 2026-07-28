@@ -1,0 +1,190 @@
+/* c:\Users\Akash Deep Sharma\Desktop\NextJs\tour-website-like-enlive\src\components\VideosSection\VideosSection.css */
+
+.custom-video-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+    cursor: pointer;
+    height: 400px;
+    width: 100%;
+}
+
+/* Completely hide ::before and ::after effects on hover as requested */
+.custom-video-thumb::before,
+.custom-video-thumb::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Thumbnail Image scaling */
+.video-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease, opacity 0.4s ease;
+    z-index: 2;
+}
+
+.custom-video-thumb.is-hovered .video-thumb-img,
+.custom-video-thumb:hover .video-thumb-img {
+    transform: scale(1.08);
+    /* slight zoom on hover */
+}
+
+/* Video Element */
+.video-thumb-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+/* Instagram Icon Overlay */
+.insta-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 26px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Volume Button */
+.vol-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+}
+
+.custom-video-thumb.is-hovered .vol-btn,
+.custom-video-thumb:hover .vol-btn {
+    transform: translateY(0);
+}
+
+.vol-btn:hover {
+    background: var(--primary-color, rgba(0, 186, 157, 0.9));
+    transform: scale(1.1) !important;
+    border-color: transparent;
+}
+
+/* Swiper Navigation Custom Styles - Matching Reference Image */
+.videos-swiper .swiper-button-next,
+.videos-swiper .swiper-button-prev {
+    width: 45px;
+    height: 45px;
+    background: #ffffff !important;
+    border-radius: 50%;
+    color: #00C18D !important;
+    /* Teal color from image */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.videos-swiper .swiper-button-next::after,
+.videos-swiper .swiper-button-prev::after {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.videos-swiper .swiper-button-next:hover,
+.videos-swiper .swiper-button-prev:hover {
+    background: #00C18D !important;
+    color: #ffffff !important;
+}
+
+
+.videos-swiper .swiper-button-prev {
+    left: 10px;
+}
+
+.videos-swiper .swiper-button-next {
+    right: 10px;
+}
+
+.video-list-title .icon {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.video-list-title .title h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0;
+}
+
+
+/* Mobile Responsive Optimization - Matching Reference Image */
+@media (max-width: 767px) {
+    .videos-swiper {
+        padding-bottom: 30px !important;
+        /* Back to normal padding */
+        overflow: hidden !important;
+    }
+
+    .videos-swiper .swiper-button-next,
+    .videos-swiper .swiper-button-prev {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 38px;
+        height: 38px;
+        background: #ffffff !important;
+        color: #00C18D !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .videos-swiper .swiper-button-prev {
+        left: -5px !important;
+        /* Slight overlap on the left */
+        margin-left: 0;
+    }
+
+    .videos-swiper .swiper-button-next {
+        right: -5px !important;
+        /* Slight overlap on the right */
+        margin-right: 0;
+    }
+
+    .videos-swiper .swiper-button-next::after,
+    .videos-swiper .swiper-button-prev::after {
+        font-size: 14px;
+    }
+}

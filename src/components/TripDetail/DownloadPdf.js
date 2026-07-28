@@ -2,14 +2,18 @@
 import { useState } from "react";
 import RequestCallback from "../HelpingCompnents/RequestCallback";
 
-export default function ({ id, itinerary_pdf }) {
+export default function ({ id, title, itinerary_pdf, footer }) {
   const [open, setOpen] = useState(false);
+  const whatsappMessage = encodeURIComponent(
+    `I want to book this package: ${title || id}`
+  );
+
   return (
     <div className="min_box-detail asdfasdfasdfasd Age_limit container my-6 mt-24">
       <div className="d-flex align-items-center justify-content-center gap-3">
-        
+
         <a
-          href="https://wa.me/919876543210"
+          href={`https://wa.me/919679945077?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
           className="d-flex align-items-center justify-content-center rounded-circle"
@@ -29,7 +33,7 @@ export default function ({ id, itinerary_pdf }) {
 
         {/* Send Query Button */}
         <button
-          onClick={() => setOpen(id)}
+          onClick={() => setOpen({ id, title })}
           className="btn btn-primary w-100 px-4 py-2 rounded-pill fw-semibold"
         >
           Send Query

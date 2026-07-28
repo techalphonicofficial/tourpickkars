@@ -2,39 +2,35 @@
 import React, { useState } from "react";
 import RequestCallback from "../HelpingCompnents/RequestCallback";
 
-export default function BookNow({ id, slug, starting_price, bookingButton }) {
+export default function BookNow({ id, title, slug, starting_price, bookingButton }) {
   const [open, setOpen] = useState(false);
+
   return (
-    <div className="min_box-detail uiymyumyumyum Age_limit container my-6 mt-80">
-      {/* <!-- Title --> */}
-      <div className="d-flex justify-content-between align-items-center mb-2">
-        <span className="fw-semibold text-secondary">
-          Starting From
-          <i className="bi bi-info-circle ms-1"></i>
-          {/* <!-- Price --> */}
-          <h3 className="fw-bold text-primary mb-4">
-            ₹ {Number(starting_price)}/-
+    <div className="enlive-booking-card min_box-detail uiymyumyumyum package-booking-card Age_limit container my-4 mt-80">
+      <div className="package-booking-price mb-4">
+        <span className="booking-price-label">Starting From</span>
+        <div className="d-flex align-items-end justify-content-between gap-3 mt-2">
+          <h3 className="fw-bold text-primary mb-0">
+            Rs {Number(starting_price)}/-
           </h3>
-        </span>
-        <span className=" bg-light text-dark rounded-pill px-3 py-2">
-          Per Person
-        </span>
+          <span className="booking-price-unit bg-light text-dark rounded-pill px-3 py-2">
+            Per Person
+          </span>
+        </div>
       </div>
 
-      {/* <!-- Button --> */}
-      <div className="d-flex align-items-center justify-content-between  gap-4">
+      <div className="package-booking-actions d-flex flex-column gap-3">
         {bookingButton && (
           <a
             href={`/booking/${slug}`}
-            className="btn btn-primary w-100 py-2 rounded-pill fw-semibold"
+            className="btn btn-primary w-100 py-3 rounded-pill fw-semibold"
           >
-            {" "}
-            Book Now{" "}
+            Book Now
           </a>
         )}
         <button
-          className="btn btn-primary w-100 py-2 rounded-pill fw-semibold"
-          onClick={() => setOpen(id)}
+          className="btn btn-outline-primary w-100 py-3 rounded-pill fw-semibold"
+          onClick={() => setOpen({ id, title })}
         >
           Send Inquiry
         </button>

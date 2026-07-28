@@ -166,12 +166,60 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-socials svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-socials .social-facebook {
+  color: #1877f2;
+  background: rgba(24, 119, 242, 0.12);
+}
+
+.footer-socials .social-youtube {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.12);
+}
+
+.footer-socials .social-whatsapp {
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.12);
+}
+
+.footer-socials .social-instagram {
+  color: #e4405f;
+  background:
+    linear-gradient(#0f172a, #0f172a) padding-box,
+    linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4) border-box;
+}
+
 .footer-socials a:hover {
-  background: #00ba9d;
   color: #fff;
-  border-color: #00ba9d;
   transform: translateY(-3px);
-  box-shadow: 0 10px 15px -3px rgba(0, 186, 157, 0.2);
+}
+
+.footer-socials .social-facebook:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+  box-shadow: 0 10px 15px -3px rgba(24, 119, 242, 0.3);
+}
+
+.footer-socials .social-youtube:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+  box-shadow: 0 10px 15px -3px rgba(255, 0, 0, 0.3);
+}
+
+.footer-socials .social-whatsapp:hover {
+  background: #25d366;
+  border-color: #25d366;
+  box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.3);
+}
+
+.footer-socials .social-instagram:hover {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  border-color: transparent;
+  box-shadow: 0 10px 15px -3px rgba(221, 42, 123, 0.3);
 }
 
 .footer-links ul {
@@ -349,6 +397,7 @@
   .footer-gallery {
     grid-template-columns: repeat(4, 1fr);
   }
+
 }
 
 @media (max-width: 480px) {
@@ -377,4 +426,70 @@
   .footer-gallery {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+
+/* Base */
+.btn-floating:hover img {
+  margin-bottom: -3px
+}
+
+.btn-floating {
+  position: fixed;
+  right: 25px;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  border: 0;
+  z-index: 9999;
+  color: white;
+  transition: .2s;
+  padding: 8px;
+}
+
+.btn-floating:hover {
+  width: auto;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.btn-floating span {
+  font-size: 16px;
+  margin-left: 5px;
+  transition: .2s;
+  line-height: 0px;
+  display: none;
+}
+
+.btn-floating:hover span {
+  display: inline-block;
+}
+
+/* Phone */
+.btn-floating.phone {
+  bottom: 85px;
+  background-color: #334fff;
+}
+
+.btn-floating.phone:hover {
+  background-color: #1430e9;
+}
+
+/* WhatsApp */
+.btn-floating.whatsapp {
+  background-color: #34af23;
+  bottom: 25px;
+}
+
+.btn-floating.whatsapp:hover {
+  background-color: #1f7a12
+}
+
+.btn-floating.phone img {
+  width: 20x;
+}
+
+.btn-floating.whatsapp img {
+  width: 22px;
 }

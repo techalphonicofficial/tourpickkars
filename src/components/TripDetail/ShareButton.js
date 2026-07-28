@@ -14,12 +14,15 @@ const ShareButton = ({ packageLink, packageName = "Package" }) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const menuRef = useRef(null);
-  
+
   // To handle the fully resolved URL in the client properly
   const [currentUrl, setCurrentUrl] = useState('');
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCurrentUrl(packageLink || window.location.href);
+      const shareUrl = packageLink
+        ? new URL(packageLink, window.location.origin).href
+        : window.location.href;
+      setCurrentUrl(shareUrl);
     }
   }, [packageLink]);
 
@@ -87,8 +90,12 @@ const ShareButton = ({ packageLink, packageName = "Package" }) => {
   };
 
   const shareOnWhatsApp = (link, name) => {
-    const text = `Check out this amazing trip package: ${name} %0A%0A ${link}`;
-    window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+    const phone = "919679945077"; // country code + number
+    const tripUrl = link ? new URL(link, window.location.origin).href : window.location.href;
+    const message = `Hi Tour Pickkars, I'm interested in booking a trip: ${name}\n${tripUrl}`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const shareOnTwitter = (link, name) => {
@@ -170,8 +177,8 @@ const ShareButton = ({ packageLink, packageName = "Package" }) => {
               <button
                 key={index}
                 className="w-100 text-start px-3 py-2 border-0 bg-transparent d-flex align-items-center gap-3"
-                style={{ 
-                  transition: "background 0.2s", 
+                style={{
+                  transition: "background 0.2s",
                   cursor: "pointer",
                   fontSize: "14px",
                   fontWeight: "500",
@@ -186,8 +193,8 @@ const ShareButton = ({ packageLink, packageName = "Package" }) => {
                   }
                 }}
               >
-                <div 
-                  className="d-flex justify-content-center align-items-center rounded-circle" 
+                <div
+                  className="d-flex justify-content-center align-items-center rounded-circle"
                   style={{ width: "26px", height: "26px", backgroundColor: `${option.color}15`, color: option.color }}
                 >
                   <FontAwesomeIcon icon={option.icon} />

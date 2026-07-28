@@ -69,10 +69,10 @@ export default function RequestCallback({ heading = "Request Callback", open, se
           <div className="modal-body">
             <form ref={formRef} onSubmit={handleSubmit}>
               <input
-                  type="hidden"
-                  name="package_id"
-                  value={open}
-                />
+                type="hidden"
+                name="package_id"
+                value={typeof open === "object" ? open.id : open}
+              />
               <div className="mb-3">
                 <input
                   type="text"
@@ -104,14 +104,26 @@ export default function RequestCallback({ heading = "Request Callback", open, se
                   required
                 />
               </div>
+              <div className="d-flex gap-3" >
 
-              <button
-                type="submit"
-                className="btn btn-success w-100"
-                disabled={loading}
-              >
-                {loading ? "Submitting..." : "Submit"}
-              </button>
+                <button
+                  type="submit"
+                  className="btn btn-success w-100"
+                  disabled={loading}
+                >
+                  {loading ? "Submitting..." : "Submit"}
+                </button>
+                <a
+                  href={`https://wa.me/919679945077?text=${encodeURIComponent(
+                    `I want to book this package: ${typeof open === "object" && open?.title ? open.title : open}`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: 'none', backgroundColor: '#ffffff', borderRadius: '50%', overflow: 'hidden', padding: '0px' }}
+                >
+                  <img src="/img/icon/whatsapp.png" alt="WhatsApp" width={50} height={50} style={{ backgroundColor: 'transparent', objectFit: 'contain', borderRadius: '50%', overflow: 'hidden' }} />
+                </a>
+              </div>
 
               {message && (
                 <div className="alert alert-info text-center mt-3 py-2">

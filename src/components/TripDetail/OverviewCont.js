@@ -2,14 +2,16 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default function OverviewCont() {
+export default function OverviewCont({ hasGallery = false }) {
   const [activeSection, setActiveSection] = useState("Overview");
 
   const sections = [
     { id: "Overview", label: "Overview" },
     { id: "Itinerary", label: "Itinerary" },
+    ...(hasGallery ? [{ id: "Gallery", label: "Gallery" }] : []),
     { id: "Inclusions", label: "Inclusions" },
     { id: "Exclusions", label: "Exclusions" },
+    { id: "Costing", label: "Costing" },
     { id: "ThingsToPack", label: "Things To Pack" },
   ];
 
@@ -51,10 +53,10 @@ export default function OverviewCont() {
 
   return (
     <div
-      className="min_box-detail dvsdvsdvsdv Age_limit container my-4"
+      className="enlive-package-tabs min_box-detail dvsdvsdvsdv Age_limit container my-4"
       style={{
         position: "sticky",
-        top: "140px",
+        top: "90px",
         zIndex: 1,
         background: "#ffffff",
         padding: "6px 0",

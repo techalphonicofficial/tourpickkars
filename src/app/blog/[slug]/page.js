@@ -9,6 +9,11 @@ import Link from "next/link";
 import { getSingleBlog } from "@/services/blogApi";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+export const dynamicParams = true;
+
 const getblog = async (slug) => {
   return await getSingleBlog(slug);
 };
@@ -21,6 +26,9 @@ export async function generateMetadata({ params }) {
     title: blog.blog.meta_title,
     description: blog.blog.meta_description,
     keywords: blog.blog.meta_description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+    },
     openGraph: {
       type: "article",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
@@ -42,7 +50,7 @@ export default async function PageDetail({ params }) {
   const pathname = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`;
   const blog = await getblog(slug);
 
-  console.log("blog data", blog);
+  // console.log("blog data", blog);
 
   if (!blog) {
     return notFound();
@@ -115,7 +123,7 @@ export default async function PageDetail({ params }) {
                       <i>
                         <FontAwesomeIcon icon={faUser} />
                       </i>
-                      by Enlivetrips
+                      by Tour Pickkars
                     </Link>
                     <Link href="blog">
                       <i>
@@ -137,26 +145,26 @@ export default async function PageDetail({ params }) {
                   )}
 
                   {blog.blog.details && blog.blog.details.length > 0 && (
-                   <>
-                    <div id="blogDetailsContent">
-                      {blog.blog.details.map((detail, index) => (
-                        <div key={index} >
-                          {detail.image && (
-                            <img src={detail.image} alt="blog" className="mb-4"/>
-                          )}
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: detail.content
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                    
+                    <>
+                      <div id="blogDetailsContent">
+                        {blog.blog.details.map((detail, index) => (
+                          <div key={index} >
+                            {detail.image && (
+                              <img src={detail.image} alt="blog" className="mb-4" />
+                            )}
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: detail.content
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+
                   )}
-                   
-                  
+
+
 
                   <div className="share-links clearfix">
                     <div className="row justify-content-between">
@@ -201,7 +209,7 @@ export default async function PageDetail({ params }) {
             </div>
             <div className="col-xxl-4 col-lg-5">
               <aside className="sidebar-area">
-               
+
                 <div className="widget">
                   <h3 className="widget_title">Recent Posts</h3>
                   <div className="recent-post-wrap">

@@ -61,7 +61,7 @@ export default function AboutSection() {
                   <span>MR</span>
                 </div>
                 <div className="review-text">
-                  <strong>4000+ Happy Travelers</strong>
+                  <strong>4700+ Happy Travelers</strong>
                   <small>Join our growing community</small>
                 </div>
               </div>
@@ -109,12 +109,12 @@ export default function AboutSection() {
                 </div>
                 <div className="about-stat-divider" />
                 <div className="about-stat-item">
-                  <span className="stat-num">4000+</span>
+                  <span className="stat-num">4700+</span>
                   <span className="stat-lbl">Happy Travelers</span>
                 </div>
                 <div className="about-stat-divider" />
                 <div className="about-stat-item">
-                  <span className="stat-num">50+</span>
+                  <span className="stat-num">10+</span>
                   <span className="stat-lbl">Destinations</span>
                 </div>
               </div>
@@ -141,8 +141,8 @@ export default function AboutSection() {
 
               {/* CTA Row */}
               <div className="about-cta-row">
-                <Link href={mainpage.section[8].data.button_link} className="th-btn">
-                  Explore More Plans
+                <Link href="/contact" className="th-btn py-4 px-3">
+                  Contact With Us
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />

@@ -1,201 +1,114 @@
-// export const dynamic = 'force-static';
-// import { api } from "@/services/config";
-
-// export async function GET() {
-//   const baseUrl =
-//     process?.env?.NEXT_PUBLIC_SITE_URL || "https://www.enlivetrips.com";
-
-//   try {
-//     // Multiple API calls for different data
-//     const res = await api.get("sitemap-xml");
-
-//     const urls = [
-//       {
-//         url: baseUrl,
-//         lastmod: new Date().toISOString().split("T")[0],
-//         changefreq: "weekly",
-//         priority: "1.0",
-//       },
-//       {
-//         url: `${baseUrl}/about`,
-//         lastmod: new Date().toISOString().split("T")[0],
-//         changefreq: "monthly",
-//         priority: "0.8",
-//       },
-//       {
-//         url: `${baseUrl}/contact`,
-//         lastmod: new Date().toISOString().split("T")[0],
-//         changefreq: "monthly",
-//         priority: "0.8",
-//       },
-//       {
-//         url: `${baseUrl}/blog`,
-//         lastmod: new Date().toISOString().split("T")[0],
-//         changefreq: "monthly",
-//         priority: "0.8",
-//       },
-
-//       // Dynamic pages from API
-//       ...res.data.map((page) => ({
-//         url: `${baseUrl}/${page.url}`,
-//         lastmod: page.lastmod,
-//         changefreq: page.changefreq,
-//         priority: page.priority,
-//       })),
-//     ];
-
-//     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-//   ${urls
-//     .map(
-//       (url) => `
-//   <url>
-//     <loc>${url.url}</loc>
-//     <lastmod>${url.lastmod}</lastmod>
-//     <changefreq>${url.changefreq}</changefreq>
-//     <priority>${url.priority}</priority>
-//   </url>
-//   `
-//     )
-//     .join("")}
-// </urlset>`;
-
-//     return new Response(sitemap, {
-//       headers: {
-//         "Content-Type": "application/xml",
-//         "Cache-Control": "public, s-maxage=86400, stale-while-revalidate",
-//       },
-//     });
-//   } catch (error) {
-//     console.error("Sitemap generation error:", error);
-
-//     // Basic fallback sitemap
-//     const fallbackSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-//   <url>
-//     <loc>${baseUrl}</loc>
-//     <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-//     <changefreq>weekly</changefreq>
-//     <priority>1.0</priority>
-//   </url>
-//   <url>
-//     <loc>${baseUrl}/about</loc>
-//     <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-//     <changefreq>monthly</changefreq>
-//     <priority>0.8</priority>
-//   </url>
-// </urlset>`;
-
-//     return new Response(fallbackSitemap, {
-//       headers: {
-//         "Content-Type": "application/xml",
-//       },
-//     });
-//   }
-// }
-
-
-export const dynamic = 'force-static';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.enlivetrips.com";
-  
-  // Static URLs that always exist
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tourpickkars.in";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://dashboard.tourpickkars.in/api";
+  const today = new Date().toISOString().split("T")[0];
+
+  // Static pages
   const staticUrls = [
-    {
-      url: baseUrl,
-      lastmod: new Date().toISOString().split("T")[0],
-      changefreq: "weekly",
-      priority: "1.0",
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastmod: new Date().toISOString().split("T")[0],
-      changefreq: "monthly",
-      priority: "0.8",
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastmod: new Date().toISOString().split("T")[0],
-      changefreq: "monthly",
-      priority: "0.8",
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastmod: new Date().toISOString().split("T")[0],
-      changefreq: "monthly",
-      priority: "0.8",
-    },
+    { url: baseUrl, lastmod: today, changefreq: "weekly", priority: "1.0" },
+    { url: `${baseUrl}/about`, lastmod: today, changefreq: "weekly", priority: "0.8" },
+    { url: `${baseUrl}/contact`, lastmod: today, changefreq: "weekly", priority: "0.8" },
+    { url: `${baseUrl}/blog`, lastmod: today, changefreq: "weekly", priority: "0.8" },
   ];
 
   try {
-    // Add timeout to API call
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-    
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sitemap-xml`, {
-      signal: controller.signal,
-      next: { revalidate: 86400 } // Cache for 24 hours
-    }).catch(() => null);
-    
-    clearTimeout(timeoutId);
+    // Fetch both APIs in parallel and forbid Brotli to avoid Node.js zlib crashes
+    const [sitemapRes, packagesRes] = await Promise.allSettled([
+      fetch(`${apiUrl}/sitemap-xml`, {
+        cache: "no-store",
+        headers: { "Accept-Encoding": "gzip, deflate" },
+      }),
+      fetch(`${apiUrl}/packages`, {
+        cache: "no-store",
+        headers: { "Accept-Encoding": "gzip, deflate" },
+      }),
+    ]);
 
-    let dynamicUrls = [];
-    if (res && res.ok) {
-      const data = await res.json();
-      dynamicUrls = data.map((page) => ({
+    // --- sitemap-xml API (blogs, destinations, trip categories, packages) ---
+    let sitemapUrls = [];
+    if (sitemapRes.status === "fulfilled" && sitemapRes.value.ok) {
+      const data = await sitemapRes.value.json();
+      sitemapUrls = data.map((page) => ({
+        key: page.url,
         url: `${baseUrl}/${page.url}`,
-        lastmod: page.lastmod,
-        changefreq: page.changefreq,
-        priority: page.priority,
+        lastmod: page.lastmod ? page.lastmod.split("T")[0] : today,
+        changefreq: page.changefreq || "weekly",
+        priority: page.priority || "0.8",
       }));
     }
 
-    const allUrls = [...staticUrls, ...dynamicUrls];
-    
+    // --- /packages API — direct package list (ensures nothing is missed) ---
+    let packageUrls = [];
+    if (packagesRes.status === "fulfilled" && packagesRes.value.ok) {
+      const packages = await packagesRes.value.json();
+      packageUrls = packages
+        .filter((pkg) => pkg.slug)
+        .map((pkg) => ({
+          key: pkg.slug,
+          url: `${baseUrl}/${pkg.slug}`,
+          lastmod: pkg.updated_at
+            ? pkg.updated_at.split("T")[0]
+            : pkg.created_at
+              ? pkg.created_at.split("T")[0]
+              : today,
+          changefreq: "weekly",
+          priority: "0.8",
+        }));
+    }
+
+    // Merge — add packages that are NOT already in sitemapUrls (dedup by slug key)
+    const sitemapKeys = new Set(sitemapUrls.map((u) => u.key));
+    const extraPackages = packageUrls.filter((p) => !sitemapKeys.has(p.key));
+    const allDynamicUrls = [...sitemapUrls, ...extraPackages];
+
+    const allUrls = [...staticUrls, ...allDynamicUrls];
+
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${allUrls
-    .map(
-      (url) => `
-  <url>
-    <loc>${url.url}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
+${allUrls
+        .map(
+          (u) => `  <url>
+    <loc>${u.url}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
   </url>`
-    )
-    .join("")}
+        )
+        .join("\n")}
 </urlset>`;
 
     return new Response(sitemap, {
       headers: {
         "Content-Type": "application/xml",
-        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=43200",
+        "Cache-Control": "no-store",
       },
     });
+
   } catch (error) {
     console.error("Sitemap generation error:", error);
-    
-    // Fallback to static URLs only
+
     const fallbackSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${staticUrls
-    .map(
-      (url) => `
-  <url>
-    <loc>${url.url}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
+${staticUrls
+        .map(
+          (u) => `  <url>
+    <loc>${u.url}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
   </url>`
-    )
-    .join("")}
+        )
+        .join("\n")}
 </urlset>`;
 
     return new Response(fallbackSitemap, {
       headers: {
         "Content-Type": "application/xml",
+        "Cache-Control": "no-cache",
       },
     });
   }

@@ -20,9 +20,8 @@ export default function HeaderMob({ mainpage, menuOpen, setMenuOpen, tripsWithco
 
   return (
     <div
-      className={`th-menu-wrapper onepage-nav ${
-        menuOpen ? "th-body-visible" : ""
-      }`}
+      className={`th-menu-wrapper onepage-nav ${menuOpen ? "th-body-visible" : ""
+        }`}
     >
       <div className="th-menu-area">
         {/* Close Button */}
@@ -65,25 +64,48 @@ export default function HeaderMob({ mainpage, menuOpen, setMenuOpen, tripsWithco
 
             {/* Dropdown */}
             <li
-              className={`menu-item-has-children th-item-has-children ${
-                activeMenu === 0 ? "th-active" : ""
-              }`}
-              onClick={() => handleMenuClick(0)}
+              className={`menu-item-has-children th-item-has-children ${activeMenu === 0 ? "th-active" : ""
+                }`}
+              onClick={() => handleMenuClick("domestic")}
             >
               <a>Domestic Trips</a>
               <ul
                 className="sub-menu th-submenu ms-3"
-                style={{ display: activeMenu === 0 ? "block" : "none" }}
+                style={{ display: activeMenu === "domestic" ? "block" : "none" }}
               >
-                {tripsWithcount.map((item) => (
-                  <li key={item.id}>
-                    <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
-                      {item.heading}
-                    </Link>
-                  </li>
-                ))}
+                {tripsWithcount
+                  .filter((item) => item.international === 0)
+                  .map((item) => (
+                    <li key={item.id}>
+                      <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
+                        {item.heading}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </li>
+            <li
+              className={`menu-item-has-children th-item-has-children ${activeMenu === 0 ? "th-active" : ""
+                }`}
+              onClick={() => handleMenuClick("international")}
+            >
+              <a>International Trips</a>
+              <ul
+                className="sub-menu th-submenu ms-3"
+                style={{ display: activeMenu === "international" ? "block" : "none" }}
+              >
+                {tripsWithcount
+                  .filter((item) => item.international === 1)
+                  .map((item) => (
+                    <li key={item.id}>
+                      <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
+                        {item.heading}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </li>
+
 
             <li>
               <Link href="/blog" onClick={handleLinkClick}>

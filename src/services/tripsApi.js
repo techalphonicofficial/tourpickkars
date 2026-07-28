@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { api } from "./config";
+import { api, apiEndpoint } from "./config";
 
 export async function allTrips() {
   try {
@@ -29,10 +29,13 @@ export async function singleTrips(slug) {
 
 export async function tripsWithPackagecount() {
   try {
-    const res = await api.get(`/trips/trips-with-packagecount`);
-    return res.data;
+    const res = await fetch(apiEndpoint("/trips/trips-with-packagecount"), {
+      cache: "no-store"
+    });
+    if (!res.ok) throw new Error("Failed to fetch");
+    return await res.json();
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch blog");
+    throw new Error(error.message || "Failed to fetch blog");
   }
 }
 

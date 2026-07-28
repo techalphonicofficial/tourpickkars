@@ -23,7 +23,7 @@ export async function getBlogsByTripDestination(text) {
 export async function getSingleBlog(slug) {
   try {
     const res = await api.get(`/blogs/${slug}`);
-    console.log("res blog", res);
+    // console.log("res blog", res);
     return res.data;
   } catch (error) {
     return notFound();

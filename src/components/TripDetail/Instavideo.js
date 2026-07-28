@@ -32,7 +32,7 @@ export default function Instavideo({ related_insta_video }) {
       }}
     >
       <div className="container th-container">
-        <div className="title-area text-center">
+        <div className="title-area text-center pt-5">
           <span className="sub-title">Travelers On Instagram</span>
           <h2 className="sec-title">
             <i>

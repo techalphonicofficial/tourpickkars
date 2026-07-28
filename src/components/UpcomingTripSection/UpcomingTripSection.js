@@ -104,7 +104,7 @@ export default function UpcomingTripSection({ byCategory, resetKey, setHasDateFi
                     <div key={tour.id} className="col-xxl-4 col-lg-6">
                       <TourCard
                         data={tour}
-                        onRequestCallback={() => setOpen(tour.id)}
+                        onRequestCallback={(data) => setOpen(data)}
                       />
                     </div>
                   ))}

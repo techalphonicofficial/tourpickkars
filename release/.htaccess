@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Forward all public requests from Apache/LiteSpeed to the Next.js PM2 server.
+  # Keep this port the same as the PORT used by PM2 and the vhost proxy.
+  RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+</IfModule>

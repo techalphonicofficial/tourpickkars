@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getBookingDetail, submitBookingDetail } from "@/services/bookingForm";
+import { apiEndpoint } from "@/services/config";
 
 // Empty member template
 const emptyMember = {
@@ -53,7 +54,7 @@ const validateAge = (dob) => {
   const birthDate = new Date(dob);
   let age = today.getFullYear() - birthDate.getFullYear();
   const monthDiff = today.getMonth() - birthDate.getMonth();
-  
+
   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
@@ -71,14 +72,14 @@ const getStorageKey = (bookingId, memberIndex) => {
   return `booking_${bookingId}_member_${memberIndex}`;
 };
 
-export default function BookingForm() {
+function BookingFormInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const id = searchParams.get('id');
-  
+
   // Add a ref to track initial load
   const initialLoadDone = useRef(false);
-  
+
   const [memberCount, setMemberCount] = useState(1);
   const [members, setMembers] = useState([{ ...emptyMember }]);
   const [errors, setErrors] = useState({});
@@ -196,7 +197,7 @@ export default function BookingForm() {
       // Don't save file objects to localStorage
       const dataToSave = { ...memberData };
       delete dataToSave.idProofFile; // Remove file object as it can't be stored
-      
+
       // Add flag to indicate file was uploaded
       if (memberData.idProofFile) {
         dataToSave.hasFile = true;
@@ -204,9 +205,9 @@ export default function BookingForm() {
         dataToSave.fileType = memberData.idProofFile.type;
         dataToSave.fileSize = memberData.idProofFile.size;
       }
-      
+
       localStorage.setItem(key, JSON.stringify(dataToSave));
-      console.log(`Saved member ${index + 1} to local storage`);
+      // console.log(`Saved member ${index + 1} to local storage`);
     } catch (error) {
       console.error('Error saving to local storage:', error);
     }
@@ -217,11 +218,11 @@ export default function BookingForm() {
     try {
       const updatedMembers = [...members];
       let hasStoredData = false;
-      
+
       members.forEach((_, index) => {
         const key = getStorageKey(id, index);
         const savedData = localStorage.getItem(key);
-        
+
         if (savedData) {
           try {
             const parsedData = JSON.parse(savedData);
@@ -232,15 +233,15 @@ export default function BookingForm() {
               idProofFile: updatedMembers[index].idProofFile // Keep existing file if any
             };
             hasStoredData = true;
-            console.log(`Loaded member ${index + 1} from local storage`);
-            
+            // console.log(`Loaded member ${index + 1} from local storage`);
+
             // Mark field as touched for validation
             const fields = [
-              'name', 'contact', 'dob', 'gender', 
+              'name', 'contact', 'dob', 'gender',
               'idProofType', 'idProofNumber',
               'emergencyName', 'emergencyContact', 'emergencyRelation'
             ];
-            
+
             const newTouched = { ...touched };
             fields.forEach(field => {
               if (parsedData[field]) {
@@ -248,18 +249,18 @@ export default function BookingForm() {
               }
             });
             setTouched(newTouched);
-            
+
           } catch (e) {
             console.error(`Error parsing saved data for member ${index}:`, e);
           }
         }
       });
-      
+
       if (hasStoredData) {
         setMembers(updatedMembers);
         setDataLoadedFromStorage(true);
         setShowLoadFromStorage(false);
-        
+
         // Check which members are complete after loading
         const completed = [];
         updatedMembers.forEach((member, index) => {
@@ -278,11 +279,11 @@ export default function BookingForm() {
   const loadSpecificMembersFromStorage = (indices) => {
     try {
       const updatedMembers = [...members];
-      
+
       indices.forEach(index => {
         const key = getStorageKey(id, index);
         const savedData = localStorage.getItem(key);
-        
+
         if (savedData) {
           try {
             const parsedData = JSON.parse(savedData);
@@ -291,15 +292,15 @@ export default function BookingForm() {
               ...parsedData,
               idProofFile: updatedMembers[index].idProofFile
             };
-            console.log(`Loaded member ${index + 1} from local storage`);
-            
+            // console.log(`Loaded member ${index + 1} from local storage`);
+
             // Mark field as touched for validation
             const fields = [
-              'name', 'contact', 'dob', 'gender', 
+              'name', 'contact', 'dob', 'gender',
               'idProofType', 'idProofNumber',
               'emergencyName', 'emergencyContact', 'emergencyRelation'
             ];
-            
+
             const newTouched = { ...touched };
             fields.forEach(field => {
               if (parsedData[field]) {
@@ -307,16 +308,16 @@ export default function BookingForm() {
               }
             });
             setTouched(newTouched);
-            
+
           } catch (e) {
             console.error(`Error parsing saved data for member ${index}:`, e);
           }
         }
       });
-      
+
       setMembers(updatedMembers);
       setShowLoadFromStorage(false);
-      
+
       // Check which members are complete after loading
       const completed = [];
       updatedMembers.forEach((member, index) => {
@@ -325,7 +326,7 @@ export default function BookingForm() {
         }
       });
       setCompletedSteps(completed);
-      
+
     } catch (error) {
       console.error('Error loading from local storage:', error);
     }
@@ -336,7 +337,7 @@ export default function BookingForm() {
     try {
       const key = getStorageKey(id, index);
       localStorage.removeItem(key);
-      console.log(`Cleared member ${index + 1} from local storage`);
+      // console.log(`Cleared member ${index + 1} from local storage`);
     } catch (error) {
       console.error('Error clearing from local storage:', error);
     }
@@ -349,7 +350,7 @@ export default function BookingForm() {
         const key = getStorageKey(id, index);
         localStorage.removeItem(key);
       });
-      console.log('Cleared all local storage for this booking');
+      // console.log('Cleared all local storage for this booking');
     } catch (error) {
       console.error('Error clearing all storage:', error);
     }
@@ -411,10 +412,10 @@ export default function BookingForm() {
       if (!completedSteps.includes(currentStep)) {
         setCompletedSteps([...completedSteps, currentStep]);
       }
-      
+
       // Save to local storage before moving to next
       saveToLocalStorage(currentStep, members[currentStep]);
-      
+
       if (currentStep < members.length - 1) {
         goToNextStep();
       } else {
@@ -424,17 +425,17 @@ export default function BookingForm() {
     } else {
       // Mark all fields as touched to show validation errors
       const fields = [
-        'name', 'contact', 'dob', 'gender', 
+        'name', 'contact', 'dob', 'gender',
         'idProofType', 'idProofNumber', 'idProofFile',
         'emergencyName', 'emergencyContact', 'emergencyRelation'
       ];
-      
+
       const newTouched = { ...touched };
       fields.forEach(field => {
         newTouched[`${currentStep}-${field}`] = true;
       });
       setTouched(newTouched);
-      
+
       // Scroll to first error
       const errorElement = document.querySelector(`.is-invalid`);
       errorElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -455,8 +456,8 @@ export default function BookingForm() {
         setInvalidIdError(false);
         const response = await getBookingDetail(id);
         const data = response.data;
-        console.log("booking response api data ", data );
-        
+        // console.log("booking response api data ", data);
+
         if (!data || Object.keys(data).length === 0) {
           setInvalidIdError(true);
           setError('Booking not found. The provided ID does not exist.');
@@ -473,11 +474,11 @@ export default function BookingForm() {
             double: 0,
             triple: 0
           };
-          
+
           data.active_cost.forEach(item => {
             const activity = item.activity.toLowerCase();
             const quantity = item.quantity || 1;
-            
+
             if (activity.includes('quard') || activity.includes('quad')) {
               allocation.quad += quantity;
             } else if (activity.includes('double')) {
@@ -486,16 +487,16 @@ export default function BookingForm() {
               allocation.triple += quantity;
             }
           });
-          
+
           setActivityAllocation(allocation);
-          
+
           // Calculate total members from allocations
           const totalMembers = allocation.quad + allocation.double + allocation.triple;
           setMemberCount(totalMembers || 1);
 
           // Create member array based on allocations - THIS IS THE BASE STRUCTURE
           const baseMembers = [];
-          
+
           // Add Quad members
           for (let i = 0; i < allocation.quad; i++) {
             baseMembers.push({
@@ -503,7 +504,7 @@ export default function BookingForm() {
               allocatedActivity: 'Quad Sharing'
             });
           }
-          
+
           // Add Double members
           for (let i = 0; i < allocation.double; i++) {
             baseMembers.push({
@@ -511,7 +512,7 @@ export default function BookingForm() {
               allocatedActivity: 'Double Sharing'
             });
           }
-          
+
           // Add Triple members
           for (let i = 0; i < allocation.triple; i++) {
             baseMembers.push({
@@ -522,16 +523,16 @@ export default function BookingForm() {
 
           // Check if we have saved local storage data
           const hasLocalStorageData = checkAnyStorageData(id, totalMembers);
-          
+
           if (hasLocalStorageData) {
             // Load from local storage but preserve the base structure
             const loadedMembers = [...baseMembers];
-            
+
             // Try to load each member's data from localStorage
             for (let i = 0; i < totalMembers; i++) {
               const key = getStorageKey(id, i);
               const savedData = localStorage.getItem(key);
-              
+
               if (savedData) {
                 try {
                   const parsedData = JSON.parse(savedData);
@@ -540,15 +541,15 @@ export default function BookingForm() {
                     ...parsedData,
                     idProofFile: null // Reset file object as it can't be stored
                   };
-                  console.log(`Loaded member ${i + 1} from local storage`);
+                  // console.log(`Loaded member ${i + 1} from local storage`);
                 } catch (e) {
                   console.error(`Error parsing saved data for member ${i}:`, e);
                 }
               }
             }
-            
+
             setMembers(loadedMembers);
-            
+
             // Mark completed steps based on loaded data
             const completed = [];
             loadedMembers.forEach((member, index) => {
@@ -557,9 +558,9 @@ export default function BookingForm() {
               }
             });
             setCompletedSteps(completed);
-            
+
             setDataLoadedFromStorage(true);
-            
+
           } else if (data.members && Array.isArray(data.members)) {
             // If no local storage but API has members, use API data
             const apiMembers = data.members.map((member, index) => ({
@@ -576,9 +577,9 @@ export default function BookingForm() {
               emergencyRelation: member.emergencyRelation || '',
               allocatedActivity: member.allocatedActivity || baseMembers[index]?.allocatedActivity || ''
             }));
-            
+
             setMembers(apiMembers);
-            
+
             // Auto-complete steps for already filled members
             const completed = [];
             data.members.forEach((member, index) => {
@@ -587,13 +588,13 @@ export default function BookingForm() {
               }
             });
             setCompletedSteps(completed);
-            
+
           } else {
             // No data anywhere, use empty base members
             setMembers(baseMembers);
           }
         }
-        
+
         initialLoadDone.current = true;
       } catch (err) {
         console.error("Error fetching booking:", err);
@@ -624,7 +625,7 @@ export default function BookingForm() {
     setMembers(updatedMembers);
     setCurrentStep(0);
     setCompletedSteps([]);
-    
+
     // Clear errors for new members
     const newErrors = { ...errors };
     Object.keys(newErrors).forEach(key => {
@@ -638,17 +639,17 @@ export default function BookingForm() {
   // Handle input change
   const handleChange = (index, field, value) => {
     const updated = [...members];
-    
+
     if (field === 'idProofFile' && value.target) {
       // Store the actual File object
       updated[index][field] = value.target.files[0];
     } else {
       updated[index][field] = value;
     }
-    
+
     setMembers(updated);
     validateField(index, field, updated[index]);
-    
+
     // Auto-save to local storage on change
     if (id) {
       saveToLocalStorage(index, updated[index]);
@@ -662,7 +663,7 @@ export default function BookingForm() {
       [`${index}-${field}`]: true
     }));
     validateField(index, field, members[index]);
-    
+
     // Save to local storage on blur
     if (id) {
       saveToLocalStorage(index, members[index]);
@@ -679,36 +680,36 @@ export default function BookingForm() {
         if (!memberData.name?.trim()) errorMessage = 'Name is required';
         else if (memberData.name.length < 3) errorMessage = 'Name must be at least 3 characters';
         break;
-        
+
       case 'contact':
         if (!memberData.contact) errorMessage = 'Contact number is required';
         else if (!validateIndianPhone(memberData.contact)) errorMessage = 'Enter valid 10-digit Indian mobile number';
         break;
-        
+
       case 'email':
         if (memberData.email && !validateEmail(memberData.email)) errorMessage = 'Enter valid email address';
         break;
-        
+
       case 'dob':
         if (!memberData.dob) errorMessage = 'Date of birth is required';
         else if (!validateAge(memberData.dob)) errorMessage = 'You must be at least 18 years old';
         break;
-        
+
       case 'gender':
         if (!memberData.gender) errorMessage = 'Please select gender';
         break;
-        
+
       case 'idProofType':
         if (!memberData.idProofType) errorMessage = 'Please select ID proof type';
         break;
-        
+
       case 'idProofNumber':
         if (!memberData.idProofNumber) errorMessage = 'ID proof number is required';
         else if (!validateIdNumber(memberData.idProofType, memberData.idProofNumber)) {
           errorMessage = idValidationMessages[memberData.idProofType] || 'Invalid ID number format';
         }
         break;
-        
+
       case 'idProofFile':
         if (!memberData.idProofFile && !id) errorMessage = 'Please upload ID proof document';
         else if (memberData.idProofFile && memberData.idProofFile.size > 5 * 1024 * 1024) {
@@ -717,20 +718,20 @@ export default function BookingForm() {
           errorMessage = 'Only JPG, PNG, or PDF files are allowed';
         }
         break;
-        
+
       case 'emergencyName':
         if (!memberData.emergencyName?.trim()) errorMessage = 'Emergency contact name is required';
         break;
-        
+
       case 'emergencyContact':
         if (!memberData.emergencyContact) errorMessage = 'Emergency contact number is required';
         else if (!validateIndianPhone(memberData.emergencyContact)) errorMessage = 'Enter valid 10-digit mobile number';
         break;
-        
+
       case 'emergencyRelation':
         if (!memberData.emergencyRelation?.trim()) errorMessage = 'Relation is required';
         break;
-        
+
       default:
         break;
     }
@@ -746,18 +747,18 @@ export default function BookingForm() {
   // Validate all fields for a member
   const validateMember = (index, memberData) => {
     const fields = [
-      'name', 'contact', 'dob', 'gender', 
+      'name', 'contact', 'dob', 'gender',
       'idProofType', 'idProofNumber', 'idProofFile',
       'emergencyName', 'emergencyContact', 'emergencyRelation'
     ];
-    
+
     let isValid = true;
     fields.forEach(field => {
       if (!validateField(index, field, memberData)) {
         isValid = false;
       }
     });
-    
+
     return isValid;
   };
 
@@ -771,7 +772,7 @@ export default function BookingForm() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate all members
     let isValid = true;
     members.forEach((member, index) => {
@@ -877,9 +878,9 @@ export default function BookingForm() {
         },
         sharing_details: sharingDetails
       };
-      console.log("Booking data", bookingData);
-      
-      const response = await fetch("https://dashboard.enlivetrips.com/api/booking/booking-information", {
+      // console.log("Booking data", bookingData);
+
+      const response = await fetch(apiEndpoint("/booking/booking-information"), {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -892,10 +893,10 @@ export default function BookingForm() {
 
       if (result.success) {
         alert('Booking details submitted successfully!');
-        
+
         // Clear local storage after successful submission
         clearAllStorage();
-        
+
         if (!id) {
           setMembers([{ ...emptyMember }]);
           setMemberCount(1);
@@ -909,7 +910,7 @@ export default function BookingForm() {
       } else {
         throw new Error(result.message || 'Submission failed');
       }
-      
+
     } catch (error) {
       console.error('Submission error:', error);
       alert(error.message || 'Failed to submit booking details. Please try again.');
@@ -922,7 +923,7 @@ export default function BookingForm() {
   const handleClearSavedData = () => {
     if (window.confirm('Are you sure you want to clear all saved data for this member?')) {
       clearMemberFromStorage(currentStep);
-      
+
       // Reset current member to empty but preserve allocated activity
       const updatedMembers = [...members];
       updatedMembers[currentStep] = {
@@ -930,26 +931,26 @@ export default function BookingForm() {
         allocatedActivity: members[currentStep].allocatedActivity
       };
       setMembers(updatedMembers);
-      
+
       // Clear validation
       const fields = [
-        'name', 'contact', 'dob', 'gender', 
+        'name', 'contact', 'dob', 'gender',
         'idProofType', 'idProofNumber', 'idProofFile',
         'emergencyName', 'emergencyContact', 'emergencyRelation'
       ];
-      
+
       const newTouched = { ...touched };
       fields.forEach(field => {
         delete newTouched[`${currentStep}-${field}`];
       });
       setTouched(newTouched);
-      
+
       const newErrors = { ...errors };
       fields.forEach(field => {
         delete newErrors[`${currentStep}-${field}`];
       });
       setErrors(newErrors);
-      
+
       // Update completed steps
       const completed = completedSteps.filter(step => step !== currentStep);
       setCompletedSteps(completed);
@@ -991,7 +992,7 @@ export default function BookingForm() {
           <div className="card-body text-center p-5">
             <div className="mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" className="bi bi-exclamation-triangle-fill text-warning" viewBox="0 0 16 16">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
               </svg>
             </div>
             <h2 className="display-6 fw-bold text-danger mb-3">Missing Booking ID</h2>
@@ -1005,8 +1006,8 @@ export default function BookingForm() {
               </ul>
             </div>
             <div className="mt-4">
-              <button 
-                className="btn btn-primary px-4 py-2" 
+              <button
+                className="btn btn-primary px-4 py-2"
                 onClick={() => window.location.href = '/'}
               >
                 Go to Homepage
@@ -1017,7 +1018,7 @@ export default function BookingForm() {
       </div>
     );
   }
-  
+
   // Show loading state
   if (initialLoading) {
     return (
@@ -1038,7 +1039,7 @@ export default function BookingForm() {
           <div className="card-body text-center p-5">
             <div className="mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" className="bi bi-exclamation-triangle-fill text-warning" viewBox="0 0 16 16">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
               </svg>
             </div>
             <h2 className="display-6 fw-bold text-danger mb-3">Invalid Booking URL</h2>
@@ -1052,8 +1053,8 @@ export default function BookingForm() {
               </ul>
             </div>
             <div className="mt-4">
-              <button 
-                className="btn btn-primary px-4 py-2" 
+              <button
+                className="btn btn-primary px-4 py-2"
                 onClick={() => window.location.href = '/'}
               >
                 Go to Homepage
@@ -1090,12 +1091,12 @@ export default function BookingForm() {
           </span>
         </div>
         <div className="progress" style={{ height: '8px' }}>
-          <div 
-            className="progress-bar" 
-            role="progressbar" 
+          <div
+            className="progress-bar"
+            role="progressbar"
             style={{ width: `${((currentStep + 1) / members.length) * 100}%` }}
-            aria-valuenow={((currentStep + 1) / members.length) * 100} 
-            aria-valuemin="0" 
+            aria-valuenow={((currentStep + 1) / members.length) * 100}
+            aria-valuemin="0"
             aria-valuemax="100"
           ></div>
         </div>
@@ -1107,12 +1108,11 @@ export default function BookingForm() {
                 key={index}
                 type="button"
                 onClick={() => goToStep(index)}
-                className={`btn btn-sm rounded-circle step-indicator ${
-                  status === 'completed' ? 'btn-success' : 
-                  status === 'current' ? 'btn-primary' : 
-                  status === 'pending' ? 'btn-warning' :
-                  'btn-outline-secondary'
-                }`}
+                className={`btn btn-sm rounded-circle step-indicator ${status === 'completed' ? 'btn-success' :
+                  status === 'current' ? 'btn-primary' :
+                    status === 'pending' ? 'btn-warning' :
+                      'btn-outline-secondary'
+                  }`}
                 style={{ width: '30px', height: '30px', padding: '0' }}
                 disabled={status === 'upcoming' && index > 0}
               >
@@ -1128,22 +1128,22 @@ export default function BookingForm() {
   return (
     <div className="container py-4">
       <div className="card shadow-sm border-0">
-        <div className="card-header text-white py-3" style={{backgroundColor:'#409d00'}}>
+        <div className="card-header text-white py-3" style={{ backgroundColor: '#00ba9d' }}>
           <h3 className="mb-0 fs-3 text-white">
             Update Booking Member Details
             {id && <span className="ms-2 badge bg-light rounded-1 text-primary">ID: {bookingDetail?.id}</span>}
           </h3>
         </div>
-        
+
         <div className="card-body p-4">
           {/* Package Summary */}
           {bookingDetail && (
             <div className="alert alert-info mb-4">
               <h5 className="alert-heading">Package: {bookingDetail.package_title}</h5>
               <p className="mb-0">
-                <strong>Duration:</strong> {bookingDetail.duration} | 
-                <strong> Pickup:</strong> {bookingDetail.pickup} | 
-                <strong> Drop:</strong> {bookingDetail.drop} | 
+                <strong>Duration:</strong> {bookingDetail.duration} |
+                <strong> Pickup:</strong> {bookingDetail.pickup} |
+                <strong> Drop:</strong> {bookingDetail.drop} |
                 <strong> Dates:</strong> {bookingDetail.start_date} to {bookingDetail.end_date}
               </p>
             </div>
@@ -1186,7 +1186,7 @@ export default function BookingForm() {
                 <i className="bi bi-cloud-check me-1"></i>
                 Your progress is automatically saved locally
               </small>
-              
+
               <div className="mt-2 mt-sm-0">
                 {showLoadFromStorage && (
                   <>
@@ -1229,9 +1229,9 @@ export default function BookingForm() {
                 <div className="card mb-4 border" key={index}>
                   <div className="card-header bg-light d-flex justify-content-between align-items-center flex-wrap">
                     <h5 className="mb-0">
-                      Member {index + 1} Details   
+                      Member {index + 1} Details
                       {member.allocatedActivity && (
-                        <span className="badge bg-info rounded-2 p-2 ms-3" style={{position:'inherit'}}>
+                        <span className="badge bg-info rounded-2 p-2 ms-3" style={{ position: 'inherit' }}>
                           {member.allocatedActivity}
                         </span>
                       )}
@@ -1264,7 +1264,7 @@ export default function BookingForm() {
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="card-body">
                     <div className="row g-3">
                       {/* Personal Details Section */}
@@ -1286,7 +1286,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-name`] && errors[`${index}-name`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-name`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-name`]}</div>
                         )}
                       </div>
 
@@ -1305,7 +1305,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-contact`] && errors[`${index}-contact`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-contact`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-contact`]}</div>
                         )}
                       </div>
 
@@ -1323,7 +1323,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-dob`] && errors[`${index}-dob`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-dob`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-dob`]}</div>
                         )}
                       </div>
 
@@ -1344,7 +1344,7 @@ export default function BookingForm() {
                           <option value="Other">Other</option>
                         </select>
                         {touched[`${index}-gender`] && errors[`${index}-gender`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-gender`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-gender`]}</div>
                         )}
                       </div>
 
@@ -1361,7 +1361,7 @@ export default function BookingForm() {
                           placeholder="example@email.com"
                         />
                         {touched[`${index}-email`] && errors[`${index}-email`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-email`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-email`]}</div>
                         )}
                       </div>
 
@@ -1391,7 +1391,7 @@ export default function BookingForm() {
                           <option value="Driving License">Driving License</option>
                         </select>
                         {touched[`${index}-idProofType`] && errors[`${index}-idProofType`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-idProofType`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-idProofType`]}</div>
                         )}
                       </div>
 
@@ -1410,10 +1410,10 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-idProofNumber`] && errors[`${index}-idProofNumber`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-idProofNumber`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-idProofNumber`]}</div>
                         )}
                         {member.idProofType && !errors[`${index}-idProofNumber`] && (
-                          <small className="text-muted d-block mt-1" style={{fontSize:'12px'}}>{idValidationMessages[member.idProofType]}</small>
+                          <small className="text-muted d-block mt-1" style={{ fontSize: '12px' }}>{idValidationMessages[member.idProofType]}</small>
                         )}
                       </div>
 
@@ -1427,17 +1427,17 @@ export default function BookingForm() {
                           onChange={(e) => handleChange(index, 'idProofFile', e)}
                           onBlur={() => handleBlur(index, 'idProofFile')}
                           accept=".jpg,.jpeg,.png,.pdf"
-                          required={!id && !member.idProofFile} style={{padding:'8px'}}
+                          required={!id && !member.idProofFile} style={{ padding: '8px' }}
                         />
                         {touched[`${index}-idProofFile`] && errors[`${index}-idProofFile`] && (
                           <div className="invalid-feedback">{errors[`${index}-idProofFile`]}</div>
                         )}
-                        <small className="text-muted" style={{fontSize:'12px',lineHeight:'12px'}}>Max 5MB (JPG, PNG, PDF only)</small>
+                        <small className="text-muted" style={{ fontSize: '12px', lineHeight: '12px' }}>Max 5MB (JPG, PNG, PDF only)</small>
                         {id && member.idProofFile && (
-                          <small className="text-success d-block" style={{fontSize:'12px',lineHeight:'12px'}}>New file selected: {member.idProofFile.name}</small>
+                          <small className="text-success d-block" style={{ fontSize: '12px', lineHeight: '12px' }}>New file selected: {member.idProofFile.name}</small>
                         )}
                         {id && !member.idProofFile && member.hasFile && (
-                          <small className="text-info d-block" style={{fontSize:'12px',lineHeight:'12px'}}>
+                          <small className="text-info d-block" style={{ fontSize: '12px', lineHeight: '12px' }}>
                             Previously uploaded file: {member.fileName || 'ID proof'} (saved locally)
                           </small>
                         )}
@@ -1462,7 +1462,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-emergencyName`] && errors[`${index}-emergencyName`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-emergencyName`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-emergencyName`]}</div>
                         )}
                       </div>
 
@@ -1481,7 +1481,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-emergencyContact`] && errors[`${index}-emergencyContact`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-emergencyContact`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-emergencyContact`]}</div>
                         )}
                       </div>
 
@@ -1499,7 +1499,7 @@ export default function BookingForm() {
                           required
                         />
                         {touched[`${index}-emergencyRelation`] && errors[`${index}-emergencyRelation`] && (
-                          <div className="invalid-feedback" style={{fontSize:'12px'}}>{errors[`${index}-emergencyRelation`]}</div>
+                          <div className="invalid-feedback" style={{ fontSize: '12px' }}>{errors[`${index}-emergencyRelation`]}</div>
                         )}
                       </div>
                     </div>
@@ -1511,35 +1511,35 @@ export default function BookingForm() {
             {/* Navigation Buttons */}
             <div className="d-flex justify-content-between align-items-center mt-4">
               <div>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="btn btn-outline-secondary me-2"
                   onClick={goToPreviousStep}
                   disabled={currentStep === 0}
                 >
                   ← Previous Member
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="btn btn-outline-secondary"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Back to Top
                 </button>
               </div>
-              
+
               <div>
                 {currentStep < members.length - 1 ? (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="btn btn-primary px-4"
                     onClick={handleSaveAndContinue}
                   >
                     Save & Continue →
                   </button>
                 ) : (
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn btn-success px-5"
                     disabled={loading || completedSteps.length !== members.length}
                   >
@@ -1589,5 +1589,15 @@ export default function BookingForm() {
         }
       `}</style>
     </div>
+  );
+}
+
+export const dynamic = 'force-static';
+
+export default function BookingForm() {
+  return (
+    <Suspense fallback={<div>Loading booking form...</div>}>
+      <BookingFormInner />
+    </Suspense>
   );
 }

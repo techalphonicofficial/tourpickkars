@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs, Keyboard } from "swiper/modules";
 import "swiper/css";
@@ -10,11 +11,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 export default function Gallery({gallery}) {
-
-
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const openModal = (index) => {
     setCurrentIndex(index);
@@ -98,23 +102,24 @@ export default function Gallery({gallery}) {
         </div>
 
         {/* Modal with Gallery Slider */}
-        {showModal && (
-          <div className="position-fixed  start-0 w-100 bg-dark bg-opacity-0 d-flex flex-column align-items-center justify-content-center" style={{top: "131px",height:"calc(100% - 131px)",zIndex:"9999"}}>
+        {showModal && mounted && createPortal(
+          <div className="bg-dark d-flex flex-column align-items-center justify-content-center" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 9999999 }}>
             {/* Close Button */}
             <button
-              className="btn btn-light position-absolute top-0 end-0 m-3 rounded-circle"
+              className="btn btn-light position-absolute top-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center shadow-lg"
               onClick={closeModal}
+              style={{ width: "44px", height: "44px", zIndex: 1000 }}
             >
-              <FontAwesomeIcon icon={faClose} />
+              <FontAwesomeIcon icon={faClose} className="fs-5" />
             </button>
 
             {/* Main Slider */}
-            <div style={{ width: "80%", height: "70%" }}>
+            <div style={{ width: "90%", height: "75%", position: 'relative' }}>
               <Swiper
                 modules={[Navigation, Pagination, Thumbs, Keyboard]}
                 navigation
                 keyboard={{ enabled: true }}
-                thumbs={{ swiper: thumbsSwiper }}
+                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 initialSlide={currentIndex}
                 className="h-100"
               >
@@ -137,12 +142,12 @@ export default function Gallery({gallery}) {
             </div>
 
             {/* Thumbnails Slider */}
-            <div style={{ width: "80%", height: "100px" }} className="mt-3">
+            <div style={{ width: "90%", height: "90px" }} className="mt-4">
               <Swiper
                 onSwiper={setThumbsSwiper}
                 modules={[Thumbs]}
-                slidesPerView={10}
-                spaceBetween={10}
+                slidesPerView={9}
+                spaceBetween={12}
                 watchSlidesProgress
                 className="h-100"
               >
@@ -154,7 +159,7 @@ export default function Gallery({gallery}) {
                       style={{
                         height: "100%",
                         width: "100%",
-                        objectFit: "fill",
+                        objectFit: "cover",
                         cursor: "pointer",
                       }}
                     />
@@ -162,7 +167,8 @@ export default function Gallery({gallery}) {
                 ))}
               </Swiper>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </div>
     </div>

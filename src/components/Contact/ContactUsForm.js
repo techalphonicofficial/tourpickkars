@@ -62,9 +62,9 @@ export default function ContactUsForm({ heading, banner, video }) {
           {/* Video Section */}
           <div className="col-lg-6">
             <div className="text-lg-start text-center">
-              <span className="sub-title">Watch Our Journey</span>
-              <h2 className="display-5 fw-800 mb-4 lh-sm">Experience the Adventure Through Our Lens</h2>
-              <p className="text-muted mb-5 pe-lg-5">We dont just plan trips; we create memories. Watch our recent travelers experiences and get inspired for your next big adventure with Enlivetrips.</p>
+              <span className="sub-title text-white">Watch Our Journey</span>
+              <h2 className="display-5 fw-800 mb-4 lh-sm text-white">See the Adventure Through Our Eyes</h2>
+              <p className="text-white mb-5 pe-lg-5">We don't just organize trips — we craft unforgettable moments. Check out our latest travels and find inspiration for your next great adventure with Tour Pickkars.</p>
 
               <div className="d-flex justify-content-lg-start justify-content-center">
                 <a
