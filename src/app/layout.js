@@ -40,8 +40,8 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
-const GTM_ID = "GTM-NG5CWV9S";
-
+const GTM_ID = "G-C2265Q1FBH";
+//ssfasf
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -138,6 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
         />
+
       </head>
       <body className={`${montez.variable} ${manrope.variable}`}>
         <noscript>
