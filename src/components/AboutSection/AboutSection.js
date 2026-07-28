@@ -81,7 +81,7 @@ export default function AboutSection() {
               {/* Heading */}
               <h2 className="about-heading">
                 {mainpage.section[4].data.Text
-                  .replace(/Enlivetrips/g, "Tour Pickkars")
+                  .replace(/tourpickkars/g, "Tour Pickkars")
                   .replace(/Enlive/g, "Tour Pickkars")
                   .split(" ")
                   .map((word, i, arr) =>
@@ -96,7 +96,7 @@ export default function AboutSection() {
                 className="about-desc"
                 dangerouslySetInnerHTML={{
                   __html: mainpage.section[5].data.rich_text
-                    .replace(/Enlivetrips/g, "Tour Pickkars")
+                    .replace(/tourpickkars/g, "Tour Pickkars")
                     .replace(/Enlive/g, "Tour Pickkars"),
                 }}
               />

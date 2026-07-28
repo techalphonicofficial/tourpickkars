@@ -36,7 +36,7 @@ return (
               <span className="sub-title">{mainpage.section[0].data.Text}</span>
               <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
               <p className="sec-text">
-                {mainpage.section[2].data.content.replace(/Enlivetrips/g, "Tour Pickkars").replace(/Enlive/g, "Tour Pickkars")}
+                {mainpage.section[2].data.content.replace(/tourpickkars/g, "Tour Pickkars").replace(/Enlive/g, "Tour Pickkars")}
               </p>
             </div>
           </div>

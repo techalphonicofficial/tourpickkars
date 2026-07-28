@@ -64,11 +64,11 @@ export default async function PageDetail({ params }) {
     image: blog.blog.image,
     author: {
       "@type": "Organization",
-      name: "Enlivetrips",
+      name: "tourpickkars",
     },
     publisher: {
       "@type": "Organization",
-      name: "Enlivetrips",
+      name: "tourpickkars",
       logo: {
         "@type": "ImageObject",
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/logo.png`,

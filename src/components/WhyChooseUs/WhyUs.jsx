@@ -52,7 +52,7 @@ const WhyUs = () => {
     };
   };
 
-  const formattedTitle = data.section[1].data.Text.replace(/Enlivetrips/g, "Tour Pickkars").replace(/Enlive/g, "Tour Pickkars");
+  const formattedTitle = data.section[1].data.Text.replace(/tourpickkars/g, "Tour Pickkars").replace(/Enlive/g, "Tour Pickkars");
   const titleWords = formattedTitle.split(" ");
   
   return (
