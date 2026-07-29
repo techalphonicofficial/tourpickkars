@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import HeaderMob from "./HeaderMob";
 import Popup from "../HelpingCompnents/Popup";
+import { createSlug } from "@/functions/createSlug";
 
 const replaceOldPhone = (value = "") =>
   String(value).replace(/9876543210/g, "9679945077");
@@ -56,7 +57,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                   {mainpage.sections[0].section[2].data.trip_items.map(
                     (item, index) => (
                       <li key={index}>
-                        <Link href={`/trips/${item.slug}`}>
+                        <Link href={`/trips/${createSlug(item.slug)}`}>
                           {item.heading}
                         </Link>
                       </li>
@@ -100,7 +101,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                   {mainpage.sections[1].section[1].data.trip_items.map(
                     (item, index) => (
                       <li key={index}>
-                        <Link href={`/trips/${item.slug}`}>
+                        <Link href={`/trips/${createSlug(item.slug)}`}>
                           {item.heading}
                         </Link>
                       </li>
@@ -116,7 +117,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                         .filter((item) => item.international === 0)
                         .map((item) => (
                           <li key={item.id}>
-                            <Link href={`/trips/${item.slug}`}>
+                            <Link href={`/trips/${createSlug(item.slug)}`}>
                               {item.heading}
                             </Link>
                           </li>
@@ -130,7 +131,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                         .filter((item) => item.international === 1)
                         .map((item) => (
                           <li key={item.id}>
-                            <Link href={`/trips/${item.slug}`}>
+                            <Link href={`/trips/${createSlug(item.slug)}`}>
                               {item.heading}
                             </Link>
                           </li>

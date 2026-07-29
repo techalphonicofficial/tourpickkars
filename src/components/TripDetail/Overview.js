@@ -16,7 +16,7 @@ export default function Overview({description}) {
   return (
     <div className="min_box-detail Age_limit container my-4">
       <div className="title">
-        <h6 className="text-start fw-bold page-title mb-4">Overview</h6>
+        <h2 className="text-start fw-bold page-title mb-4">Overview</h2>
       </div>
 
       <div className="tour-page-single mt-20">

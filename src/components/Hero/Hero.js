@@ -15,9 +15,9 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { getPagewithSection } from "@/services/pageSection";
 import { api } from "@/services/config";
+import { createSlug } from "@/functions/createSlug";
 
-const mainpage = await getPagewithSection(1, "hero");
-export default function Hero() {
+export default function Hero({ mainpage }) {
   const arr = mainpage.section[2].data.content.split("|");
   const [results, setResults] = useState([]);
   // console.log("mainpage", mainpage)
@@ -171,7 +171,7 @@ export default function Hero() {
                   {results.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/${item.slug}`}
+                      href={`/${createSlug(item.slug)}`}
                       className="search-result-item"
                     >
                       <div className="result-info">

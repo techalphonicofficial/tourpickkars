@@ -37,7 +37,7 @@ export default function Itinerary({ itinerary, slots }) {
   return (
     <div className="min_box-detail Age_limit container my-4 enlive-itinerary-box">
       <div className="title enlive-itinerary-title">
-        <h6 className="text-start fw-bold mb-0 page-title">Itinerary</h6>
+        <h2 className="text-start fw-bold mb-0 page-title">Itinerary</h2>
         <span className="enlive-itinerary-count">
           {itineraryItems.length} Days
         </span>

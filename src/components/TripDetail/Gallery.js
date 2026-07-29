@@ -45,7 +45,7 @@ export default function Gallery({gallery}) {
   return (
     <div className="min_box-detail Age_limit container my-4">
       <div className="title">
-        <h6 className="text-start fw-bold mb-4">Gallery</h6>
+        <h2 className="text-start fw-bold mb-4">Gallery</h2>
       </div>
       <div className="container my-5">
         <div className="row g-2">
@@ -60,6 +60,7 @@ export default function Gallery({gallery}) {
                 src={gallery[0]}
                 className="w-100 h-100 img-fluid"
                 style={{ objectFit: "cover" }}
+                alt="Gallery preview"
               />
             </div>
           </div>
@@ -86,6 +87,7 @@ export default function Gallery({gallery}) {
                       src={img}
                       className="w-100 h-100 img-fluid"
                       style={{ objectFit: "cover" }}
+                      alt={`Gallery thumbnail ${index + 1}`}
                     />
 
                     {/* Overlay for last image */}
@@ -134,6 +136,7 @@ export default function Gallery({gallery}) {
                           maxWidth: "100%",
                           objectFit: "contain",
                         }}
+                        alt={`Gallery image ${index + 1}`}
                       />
                     </div>
                   </SwiperSlide>
@@ -162,6 +165,7 @@ export default function Gallery({gallery}) {
                         objectFit: "cover",
                         cursor: "pointer",
                       }}
+                      alt={`Gallery navigation thumbnail ${index + 1}`}
                     />
                   </SwiperSlide>
                 ))}

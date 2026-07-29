@@ -42,9 +42,9 @@ const manrope = Manrope({
 
 const GTM_ID = "G-C2265Q1FBH";
 //ssfasf
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-export const fetchCache = "force-no-store";
+// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
+// export const fetchCache = "force-no-store";
 
 
 
@@ -70,10 +70,11 @@ export const metadata = {
   openGraph: {
     title: "Tour Pickkars",
     description: "Book your tours and travel experiences with Tour Pickkars.",
-    url: "https://tourpicker.in",   // replace with your actual domain
+    url: "https://www.tourpickkars.in",// replace with your actual domain
     siteName: "Tour Pickkars",
     images: [
       {
+        
         url: "/img/logo.webp", // put og-image.jpg in /public/assets/img/
         width: 1200,
         height: 630,
@@ -126,10 +127,10 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
+      <body className={`${montez.variable} ${manrope.variable}`}>
         <Script
           id="google-tag-manager"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -138,9 +139,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
         />
-
-      </head>
-      <body className={`${montez.variable} ${manrope.variable}`}>
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}

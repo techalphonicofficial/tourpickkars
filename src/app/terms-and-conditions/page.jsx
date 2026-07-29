@@ -63,7 +63,7 @@ export default async function TermCondition() {
           <div className="col-xxl-12 col-lg-12">
             <div className="page-single">
               <div className="service-img global-img">
-                <img src="assets/img/normal/resort-details.jpg" alt="" />
+                <img src="assets/img/normal/resort-details.jpg" alt={mainpage.name || "Terms and conditions banner"} />
               </div>
               <div className="page-content d-block">
                 <div

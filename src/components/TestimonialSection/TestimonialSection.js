@@ -94,7 +94,7 @@ export default function TestimonialSection() {
                       />
                     </div>
                     <div className="testi-profile-info">
-                      <h4 className="testi-name">{item.name}</h4>
+                      <h3 className="testi-name">{item.name}</h3>
                       <span className="testi-role">{item.type}</span>
                     </div>
                   </div>

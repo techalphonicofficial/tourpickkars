@@ -6,7 +6,7 @@ export default function TripBanner() {
         <div className="tour-page-single mt-3">
             <div className="page-content">
 
-                <img src='/img/bg/cta_bg_1.png'/>
+                <img src='/img/bg/cta_bg_1.png' alt="Trip banner" />
             </div>
         </div>
     </div>

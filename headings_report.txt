@@ -1,0 +1,245 @@
+
+--- \src\app\about\page.js ---
+Line 58: <h1 className="text-3xl font-bold mb-4">Error Loading Content</h1>
+Line 88: <h1 className="breadcumb-title">
+Line 136: <h2 className="sec-title mb-20 pe-xl-5 me-xl-5 heading">
+Line 159: <h3 className="box-title h5">{item.data.section[1].data.Text}</h3>
+
+--- \src\app\blog\page.js ---
+Line 67: <h1 className="breadcumb-title">
+Line 160: <h3 className="widget_title">Categories</h3>
+
+--- \src\app\blog\[slug]\page.js ---
+Line 101: <h1 className="breadcumb-title">{blog.blog.heading}</h1>
+Line 214: <h3 className="widget_title">Recent Posts</h3>
+Line 224: <h4 className="post-title">
+Line 255: <h6 className="box-title">
+Line 262: <h6 className="offer-title">You Get Online support</h6>
+
+--- \src\app\booking-detail\page.js ---
+Line 998: <h2 className="display-6 fw-bold text-danger mb-3">Missing Booking ID</h2>
+Line 1045: <h2 className="display-6 fw-bold text-danger mb-3">Invalid Booking URL</h2>
+Line 1074: <h4 className="alert-heading">Error!</h4>
+Line 1088: <h5 className="mb-0">Member Progress</h5>
+Line 1132: <h3 className="mb-0 fs-3 text-white">
+Line 1142: <h5 className="alert-heading">Package: {bookingDetail.package_title}</h5>
+Line 1155: <h6 className="fw-bold">Booking Summary</h6>
+Line 1231: <h5 className="mb-0">
+Line 1272: <h6 className="text-primary border-bottom pb-2">Personal Information</h6>
+Line 1370: <h6 className="text-primary border-bottom pb-2">Identity Proof</h6>
+Line 1448: <h6 className="text-primary border-bottom pb-2">Emergency Contact</h6>
+
+--- \src\app\contact\page.js ---
+Line 47: //           <h1 className="breadcumb-title">{mainpage.sections[0].section[1].data.Text}</h1>
+Line 67: //           <h2 className="sec-title">Our Contact Information</h2>
+Line 84: //                 <h6 className="box-title">Our Address</h6>
+Line 104: //                 <h6 className="box-title">Phone Number</h6>
+Line 127: //                 <h6 className="box-title">Email Address</h6>
+Line 213: <h2 className="sec-title">Our Contact Information</h2>
+Line 258: <h1 className="breadcumb-title text-white fw-800 display-3 mb-4">{breadcrumbTitle}</h1>
+Line 276: <h4 className="fw-bold mb-3">Our Office</h4>
+Line 294: <h4 className="fw-bold mb-3">Call Support</h4>
+Line 307: <h4 className="fw-bold mb-3">Email Us</h4>
+
+--- \src\app\custom-trips\page.js ---
+Line 32: <h1 className="breadcumb-title text-white fw-800 display-3 mb-4">Plan Custom Trip</h1>
+
+--- \src\app\destination\[slug]\page.js ---
+Line 61: <h1 className="breadcumb-title">{trips.trip.name}</h1>
+Line 79: <h2 className="fw-bold mb-4 text-center">Available Trips</h2>
+
+--- \src\app\privacy-policy\page.jsx ---
+Line 48: <h1 className="breadcumb-title">{mainpage.name}</h1>
+
+--- \src\app\terms-and-conditions\page.jsx ---
+Line 49: <h1 className="breadcumb-title">{mainpage.name}</h1>
+
+--- \src\app\trips\[slug]\page.js ---
+Line 60: <h1 className="breadcumb-title">{trips.trip.heading}</h1>
+Line 81: <h2 className="fw-bold mb-4 text-center">Available Trips</h2>
+
+--- \src\app\upcoming-trips\page.js ---
+Line 77: <h1 className="breadcumb-title">
+
+--- \src\components\AboutSection\AboutItem.js ---
+Line 11: <h5 className="box-title">{title}</h5>
+
+--- \src\components\AboutSection\AboutSection.js ---
+Line 82: <h2 className="about-heading">
+Line 135: <h5 className="about-feature-title">{item.data.section[1].data.Text}</h5>
+
+--- \src\components\Blog\SingleBlog.js ---
+Line 47: <h3 className="blog-card-title">
+
+--- \src\components\BlogSection\BlogSection.js ---
+Line 48: <h2 className="blog-section-title">
+Line 104: <h3 className="blog-card-title">
+
+--- \src\components\Booking\AvailableDates.js ---
+Line 39: <h3 className="section-title-premium m-0">Select Your Batch</h3>
+
+--- \src\components\Booking\BillingDetail.js ---
+Line 77: <h3 className="section-title-premium">Personal Details</h3>
+
+--- \src\components\Booking\Coupons.js ---
+Line 17: <h6 className="text-start fw-bold mb-4 page-title">Coupons & Offers</h6>
+Line 93: <h6 className="fw-bold mb-0">Coupons And Offers</h6>
+
+--- \src\components\Booking\Occupancy.js ---
+Line 95: <h3 className="section-title-premium m-0">Room Arrangement</h3>
+
+--- \src\components\Booking\PaymentType.js ---
+Line 29: <h3 className="section-title-premium">Payment Options</h3>
+Line 51: <h5 className="fw-bold text-dark mb-1">
+Line 79: <h5 className="fw-bold text-dark mb-1">Full Payment</h5>
+
+--- \src\components\Booking\Pricing.js ---
+Line 178: //         <h6 className="text-start flex-wrap fw-bold mb-4 page-title">
+Line 523: <h4 className="fw-bold mb-1">Booking Summary</h4>
+Line 625: <h4 className="fw-bold">Securing Your Trip...</h4>
+
+--- \src\components\Booking\TravellerDetail.js ---
+Line 17: <h3 className="section-title-premium m-0">Traveller Information</h3>
+
+--- \src\components\Booking\TripSummary.js ---
+Line 51: <h3 className="section-title-premium">Trip Summary</h3>
+Line 61: <h4 className="fw-bold text-dark m-0">
+
+--- \src\components\Contact\ContactUsForm.js ---
+Line 66: <h2 className="display-5 fw-800 mb-4 lh-sm text-white">See the Adventure Through Our Eyes</h2>
+Line 90: <h3 className="fw-bold text-capitalize m-0">{heading}</h3>
+
+--- \src\components\CustomTrips\CustomTripForm.js ---
+Line 102: <h3 className="fw-bolder text-capitalize m-0 mt-2 display-6" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Plan Your Custom Trip</h3>
+
+--- \src\components\HelpingCompnents\Popup.js ---
+Line 98: <h4 className="mb-4 border-bottom pb-2 sec-title">
+
+--- \src\components\HelpingCompnents\RequestCallback.js ---
+Line 61: <h5 className="modal-title text-success">{heading}</h5>
+
+--- \src\components\Hero\Hero.js ---
+Line 137: <h1 className="hero-title display-3 fw-bold mb-3 mt-0">
+Line 204: <h3 className="stat-number">
+Line 234: <h3 className="stat-number">
+
+--- \src\components\Partials\Footer.js ---
+Line 77: <h2>Stay Informed Every Week</h2>
+Line 139: <h3 className="footer-col-title">Quick Links</h3>
+Line 171: <h3 className="footer-col-title">Contact Information</h3>
+Line 226: <h3 className="footer-col-title">Instagram Feed</h3>
+
+--- \src\components\PopularDestination\PopularCard.js ---
+Line 17: <h4 className="box-title">{title}</h4>
+
+--- \src\components\PopularDestination\PopularDestination.js ---
+Line 25: <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+
+--- \src\components\PopularTour\PopularTour.js ---
+Line 37: <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+
+--- \src\components\PopularTour\TourCard.js ---
+Line 55: <h3 className="box-title">
+
+--- \src\components\TestimonialSection\TestimonialPackageSection.js ---
+Line 31: <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+Line 75: <h3 className="box-title">{item.name}</h3>
+
+--- \src\components\TestimonialSection\TestimonialSection.js ---
+Line 41: <h2 className="testi-heading">
+Line 97: <h3 className="testi-name">{item.name}</h3>
+
+--- \src\components\TourCategories\CategoriesCard.js ---
+Line 22: <h3 className="category-title">
+
+--- \src\components\TourCategories\TourCategories.js ---
+Line 21: //           <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+Line 68: <h2 className="sec-title">
+Line 76: <h3 className="text-center mt-4 mb-3">
+Line 86: <h3 className="text-center mt-5 mb-3">
+
+--- \src\components\TripDetail\AgeLimit.js ---
+Line 50: <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Age Limit (Trip Wise)</h2>
+Line 68: <h3 className="fw-bolder m-0" style={{ color: '#2c3e50', fontSize: '1.2rem' }}>
+
+--- \src\components\TripDetail\Batches.js ---
+Line 102: <h2 className="section-title-premium m-0">Available Batches</h2>
+
+--- \src\components\TripDetail\BookNow.js ---
+Line 13: <h3 className="fw-bold text-primary mb-0">
+
+--- \src\components\TripDetail\Dates.js ---
+Line 23: <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h2>
+Line 46: <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#00ba9d', fontSize: '1.8rem' }}>
+Line 67: <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h2>
+Line 96: <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+Line 103: <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+Line 110: <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+
+--- \src\components\TripDetail\Exclusions.js ---
+Line 18: <h2 className="text-start fw-bold mb-4 page-title">
+
+--- \src\components\TripDetail\Faq.jsx ---
+Line 14: <h2 className="text-start fw-bold mb-4 page-title">
+
+--- \src\components\TripDetail\Form.jsx ---
+Line 102: <h2 className="fw-bold text-secondary h6">
+Line 111: <h4 className="fw-bold text-dark">
+Line 146: <h2 className="fw-bold h6">Pricing</h2>
+Line 182: <h2 className="fw-bold h6">Batches</h2>
+
+--- \src\components\TripDetail\Gallery.js ---
+Line 48: <h2 className="text-start fw-bold mb-4">Gallery</h2>
+
+--- \src\components\TripDetail\Inclusions.js ---
+Line 36: <h2 className="text-start fw-bold mb-4 page-title">Inclusions</h2>
+
+--- \src\components\TripDetail\Instavideo.js ---
+Line 37: <h2 className="sec-title">
+Line 43: <h3 className="h5">Reviews that make me Blush</h3>
+
+--- \src\components\TripDetail\Itinerary.js ---
+Line 40: <h2 className="text-start fw-bold mb-0 page-title">Itinerary</h2>
+
+--- \src\components\TripDetail\Notes.js ---
+Line 9: <h2 className="text-start fw-bold mb-4 page-title">
+
+--- \src\components\TripDetail\Overview.js ---
+Line 19: <h2 className="text-start fw-bold page-title mb-4">Overview</h2>
+
+--- \src\components\TripDetail\RelatedBlogs.js ---
+Line 65: <h2 className="blog-section-title" style={{ fontSize: "2rem" }}>
+Line 118: <h3 className="blog-card-title mb-3">
+
+--- \src\components\TripDetail\RelatedTrips.js ---
+Line 37: <h2 className="sec-title"> Backpacking Trips</h2>
+
+--- \src\components\TripDetail\RelatedYoutube.js ---
+Line 67: <h2 className="sec-title">
+Line 73: <h3 className="h5">Reviews that make me Blush</h3>
+
+--- \src\components\TripDetail\ThingsToPack.js ---
+Line 20: <h2 className="text-start fw-bold mb-4 page-title">Things To Pack</h2>
+
+--- \src\components\TripDetail\TripHero.js ---
+Line 24: <h1 className="trip-hero-title fw-bold text-white">
+
+--- \src\components\Trips\TripContent.js ---
+Line 23: <h2 className="mb-4 fw-bold">Overview</h2>
+Line 37: <div dangerouslySetInnerHTML={{ __html: content ? content.replace(/<h1/gi, '<h2').replace(/<\/h1>/gi, '</h2>') : '' }} />
+
+--- \src\components\Trips_card\TripsCard.js ---
+Line 57: <h2 className="fw-bold mb-4 text-center">Available Trips</h2>
+Line 96: <h3 className="card-title h5">{trip.title}</h3>
+
+--- \src\components\UpcomingTripSection\UpcomingTripMain.js ---
+Line 25: <h2 className="h5 fw-bolder mb-0 text-dark">Destinations</h2>
+
+--- \src\components\VideosSection\VideosSection.js ---
+Line 82: <h3>{tag}</h3>
+Line 116: <h2 className="sec-title">
+Line 122: <h3 className="h5">Reviews that make me Blush</h3>
+
+--- \src\components\WhyChooseUs\WhyUs.jsx ---
+Line 65: <h2 className="whyus-title">
+Line 90: <h3 className="whyus-card-title">{item[1].Text.Text}</h3>

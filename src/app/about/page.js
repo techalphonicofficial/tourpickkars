@@ -156,7 +156,7 @@ export default async function About() {
                           />
                         </div>
                         <div className="about-item_centent">
-                          <h5 className="box-title">{item.data.section[1].data.Text}</h5>
+                          <h3 className="box-title h5">{item.data.section[1].data.Text}</h3>
                           <p className="about-item_text">
                             {item.data.section[2].data.content}
                           </p>

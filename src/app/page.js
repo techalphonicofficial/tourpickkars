@@ -34,7 +34,7 @@ export async function generateMetadata() {
 
   if (!data) {
     return {
-      title: "Enlive Trips",
+      title: "TourPickkars",
       description: "Content temporarily unavailable – please try again later",
     };
   }
@@ -64,6 +64,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const { data } = await getHomeData();
+  const heroData = await getPagewithSection(1, "hero");
   return (
     <>
 
@@ -74,7 +75,7 @@ export default async function Home() {
           dangerouslySetInnerHTML={{ __html: schema.schema }}
         />
       ))}
-      <Hero />
+      <Hero mainpage={heroData} />
       <AdvertisementSectionCard />
       <TourCategories />
       {/* <PopularDestination /> */}

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { getSingleBlog } from "@/services/blogApi";
 import { notFound } from "next/navigation";
+import { createSlug } from "@/functions/createSlug";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -216,7 +217,7 @@ export default async function PageDetail({ params }) {
                     {blog.recentBlog.map((post) => (
                       <div className="recent-post" key={post.id}>
                         <div className="media-img">
-                          <Link href={`/blog/${post.slug}`}>
+                          <Link href={`/blog/${createSlug(post.slug)}`}>
                             <img src={post.image} alt="Blog Image" />
                           </Link>
                         </div>
@@ -224,13 +225,13 @@ export default async function PageDetail({ params }) {
                           <h4 className="post-title">
                             <Link
                               className="text-inherit"
-                              href={`/blog/${post.slug}`}
+                              href={`/blog/${createSlug(post.slug)}`}
                             >
                               {post.heading}
                             </Link>
                           </h4>
                           <div className="recent-post-meta">
-                            <Link href={`/blog/${post.slug}`}>
+                            <Link href={`/blog/${createSlug(post.slug)}`}>
                               <i>
                                 <FontAwesomeIcon icon={faCalendarDays} />
                               </i>

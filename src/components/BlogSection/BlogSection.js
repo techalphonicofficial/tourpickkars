@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./BlogSection.css";
+import { createSlug } from "@/functions/createSlug";
 
 const mainpage = await getPagewithSection(1, "blogs");
 const blogPosts = await getBlogs();
@@ -102,7 +103,7 @@ export default function BlogSection() {
                   {/* Body */}
                   <div className="blog-card-body">
                     <h3 className="blog-card-title">
-                      <Link href={`blog/${blog.slug}`}>{blog.heading}</Link>
+                      <Link href={`/blog/${createSlug(blog.slug)}`}>{blog.heading}</Link>
                     </h3>
 
                     {blog.excerpt && (
@@ -114,7 +115,7 @@ export default function BlogSection() {
                         <div className="blog-author-avatar">TP</div>
                         Tour Pickkars
                       </div>
-                      <Link href={`blog/${blog.slug}`} className="blog-read-link">
+                      <Link href={`/blog/${createSlug(blog.slug)}`} className="blog-read-link">
                         Read More <ArrowIcon />
                       </Link>
                     </div>

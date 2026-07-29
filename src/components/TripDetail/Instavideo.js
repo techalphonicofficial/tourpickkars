@@ -40,7 +40,7 @@ export default function Instavideo({ related_insta_video }) {
             </i>{" "}
             Travel Reels
           </h2>
-          <h5>Reviews that make me Blush</h5>
+          <h3 className="h5">Reviews that make me Blush</h3>
           <p className='text-center smp'>Testimonials, Reviews, Experiences, Virtual Tours & Much More</p>
         </div>
 

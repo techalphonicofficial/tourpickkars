@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { createSlug } from "@/functions/createSlug";
 
 export default function PopularCard({ image, title, subtitle, slug }) {
   return (
@@ -19,7 +20,7 @@ export default function PopularCard({ image, title, subtitle, slug }) {
           </div>
           <div className="btn-wrap">
             <Link
-              href={`/destination/${slug}`}
+              href={`/destination/${createSlug(slug)}`}
               className="th-btn"
             >
               Explore

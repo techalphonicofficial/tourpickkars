@@ -2,6 +2,7 @@
 const isStaticExport = process.env.STATIC_EXPORT === "true";
 
 const nextConfig = {
+  htmlLimitedBots: /.*/,
   output: isStaticExport ? "export" : "standalone",
   images: {
     unoptimized: true,

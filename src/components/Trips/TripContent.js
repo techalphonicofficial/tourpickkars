@@ -20,7 +20,7 @@ export default function TripContent({ content }) {
         <div className="row justify-content-center">
           <div className="col-lg-12">
             <div className="trip-content-wrap bg-white rounded-4 shadow-sm p-4 p-md-5 position-relative">
-              <h3 className="mb-4 fw-bold">Overview</h3>
+              <h2 className="mb-4 fw-bold">Overview</h2>
 
               <div
                 className="trip-content-inner text-muted pb-3"
@@ -34,7 +34,21 @@ export default function TripContent({ content }) {
                   fontSize: "16px"
                 }}
               >
-                <div dangerouslySetInnerHTML={{ __html: content }} />
+                <div dangerouslySetInnerHTML={{ 
+                  __html: content ? (() => {
+                    let h1OpenCount = 0;
+                    let h1CloseCount = 0;
+                    return content
+                      .replace(/<h1/gi, () => {
+                        h1OpenCount++;
+                        return h1OpenCount === 1 ? '<h1' : '<h2';
+                      })
+                      .replace(/<\/h1>/gi, () => {
+                        h1CloseCount++;
+                        return h1CloseCount === 1 ? '</h1>' : '</h2>';
+                      });
+                  })() : '' 
+                }} />
 
                 {/* Fade out effect when collapsed */}
                 {!showMore && (

@@ -57,7 +57,11 @@ export default async function Trips({ params }) {
       >
         <div className="container">
           <div className="breadcumb-content">
-            <h1 className="breadcumb-title">{trips.trip.heading}</h1>
+            {trips.trip.content && /<h1/i.test(trips.trip.content) ? (
+              <div className="breadcumb-title h1">{trips.trip.heading}</div>
+            ) : (
+              <h1 className="breadcumb-title">{trips.trip.heading}</h1>
+            )}
             <ul className="breadcumb-menu">
               <li>
                 <Link href="/">Home</Link>

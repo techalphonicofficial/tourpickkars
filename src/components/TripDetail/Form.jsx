@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { createSlug } from "@/functions/createSlug";
 
 // Dummy JSON data (replace with API response if needed)
 const jsonData = {
@@ -99,13 +100,13 @@ const Form = ({ loaded }) => {
     <div className="bg-light rounded p-3">
       {/* Price Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded mb-3">
-        <h6 className="fw-bold text-secondary">
+        <h2 className="fw-bold text-secondary h6">
           {!loaded && !anotherLoading ? (
             "Starting From"
           ) : (
             <Skeleton width={100} />
           )}
-        </h6>
+        </h2>
         <div className="mt-2">
           {!loaded && !anotherLoading ? (
             <h4 className="fw-bold text-dark">
@@ -118,7 +119,7 @@ const Form = ({ loaded }) => {
           )}
         </div>
         <div className="d-flex gap-2 mt-3">
-          <Link href={`/booking/${data?.packageDetail?.slug}`}>
+          <Link href={`/booking/${createSlug(data?.packageDetail?.slug)}`}>
             {!loaded && !anotherLoading ? (
               <button className="btn btn-success rounded-pill px-4">
                 Book Now
@@ -143,7 +144,7 @@ const Form = ({ loaded }) => {
       {/* Pricing Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded mb-3">
         <div className="d-flex justify-content-between border-bottom pb-2">
-          <h6 className="fw-bold">Pricing</h6>
+          <h2 className="fw-bold h6">Pricing</h2>
           <div>
             <span className="me-2">Occupancy -</span>
             {data?.activity_cost?.map((item, index) => (
@@ -179,7 +180,7 @@ const Form = ({ loaded }) => {
       {/* Batches Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded">
         <div className="d-flex justify-content-between border-bottom pb-2">
-          <h6 className="fw-bold">Batches</h6>
+          <h2 className="fw-bold h6">Batches</h2>
           <div className="d-flex gap-3">
             {["All", "Jan", "Feb", "Mar"].map((filter) => (
               <span

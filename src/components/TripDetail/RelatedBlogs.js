@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "@/components/BlogSection/BlogSection.css"; // inherit new blog styling
 import { getBlogsByTripDestination } from "@/services/blogApi";
+import { createSlug } from "@/functions/createSlug";
 
 function CalendarIcon() {
   return (
@@ -116,7 +117,7 @@ export default function RelatedBlogs({ title, destination, trip }) {
                   {/* Body */}
                   <div className="blog-card-body d-flex flex-column" style={{ flexGrow: 1 }}>
                     <h3 className="blog-card-title mb-3">
-                      <Link href={`/blog/${blog.slug}`}>{blog.heading}</Link>
+                      <Link href={`/blog/${createSlug(blog.slug)}`}>{blog.heading}</Link>
                     </h3>
 
                     {blog.excerpt && (
@@ -130,7 +131,7 @@ export default function RelatedBlogs({ title, destination, trip }) {
                         <div className="blog-author-avatar">TP</div>
                         Tour Pickkars
                       </div>
-                      <Link href={`/blog/${blog.slug}`} className="blog-read-link">
+                      <Link href={`/blog/${createSlug(blog.slug)}`} className="blog-read-link">
                         Read More <ArrowIcon />
                       </Link>
                     </div>

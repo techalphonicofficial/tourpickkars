@@ -4,10 +4,10 @@ import ShareButton from "./ShareButton";
 
 export default function TripInfo({ trip, completedata }) {
   const serviceItems = [
-    { label: "Meals", icon: "/img/icon/Meals.svg" },
-    { label: "Stays", icon: "/img/icon/Stays.svg" },
-    { label: "Transfers", icon: "/img/icon/Transfers.svg" },
-    { label: "Activities", icon: "/img/icon/Activities.svg" },
+    { label: "Meals", icon: "/img/icon/Meals.svg", alt: "Travel meals and dining icon" },
+    { label: "Stays", icon: "/img/icon/Stays.svg", alt: "Accommodation and stays icon" },
+    { label: "Transfers", icon: "/img/icon/Transfers.svg", alt: "Travel transfer service icon" },
+    { label: "Activities", icon: "/img/icon/Activities.svg", alt: "Travel activities icon" },
   ];
 
   return (
@@ -26,7 +26,7 @@ export default function TripInfo({ trip, completedata }) {
               className="jtym package-detail-card package-service-card d-flex align-items-center gap-3 py-3 px-4"
               key={item.label}
             >
-              <img src={item.icon} alt="" />
+              <img src={item.icon} alt={item.alt} />
               <div className="deta_content">
                 <p className="sadasd">{item.label}</p>
               </div>

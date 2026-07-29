@@ -22,7 +22,7 @@ export default function UpcomingTripMain({ tripsWithcount }) {
         <aside className="sidebar-area sticky-top" style={{ top: "120px", zIndex: 10 }}>
 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h3 className="h5 fw-bolder mb-0 text-dark">Destinations</h3>
+            <h2 className="h5 fw-bolder mb-0 text-dark">Destinations</h2>
             {(byCategory !== "all" || hasDateFilter) && (
               <button
                 onClick={handleClearFilters}

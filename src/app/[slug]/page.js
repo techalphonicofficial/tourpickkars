@@ -379,7 +379,7 @@ export default async function Tripdetail({ params }) {
 
             {single_package.map_image && (
               <div className="container d-lg-none">
-                <img src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}${single_package.map_image}`} alt="single_package.title" className="img-fluid rounded" />
+                <img src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}${single_package.map_image}`} alt={single_package.title || "Tour map image"} className="img-fluid rounded" />
               </div>
             )}
 

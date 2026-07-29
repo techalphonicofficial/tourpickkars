@@ -28,7 +28,7 @@ export async function generateMetadata() {
 
   if (!data) {
     return {
-      title: "Enlive Trips",
+      title: "Tourpickkars",
       description: "Content temporarily unavailable – please try again later",
     };
   }
@@ -37,12 +37,13 @@ export async function generateMetadata() {
     title: data.meta_title,
     description: data.meta_description,
     keywords: data.meta_description,
-    alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/trips/upcoming-trips/all`,
-    },
-    openGraph: {
-      type: "website",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/trips/upcoming-trips/all`,
+   alternates: {
+  canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
+},
+
+openGraph: {
+  type: "website",
+  url: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
       title: data.meta_title,
       description: data.meta_description,
       keywords: data.meta_description,

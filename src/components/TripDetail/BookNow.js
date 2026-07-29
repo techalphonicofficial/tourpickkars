@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import RequestCallback from "../HelpingCompnents/RequestCallback";
+import { createSlug } from "@/functions/createSlug";
 
 export default function BookNow({ id, title, slug, starting_price, bookingButton }) {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function BookNow({ id, title, slug, starting_price, bookingButton
       <div className="package-booking-actions d-flex flex-column gap-3">
         {bookingButton && (
           <a
-            href={`/booking/${slug}`}
+            href={`/booking/${createSlug(slug)}`}
             className="btn btn-primary w-100 py-3 rounded-pill fw-semibold"
           >
             Book Now

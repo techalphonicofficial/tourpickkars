@@ -93,7 +93,7 @@ export default function Trips() {
                       style={{ height: "180px", objectFit: "cover" }}
                     />
                     <div className="card-body">
-                      <h5 className="card-title">{trip.title}</h5>
+                      <h3 className="card-title h5">{trip.title}</h3>
                       <p className="card-text text-muted">{trip.description}</p>
                     </div>
                   </div>

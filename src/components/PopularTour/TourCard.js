@@ -9,6 +9,7 @@ import { faClock } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import Image from "next/image";
 import "./PopularTour.css";
+import { createSlug } from "@/functions/createSlug";
 
 export default function TourCard({ data, onRequestCallback }) {
   const dates =
@@ -26,7 +27,7 @@ export default function TourCard({ data, onRequestCallback }) {
     <div className="tour-box">
       {/* --- Image & Badges --- */}
       <div className="tour-box_img">
-        <Link href={`/${data.slug}`}>
+        <Link href={`/${createSlug(data.slug)}`}>
           <Image
             src={data.thumbnail}
             alt={data.title}
@@ -53,7 +54,7 @@ export default function TourCard({ data, onRequestCallback }) {
       {/* --- Content Area --- */}
       <div className="tour-content-body">
         <h3 className="box-title">
-          <Link href={`/${data.slug}`}>{data.title}</Link>
+          <Link href={`/${createSlug(data.slug)}`}>{data.title}</Link>
         </h3>
 
         <div className="tour-meta-info">

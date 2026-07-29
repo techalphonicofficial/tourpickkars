@@ -20,7 +20,7 @@ function Dates({ active_costs, package_dates }) {
           <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#e9f9ee' }}>
             <img src="/img/icon/regular_date.png" alt="Regular Date" style={{ width: '28px', objectFit: 'contain' }} />
           </div>
-          <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h3>
+          <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h2>
         </div>
 
         <div className="row g-4 mb-5">
@@ -64,7 +64,7 @@ function Dates({ active_costs, package_dates }) {
               <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#fff5e6' }}>
                 <img src="/img/icon/party_emoji.png" alt="Special Dates" style={{ width: '28px', objectFit: 'contain' }} />
               </div>
-              <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h3>
+              <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h2>
             </div>
 
             <div className="row justify-content-center">

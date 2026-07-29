@@ -114,6 +114,7 @@ export default async function Blog({ searchParams }) {
                           <img
                             src="/img/icon/arrow-right4.svg"
                             alt=""
+                            aria-hidden="true"
                             style={{ transform: "scaleX(-1)" }}
                           />{" "}
                           Previous{" "}
@@ -121,7 +122,7 @@ export default async function Blog({ searchParams }) {
                       ) : blogPosts.links.length === index + 1 ? (
                         <li key={index}>
                           <Link className="next-page" role="button" href={href}>
-                            Next <img src="/img/icon/arrow-right4.svg" alt="" />
+                            Next <img src="/img/icon/arrow-right4.svg" alt="" aria-hidden="true" />
                           </Link>
                         </li>
                       ) : (
