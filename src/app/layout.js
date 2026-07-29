@@ -53,6 +53,7 @@ export const viewport = {
 };
 
 export const metadata = {
+  metadataBase: new URL("https://www.tourpickkars.in"),
 
   title: "Tour Pickkars",
   description: "Tour Pickkars - Book your tours and travel experiences with us.",

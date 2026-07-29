@@ -12,15 +12,20 @@ function escapeXml(value = "") {
     .replace(/'/g, "&apos;");
 }
 
-// Normalize URL
+// Normalize URL – always rewrite to the canonical base domain
 function normalizeUrl(baseUrl, path) {
   if (!path) return null;
 
   path = String(path).trim();
 
-  // If API already returns full URL
+  // If API returns a full URL, extract just the pathname and rebuild with canonical base
   if (path.startsWith("http://") || path.startsWith("https://")) {
-    return path;
+    try {
+      const parsed = new URL(path);
+      path = parsed.pathname.replace(/^\/+/, "");
+    } catch {
+      return null;
+    }
   }
 
   // Remove leading slash
@@ -117,8 +122,8 @@ export async function GET() {
           lastmod: pkg.updated_at
             ? pkg.updated_at.split("T")[0]
             : pkg.created_at
-            ? pkg.created_at.split("T")[0]
-            : today,
+              ? pkg.created_at.split("T")[0]
+              : today,
           changefreq: "weekly",
           priority: "0.8",
         }));
@@ -141,15 +146,15 @@ export async function GET() {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allUrls
-  .map(
-    (u) => `  <url>
+        .map(
+          (u) => `  <url>
     <loc>${escapeXml(u.url)}</loc>
     <lastmod>${escapeXml(u.lastmod)}</lastmod>
     <changefreq>${escapeXml(u.changefreq)}</changefreq>
     <priority>${escapeXml(u.priority)}</priority>
   </url>`
-  )
-  .join("\n")}
+        )
+        .join("\n")}
 </urlset>`;
 
     return new Response(sitemap, {
@@ -164,15 +169,15 @@ ${allUrls
     const fallback = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticUrls
-  .map(
-    (u) => `  <url>
+        .map(
+          (u) => `  <url>
     <loc>${escapeXml(u.url)}</loc>
     <lastmod>${escapeXml(u.lastmod)}</lastmod>
     <changefreq>${escapeXml(u.changefreq)}</changefreq>
     <priority>${escapeXml(u.priority)}</priority>
   </url>`
-  )
-  .join("\n")}
+        )
+        .join("\n")}
 </urlset>`;
 
     return new Response(fallback, {
