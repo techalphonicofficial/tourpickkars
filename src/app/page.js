@@ -11,6 +11,7 @@ import WhyUs from "@/components/WhyChooseUs/WhyUs";
 import AdvertisementSectionCard from "@/components/AdvertisementSection/AdvertisementSectionCard";
 import VideosSection from "@/components/VideosSection/VideosSection";
 import { getPagewithSection } from "@/services/pageSection";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -44,7 +45,7 @@ export async function generateMetadata() {
     description: data.meta_description,
     keywords: data.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+      canonical: `/`,
     },
     openGraph: {
       type: "website",
@@ -72,7 +73,7 @@ export default async function Home() {
         <script
           key={schema.id}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: schema.schema }}
+          dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(schema.schema) }}
         />
       ))}
       <Hero mainpage={heroData} />

@@ -38,7 +38,7 @@
 //     description: single_package.meta_description,
 //     keywords: single_package.meta_description,
 //     alternates: {
-//       canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+//       canonical: `/${slug}`,
 //     },
 //     openGraph: {
 //       type: "article",
@@ -228,6 +228,7 @@ import { packageRedirection, singlePackage } from "@/services/packageApi";
 import { singleTrips } from "@/services/tripsApi";
 import { notFound } from "next/navigation";
 import { permanentRedirect } from "next/navigation";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -250,7 +251,7 @@ export async function generateMetadata({ params }) {
     description: single_package.meta_description,
     keywords: single_package.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      canonical: `/${slug}`,
     },
     openGraph: {
       type: "article",
@@ -292,7 +293,7 @@ export default async function Tripdetail({ params }) {
         <script
           key={schema.id}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: schema.schema }}
+          dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(schema.schema) }}
         />
       ))}
 

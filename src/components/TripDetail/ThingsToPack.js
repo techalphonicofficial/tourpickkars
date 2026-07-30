@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export default function ThingsToPack({ things_to_pack }) {
   const [expanded, setExpanded] = useState(false);
@@ -35,7 +36,7 @@ export default function ThingsToPack({ things_to_pack }) {
             <div className="checklist style2 style4 flex-fill">
               <div
                 id="things_to_packContent"
-                dangerouslySetInnerHTML={{ __html: things_to_pack }}
+                dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(things_to_pack) }}
               />
             </div>
           </div>

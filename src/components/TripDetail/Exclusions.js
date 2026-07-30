@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export default function Exclusions({ exclusion }) {
   const [expanded, setExpanded] = useState(false);
@@ -34,7 +35,7 @@ export default function Exclusions({ exclusion }) {
             <div className="checklist style5 flex-fill">
               <div
                 id="exclusionContent"
-                dangerouslySetInnerHTML={{ __html: exclusion }}
+                dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(exclusion) }}
               />
             </div>
           </div>

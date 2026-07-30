@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export default function Inclusions({ inclusion }) {
   const [expanded, setExpanded] = useState(false);
@@ -49,7 +50,7 @@ export default function Inclusions({ inclusion }) {
           >
             {/* Inclusions */}
             <div className="checklist style2 style4 flex-fill">
-              <div id="InclusionsContent" dangerouslySetInnerHTML={{ __html: inclusion }} />
+              <div id="InclusionsContent" dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(inclusion) }} />
             </div>
             <div className="checklist style5 flex-fill"></div>
           </div>

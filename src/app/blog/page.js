@@ -9,6 +9,7 @@ import Link from "next/link";
 import { getBlogs } from "@/services/blogApi";
 import { headers } from "next/headers";
 import { getPagewithSection } from "@/services/pageSection";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 
 // const mainpage = await getPagewithSection(2);
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }) {
     description: mainpage.meta_description,
     keywords: mainpage.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+      canonical: `/blog`,
     },
     openGraph: {
       type: "article",
@@ -48,7 +49,7 @@ export default async function Blog({ searchParams }) {
         <script
           key={schema.id}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: schema.schema }}
+          dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(schema.schema) }}
         />
       ))}
       {/* Breadcrumb */}

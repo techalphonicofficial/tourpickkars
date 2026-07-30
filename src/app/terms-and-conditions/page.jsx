@@ -1,4 +1,5 @@
 import { getPagewithSection } from '@/services/pageSection';
+import { sanitizeCmsHtml } from '@/functions/sanitizeCmsHtml';
 import Link from 'next/link'
 import React from 'react'
 // const mainpage = await getPagewithSection(7);
@@ -68,7 +69,7 @@ export default async function TermCondition() {
               <div className="page-content d-block">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: mainpage.sections[0].section[0].data.rich_text,
+                    __html: sanitizeCmsHtml(mainpage.sections[0].section[0].data.rich_text),
                   }}
                 />
               </div>

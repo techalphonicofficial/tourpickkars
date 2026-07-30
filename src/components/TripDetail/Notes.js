@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 const Notes = ({note}) => {
   return (
@@ -12,7 +13,7 @@ const Notes = ({note}) => {
       </div>
       <div
         className="notes-data p-3"
-        dangerouslySetInnerHTML={{ __html: note }}
+        dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(note) }}
       />
     </div>
   );  

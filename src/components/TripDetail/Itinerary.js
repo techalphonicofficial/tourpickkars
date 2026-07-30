@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 import "./Itinerary.css";
 
 export default function Itinerary({ itinerary, slots }) {
@@ -91,7 +92,7 @@ export default function Itinerary({ itinerary, slots }) {
                   id={contentId}
                   className="enlive-itinerary-html"
                   hidden={!isOpen}
-                  dangerouslySetInnerHTML={{ __html: item.content || "" }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(item.content || "") }}
                 />
               </div>
             </article>

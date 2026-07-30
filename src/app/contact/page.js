@@ -173,7 +173,7 @@ export async function generateMetadata({ params }) {
       description: mainpage?.meta_description || "Contact Tour Pickkars",
       keywords: mainpage?.meta_description || "",
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/contact`,
+        canonical: `/contact`,
       },
       openGraph: {
         type: "website",

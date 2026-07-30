@@ -9,6 +9,7 @@ import Link from "next/link";
 import { getSingleBlog } from "@/services/blogApi";
 import { notFound } from "next/navigation";
 import { createSlug } from "@/functions/createSlug";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }) {
     description: blog.blog.meta_description,
     keywords: blog.blog.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+      canonical: `/blog/${slug}`,
     },
     openGraph: {
       type: "article",
@@ -141,7 +142,7 @@ export default async function PageDetail({ params }) {
                   {blog.blog.content && (
                     <div
                       id="blogMainContent"
-                      dangerouslySetInnerHTML={{ __html: blog.blog.content }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(blog.blog.content) }}
                     />
                   )}
 
@@ -155,7 +156,7 @@ export default async function PageDetail({ params }) {
                             )}
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: detail.content
+                                __html: sanitizeCmsHtml(detail.content)
                               }}
                             />
                           </div>

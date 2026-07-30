@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
     description: trips.trip.meta_description,
     keywords: trips.trip.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/destination/${slug}`,
+      canonical: `/destination/${slug}`,
     },
     openGraph: {
       type: "website",

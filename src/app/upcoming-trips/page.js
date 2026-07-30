@@ -38,8 +38,8 @@ export async function generateMetadata() {
     description: data.meta_description,
     keywords: data.meta_description,
    alternates: {
-  canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
-},
+      canonical: `/upcoming-trips`,
+    },
 
 openGraph: {
   type: "website",

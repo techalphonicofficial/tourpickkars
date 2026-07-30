@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 const replaceOldPhone = (value = "") =>
   String(value).replace(/9876543210/g, "9679945077");
@@ -244,7 +245,7 @@ export default function Footer({ footer }) {
         <div className="footer-bottom">
           <div
             className="copyright-text"
-            dangerouslySetInnerHTML={{ __html: richText }}
+            dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(richText) }}
           />
           <div className="footer-payments">
             <span>Secure Payments</span>

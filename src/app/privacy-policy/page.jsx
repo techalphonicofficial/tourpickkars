@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 import { getPagewithSection } from '@/services/pageSection';
+import { sanitizeCmsHtml } from '@/functions/sanitizeCmsHtml';
 import Link from 'next/link'
 import React from 'react'
 
@@ -67,7 +68,7 @@ export default async function PrivacyPolicy() {
               <div className="page-content d-block">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: mainpage.sections[0].section[0].data.rich_text,
+                    __html: sanitizeCmsHtml(mainpage.sections[0].section[0].data.rich_text),
                   }}
                 />
               </div>

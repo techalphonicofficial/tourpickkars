@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export default function TripContent({ content }) {
   const [showMore, setShowMore] = useState(false);
@@ -38,7 +39,7 @@ export default function TripContent({ content }) {
                   __html: content ? (() => {
                     let h1OpenCount = 0;
                     let h1CloseCount = 0;
-                    return content
+                    return sanitizeCmsHtml(content)
                       .replace(/<h1/gi, () => {
                         h1OpenCount++;
                         return h1OpenCount === 1 ? '<h1' : '<h2';

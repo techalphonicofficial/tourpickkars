@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 
 export default function Overview({description}) {
   const [expanded, setExpanded] = useState(false);
@@ -29,7 +30,7 @@ export default function Overview({description}) {
           }}
           ref={contentRef}
         >
-          <div id="OverviewContent" dangerouslySetInnerHTML={{ __html: description }}/>
+          <div id="OverviewContent" dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(description) }}/>
         </div>
       </div>
 

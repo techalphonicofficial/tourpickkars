@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { getPagewithSection } from "@/services/pageSection";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 import "./AboutSection.css";
 
 const mainpage = await getPagewithSection(1, "trip_with_us");
@@ -95,9 +96,11 @@ export default function AboutSection() {
               <div
                 className="about-desc"
                 dangerouslySetInnerHTML={{
-                  __html: mainpage.section[5].data.rich_text
-                    .replace(/tourpickkars/g, "Tour Pickkars")
-                    .replace(/Enlive/g, "Tour Pickkars"),
+                  __html: sanitizeCmsHtml(
+                    mainpage.section[5].data.rich_text
+                      .replace(/tourpickkars/g, "Tour Pickkars")
+                      .replace(/Enlive/g, "Tour Pickkars")
+                  ),
                 }}
               />
 

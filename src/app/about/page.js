@@ -4,6 +4,7 @@ export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 import { getPagewithSection } from "@/services/pageSection";
+import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,7 +33,7 @@ export async function generateMetadata() {
     description: data.meta_description,
     keywords: data.meta_description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/about`,
+      canonical: `/about`,
     },
     openGraph: {
       type: "website",
@@ -70,7 +71,7 @@ export default async function About() {
         <script
           key={schema.id}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: schema.schema }}
+          dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(schema.schema) }}
         />
       ))}
 
@@ -140,7 +141,7 @@ export default async function About() {
 
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: mainpage.sections[1].section[5].data.rich_text,
+                    __html: sanitizeCmsHtml(mainpage.sections[1].section[5].data.rich_text),
                   }}
                 />
 
