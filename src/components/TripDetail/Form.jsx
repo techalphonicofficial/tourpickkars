@@ -100,13 +100,13 @@ const Form = ({ loaded }) => {
     <div className="bg-light rounded p-3">
       {/* Price Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded mb-3">
-        <h2 className="fw-bold text-secondary h6">
+        <h3 className="fw-bold text-secondary h6">
           {!loaded && !anotherLoading ? (
             "Starting From"
           ) : (
             <Skeleton width={100} />
           )}
-        </h2>
+        </h3>
         <div className="mt-2">
           {!loaded && !anotherLoading ? (
             <h4 className="fw-bold text-dark">
@@ -144,7 +144,7 @@ const Form = ({ loaded }) => {
       {/* Pricing Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded mb-3">
         <div className="d-flex justify-content-between border-bottom pb-2">
-          <h2 className="fw-bold h6">Pricing</h2>
+          <h3 className="fw-bold h6">Pricing</h3>
           <div>
             <span className="me-2">Occupancy -</span>
             {data?.activity_cost?.map((item, index) => (
@@ -180,7 +180,7 @@ const Form = ({ loaded }) => {
       {/* Batches Section */}
       <div className="bg-success bg-opacity-10 p-3 rounded">
         <div className="d-flex justify-content-between border-bottom pb-2">
-          <h2 className="fw-bold h6">Batches</h2>
+          <h3 className="fw-bold h6">Batches</h3>
           <div className="d-flex gap-3">
             {["All", "Jan", "Feb", "Mar"].map((filter) => (
               <span

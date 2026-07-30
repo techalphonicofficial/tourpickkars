@@ -15,12 +15,13 @@ function Dates({ active_costs, package_dates }) {
   return (
     <div className="min_box-detail Age_limit package-pricing-section container my-4 mt-24">
       <div className="dates-section my-4">
+        <h2 className="visually-hidden">Pricing Details</h2>
         {/* Regular Dates */}
         <div className="package-price-heading d-flex align-items-center mb-4 pb-3 border-bottom border-light">
           <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#e9f9ee' }}>
             <img src="/img/icon/regular_date.png" alt="Regular Date" style={{ width: '28px', objectFit: 'contain' }} />
           </div>
-          <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h2>
+          <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h3>
         </div>
 
         <div className="row g-4 mb-5">
@@ -64,7 +65,7 @@ function Dates({ active_costs, package_dates }) {
               <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#fff5e6' }}>
                 <img src="/img/icon/party_emoji.png" alt="Special Dates" style={{ width: '28px', objectFit: 'contain' }} />
               </div>
-              <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h2>
+              <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h3>
             </div>
 
             <div className="row justify-content-center">

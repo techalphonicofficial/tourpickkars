@@ -22,7 +22,7 @@ export default function UpcomingTripMain({ tripsWithcount }) {
         <aside className="sidebar-area sticky-top" style={{ top: "120px", zIndex: 10 }}>
 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="h5 fw-bolder mb-0 text-dark">Destinations</h2>
+            <h3 className="h5 fw-bolder mb-0 text-dark">Destinations</h3>
             {(byCategory !== "all" || hasDateFilter) && (
               <button
                 onClick={handleClearFilters}
@@ -86,6 +86,7 @@ export default function UpcomingTripMain({ tripsWithcount }) {
 
       {/* Main Content */}
       <div className="col-xxl-9 col-lg-8">
+        <h2 className="visually-hidden">Upcoming Trips</h2>
         <UpcomingTripSection
           byCategory={byCategory}
           resetKey={resetKey}

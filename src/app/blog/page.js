@@ -84,6 +84,7 @@ export default async function Blog({ searchParams }) {
           <div className="row">
             {/* Blog List */}
             <div className="col-xxl-12 col-lg-12">
+              <h2 className="visually-hidden">Blog Content</h2>
               <div className="row">
                 {blogPosts.data.map((post) => (
                   <div className="col-xxl-4 col-lg-4 col-md-6" key={post.id}>

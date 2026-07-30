@@ -75,7 +75,7 @@ export default function Footer({ footer }) {
         {/* Newsletter Section */}
         <div className="footer-newsletter">
           <div className="newsletter-content">
-            <h2>Stay Informed Every Week</h2>
+            <h3>Stay Informed Every Week</h3>
             <p>Sign up for our newsletter and never miss new travel deals and expert tips.</p>
           </div>
           <div className="newsletter-form-wrapper">
