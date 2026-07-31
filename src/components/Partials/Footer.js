@@ -75,7 +75,7 @@ export default function Footer({ footer }) {
         {/* Newsletter Section */}
         <div className="footer-newsletter">
           <div className="newsletter-content">
-            <h3>Stay Informed Every Week</h3>
+            <p className="h3 text-white" style={{ fontWeight: 700 }}>Stay Informed Every Week</p>
             <p>Sign up for our newsletter and never miss new travel deals and expert tips.</p>
           </div>
           <div className="newsletter-form-wrapper">
@@ -137,7 +137,7 @@ export default function Footer({ footer }) {
 
           {/* Quick Links Column */}
           <div className="footer-links">
-            <h3 className="footer-col-title">Quick Links</h3>
+            <p className="footer-col-title">Quick Links</p>
             <ul>
               <li>
                 <Link href="/">
@@ -169,7 +169,7 @@ export default function Footer({ footer }) {
 
           {/* Contact Details Column */}
           <div className="footer-contact">
-            <h3 className="footer-col-title">Contact Information</h3>
+            <p className="footer-col-title">Contact Information</p>
 
             <div className="contact-item">
               <div className="contact-item-icon">
@@ -224,7 +224,7 @@ export default function Footer({ footer }) {
 
           {/* Gallery Column */}
           <div className="footer-gallery-col">
-            <h3 className="footer-col-title">Instagram Feed</h3>
+            <p className="footer-col-title">Instagram Feed</p>
             <div className="footer-gallery">
               {footer.section[7].data.gallery.slice(0, 6).map((gallery, index) => (
                 <Link href={socialLinks.instagram} className="gallery-thumb" key={index} target="_blank" rel="noreferrer">

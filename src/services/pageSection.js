@@ -34,22 +34,16 @@ export async function getPagewithSection(pageId, sectionKey = false) {
     return res.data;
 
   } catch (error) {
-    console.error("Error fetching page:", {
-      pageId,
-      sectionKey,
-      message: error.message,
-      status: error.response?.status,
-      data: error.response?.data,
-      baseURL: api.defaults.baseURL,
-    });
-
-    // Better error handling
+    console.error(`Error fetching page ${pageId} (section: ${sectionKey}): ${error.message}`);
+    console.error(`Base URL: ${api.defaults.baseURL}`);
     if (error.response) {
-      throw new Error(error.response.data?.message || "API Error");
+      console.error(`Status: ${error.response.status}`);
+      console.error(`Response data:`, JSON.stringify(error.response.data));
+      throw new Error(error.response.data?.message || `API Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("No response from server");
+      throw new Error(`No response from server: ${error.message}`);
     } else {
-      throw new Error("Request setup error");
+      throw new Error(`Request setup error: ${error.message}`);
     }
   }
 }

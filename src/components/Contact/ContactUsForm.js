@@ -153,6 +153,11 @@ export default function ContactUsForm({ heading, banner, video }) {
                         name="travel_date"
                         required
                         min={new Date(Date.now() + 86400000).toISOString().split("T")[0]}
+                        onClick={(e) => {
+                          try {
+                            e.target.showPicker();
+                          } catch (err) {}
+                        }}
                       />
                     </div>
                   </div>

@@ -37,13 +37,13 @@ export async function generateMetadata() {
     title: data.meta_title,
     description: data.meta_description,
     keywords: data.meta_description,
-   alternates: {
+    alternates: {
       canonical: `/upcoming-trips`,
     },
 
-openGraph: {
-  type: "website",
-  url: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
+    openGraph: {
+      type: "website",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
       title: data.meta_title,
       description: data.meta_description,
       keywords: data.meta_description,

@@ -61,7 +61,7 @@
   margin-bottom: 12px;
 }
 
-.newsletter-content p {
+.newsletter-content p:not(.h3) {
   color: #cbd5e1;
   font-size: 1rem;
   margin: 0;

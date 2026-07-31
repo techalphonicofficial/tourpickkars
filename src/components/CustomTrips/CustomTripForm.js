@@ -151,7 +151,7 @@ export default function CustomTripForm() {
           {/* Departure Date */}
           <div className="col-md-6" style={{ position: 'relative', zIndex: 10 }}>
             <label className="form-label fw-semibold text-secondary small text-uppercase tracking-wider">Departure Date</label>
-            <div className="input-group input-group-lg shadow-sm rounded-4 border" style={{ backgroundColor: '#fff', flexWrap: 'nowrap' }}>
+            <label className="input-group input-group-lg shadow-sm rounded-4 border" style={{ backgroundColor: '#fff', flexWrap: 'nowrap', cursor: 'pointer' }}>
               <span className="input-group-text bg-white border-0 px-4 rounded-start-4" style={{ color: '#00ba9d' }}>
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
@@ -166,7 +166,7 @@ export default function CustomTripForm() {
                 style={{ boxShadow: 'none', width: '100%' }}
                 wrapperClassName="d-flex flex-grow-1"
               />
-            </div>
+            </label>
 
             <style jsx global>{`
               .react-datepicker-wrapper {
@@ -263,7 +263,7 @@ export default function CustomTripForm() {
           {/* Duration Dropdown */}
           <div className="col-12 mb-2">
             <label className="form-label fw-semibold text-secondary small text-uppercase tracking-wider">Trip Duration</label>
-            <div className="input-group input-group-lg shadow-sm rounded-4 border" style={{ backgroundColor: '#fff' }}>
+            <label className="input-group input-group-lg shadow-sm rounded-4 border" style={{ backgroundColor: '#fff', cursor: 'pointer' }}>
               <span className="input-group-text bg-white border-0 px-4 rounded-start-4" style={{ color: '#00ba9d' }}>
                 <FontAwesomeIcon icon={faClock} />
               </span>
@@ -279,7 +279,7 @@ export default function CustomTripForm() {
                 <option value="9N-10D">9 Nights - 10 Days</option>
                 <option value="More">More</option>
               </select>
-            </div>
+            </label>
           </div>
 
           {/* Additional Message */}
