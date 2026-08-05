@@ -10,6 +10,8 @@ const urls = [
   '/assets/img/normal/resort-details.jpg'
 ];
 
+//ss
+
 async function checkUrl(path) {
   return new Promise((resolve) => {
     http.get({
