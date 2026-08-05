@@ -51,7 +51,7 @@ export default function HeaderMob({ mainpage, menuOpen, setMenuOpen, tripsWithco
             {mainpage.sections[1].section[1].data.trip_items.map(
               (item, index) => (
                 <li key={index}>
-                  <Link href={`/trips/${createSlug(item.slug)}`} onClick={handleLinkClick}>
+                  <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
                     {item.heading}
                   </Link>
                 </li>
@@ -78,7 +78,7 @@ export default function HeaderMob({ mainpage, menuOpen, setMenuOpen, tripsWithco
                   .filter((item) => item.international === 0)
                   .map((item) => (
                     <li key={item.id}>
-                      <Link href={`/trips/${createSlug(item.slug)}`} onClick={handleLinkClick}>
+                      <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
                         {item.heading}
                       </Link>
                     </li>
@@ -99,7 +99,7 @@ export default function HeaderMob({ mainpage, menuOpen, setMenuOpen, tripsWithco
                   .filter((item) => item.international === 1)
                   .map((item) => (
                     <li key={item.id}>
-                      <Link href={`/trips/${createSlug(item.slug)}`} onClick={handleLinkClick}>
+                      <Link href={`/trips/${item.slug}`} onClick={handleLinkClick}>
                         {item.heading}
                       </Link>
                     </li>

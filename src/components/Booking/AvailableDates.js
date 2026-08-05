@@ -36,7 +36,7 @@ export default function AvailableDates({ groupedDates, handleSetDates, slug }) {
   return (
     <div className="min_box-detail mb-4">
       <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
-        <h3 className="section-title-premium m-0">Select Your Batch</h3>
+        <div className="section-title-premium m-0 h3">Select Your Batch</div>
 
         <div className="filter-btn-group">
           {groupedDates.map((month) => (

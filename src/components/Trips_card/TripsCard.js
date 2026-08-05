@@ -54,7 +54,7 @@ export default function Trips() {
 
   return (
     <div className="container my-5">
-      <h2 className="fw-bold mb-4 text-center">Available Trips</h2>
+      <div className="fw-bold mb-4 text-center h2">Available Trips</div>
 
       {loading ? (
         <div className="text-center py-5">Loading trips...</div>
@@ -93,7 +93,7 @@ export default function Trips() {
                       style={{ height: "180px", objectFit: "cover" }}
                     />
                     <div className="card-body">
-                      <h3 className="card-title h5">{trip.title}</h3>
+                      <div className="card-title h5 h3">{trip.title}</div>
                       <p className="card-text text-muted">{trip.description}</p>
                     </div>
                   </div>

@@ -7,9 +7,9 @@ const Notes = ({note}) => {
 
     <div className="min_box-detail Age_limit container my-5 mt-24">
       <div className="title">
-        <h2 className="text-start fw-bold mb-4 page-title">
+        <div className="h3">
           Notes
-        </h2>
+        </div>
       </div>
       <div
         className="notes-data p-3"

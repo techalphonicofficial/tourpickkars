@@ -30,12 +30,13 @@ export async function singleTrips(slug) {
 export async function tripsWithPackagecount() {
   try {
     const res = await fetch(apiEndpoint("/trips/trips-with-packagecount"), {
-      cache: "no-store"
+      next: { revalidate: 60 }
     });
-    if (!res.ok) throw new Error("Failed to fetch");
+    if (!res.ok) return []; // Fallback empty data during build failure
     return await res.json();
   } catch (error) {
-    throw new Error(error.message || "Failed to fetch blog");
+    console.error("tripsWithPackagecount error:", error);
+    return []; // Return empty array instead of throwing to prevent build crash
   }
 }
 

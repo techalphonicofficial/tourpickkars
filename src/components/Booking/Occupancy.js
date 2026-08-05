@@ -92,7 +92,7 @@ export default function Occupancy({
   return (
     <div className="min_box-detail mb-4">
       <div className="mb-4">
-        <h3 className="section-title-premium m-0">Room Arrangement</h3>
+        <div className="section-title-premium m-0 h3">Room Arrangement</div>
         <p className="text-muted small">Choose your preferred sharing option</p>
       </div>
 

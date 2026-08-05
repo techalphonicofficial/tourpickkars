@@ -47,7 +47,7 @@ export default function AgeLimit() {
         <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#e9f9ee' }}>
           <FontAwesomeIcon icon={faUsers} style={{ color: '#00ba9d', fontSize: '1.2rem' }} />
         </div>
-        <h2 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Age Limit (Trip Wise)</h2>
+        <div className="h3">Age Limit (Trip Wise)</div>
       </div>
 
       {/* Cards Grid */}
@@ -65,12 +65,12 @@ export default function AgeLimit() {
                 <p className="fw-semibold text-secondary text-uppercase tracking-wider m-0 mb-2" style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}>
                   {item.title}
                 </p>
-                <h3 className="fw-bolder m-0" style={{ color: '#2c3e50', fontSize: '1.2rem' }}>
+                <div className="fw-bolder m-0 h3" style={{ color: '#2c3e50', fontSize: '1.2rem' }}>
                   {item.age_limit} 
                   {item.age_limit !== "No Limit" && (
                     <span className="text-muted fw-normal ms-1" style={{ fontSize: '0.8rem' }}>Yrs</span>
                   )}
-                </h3>
+                </div>
               </div>
             </div>
           </div>

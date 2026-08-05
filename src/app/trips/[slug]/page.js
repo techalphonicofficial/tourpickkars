@@ -6,6 +6,7 @@ import Link from "next/link";
 // import TripContent from "@/components/TripContent"; // import client component
 
 export const dynamic = "force-dynamic";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 export const dynamicParams = true;
@@ -17,25 +18,27 @@ const getTrips = async (slug) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const trips = await getTrips(slug);
+  if (!trips || !trips.trip) return {};
+
   return {
     title: trips.trip.meta_title,
     description: trips.trip.meta_description,
     keywords: trips.trip.meta_description,
     alternates: {
-      canonical: `/trips/${slug}`,
+      canonical: getCanonicalUrl(`/trips/${slug}`),
     },
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/trips/${slug}`,
       title: trips.trip.meta_title,
       description: trips.trip.meta_description,
-      images: [{ url: trips.trip.image }],
+      images: [{ url: trips.trip.image || "" }],
     },
     twitter: {
       card: "summary_large_image",
       title: trips.trip.meta_title,
       description: trips.trip.meta_description,
-      images: [trips.trip.thumbnail],
+      images: [trips.trip.thumbnail || ""],
     },
   };
 }
@@ -43,6 +46,11 @@ export async function generateMetadata({ params }) {
 export default async function Trips({ params }) {
   const { slug } = await params;
   const trips = await getTrips(slug);
+
+  if (!trips || !trips.trip) {
+    const { notFound } = await import("next/navigation");
+    return notFound();
+  }
 
   return (
     <>
@@ -82,7 +90,7 @@ export default async function Trips({ params }) {
       >
         <div className="slider-area tour-slider">
           <div className="container th-container my-5">
-            <h2 className="fw-bold mb-4 text-center">Available Trips</h2>
+            <div className="fw-bold mb-4 text-center h2">Available Trips</div>
             <AvailableTrips trips={trips.packages} />
           </div>
         </div>

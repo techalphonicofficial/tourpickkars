@@ -58,7 +58,7 @@ export default function RequestCallback({ heading = "Request Callback", open, se
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title text-success">{heading}</h5>
+            <div className="modal-title text-success h5">{heading}</div>
             <button
               type="button"
               className="btn-close"

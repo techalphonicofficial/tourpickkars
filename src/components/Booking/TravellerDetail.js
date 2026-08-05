@@ -14,7 +14,7 @@ export default function TravellerDetail() {
   return (
     <div className="min_box-detail container my-4 p-4">
       <div className="detail-section-header mb-4">
-        <h3 className="section-title-premium m-0">Traveller Information</h3>
+        <div className="section-title-premium m-0 h3">Traveller Information</div>
       </div>
 
       <div className="row g-4 px-2">

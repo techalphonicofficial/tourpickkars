@@ -34,7 +34,7 @@ return (
           <div className="col-lg-6 offset-lg-3">
             <div className="title-area text-center">
               <span className="sub-title">{mainpage.section[0].data.Text}</span>
-              <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+              <div className="sec-title h2">{mainpage.section[1].data.Text}</div>
               <p className="sec-text">
                 {mainpage.section[2].data.content.replace(/tourpickkars/g, "Tour Pickkars").replace(/Enlive/g, "Tour Pickkars")}
               </p>

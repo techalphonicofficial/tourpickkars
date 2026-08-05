@@ -11,9 +11,9 @@ export default function Faq({ faqs }) {
   return (
     <div className=" min_box-detail Age_limit container my-5 mt-24 position-relative z-0">
       <div className="title">
-        <h2 className="text-start fw-bold mb-4 page-title">
+        <div className="h3">
           Frequently Asked Questions
-        </h2>
+        </div>
       </div>
 
       <div className="accordion-area accordion mb-30 mt-3" id="faqAccordion">

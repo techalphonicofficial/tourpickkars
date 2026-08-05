@@ -13,7 +13,7 @@ import { createSlug } from "@/functions/createSlug";
 
 export default function TourCard({ data, onRequestCallback }) {
   const dates =
-    data.package_dates
+    (data?.package_dates || [])
       .slice(0, 3)
       .map((d) =>
         new Date(d.start_date).toLocaleDateString("en-GB", {
@@ -21,13 +21,13 @@ export default function TourCard({ data, onRequestCallback }) {
           month: "short",
         })
       )
-      .join(", ") + (data.package_dates.length > 3 ? ", ..." : "");
+      .join(", ") + ((data?.package_dates?.length || 0) > 3 ? ", ..." : "");
 
   return (
     <div className="tour-box">
       {/* --- Image & Badges --- */}
       <div className="tour-box_img">
-        <Link href={`/${createSlug(data.slug)}`}>
+        <Link href={`/${data?.slug || ''}`}>
           <Image
             src={data.thumbnail}
             alt={data.title}
@@ -53,9 +53,9 @@ export default function TourCard({ data, onRequestCallback }) {
 
       {/* --- Content Area --- */}
       <div className="tour-content-body">
-        <h3 className="box-title">
-          <Link href={`/${createSlug(data.slug)}`}>{data.title}</Link>
-        </h3>
+        <div className="box-title h3">
+          <Link href={`/${data?.slug || ''}`}>{data?.title}</Link>
+        </div>
 
         <div className="tour-meta-info">
           <div className="tour-date">

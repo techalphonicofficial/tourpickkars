@@ -34,7 +34,7 @@ export default function Inclusions({ inclusion }) {
   return (
     <div className="min_box-detail Age_limit container my-4">
       <div className="title">
-        <h2 className="text-start fw-bold mb-4 page-title">Inclusions</h2>
+        <div className="h3">Inclusions</div>
       </div>
 
       <div className="tour-page-single mt-3">

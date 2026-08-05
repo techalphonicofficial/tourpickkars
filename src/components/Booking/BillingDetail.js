@@ -74,7 +74,7 @@ export default function BillingDetail({
   return (
     <div className="min_box-detail container my-4 p-4">
       <div className="detail-section-header mb-4 text-center">
-        <h3 className="section-title-premium">Personal Details</h3>
+        <div className="section-title-premium h3">Personal Details</div>
         <p className="text-muted small">Please provide your details to continue with booking</p>
       </div>
 

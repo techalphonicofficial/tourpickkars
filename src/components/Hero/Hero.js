@@ -171,7 +171,7 @@ export default function Hero({ mainpage }) {
                   {results.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/${createSlug(item.slug)}`}
+                      href={`/${item.slug}`}
                       className="search-result-item"
                     >
                       <div className="result-info">
@@ -201,13 +201,13 @@ export default function Hero({ mainpage }) {
                     />
                   </div>
                   <div className="stat-info">
-                    <h3 className="stat-number">
+                    <div className="stat-number h3">
                       <CountUp
                         end={Number(item.data.section[1].data.Text)}
                         duration={3}
                       />
                       +
-                    </h3>
+                    </div>
                     <p className="stat-label">{item.data.section[2].data.Text}</p>
                   </div>
                 </div>
@@ -231,13 +231,13 @@ export default function Hero({ mainpage }) {
                   />
                 </div>
                 <div className="stat-info">
-                  <h3 className="stat-number">
+                  <div className="stat-number h3">
                     <CountUp
                       end={Number(item.data.section[1].data.Text)}
                       duration={3}
                     />
                     +
-                  </h3>
+                  </div>
                   <p className="stat-label">{item.data.section[2].data.Text}</p>
                 </div>
               </div>

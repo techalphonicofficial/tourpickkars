@@ -63,9 +63,9 @@ export default function RelatedBlogs({ title, destination, trip }) {
         <div className="blog-section-header">
           <div className="blog-header-left">
             <div className="blog-eyebrow">Related Articles</div>
-            <h2 className="blog-section-title" style={{ fontSize: "2rem" }}>
+            <div className="h3">
               Articles From <span>{destination || "this trip"}</span>
-            </h2>
+            </div>
           </div>
           <Link href="/blog" className="blog-see-all-btn">
             See All Articles <ArrowIcon />
@@ -116,9 +116,9 @@ export default function RelatedBlogs({ title, destination, trip }) {
 
                   {/* Body */}
                   <div className="blog-card-body d-flex flex-column" style={{ flexGrow: 1 }}>
-                    <h3 className="blog-card-title mb-3">
-                      <Link href={`/blog/${createSlug(blog.slug)}`}>{blog.heading}</Link>
-                    </h3>
+                    <div className="blog-card-title mb-3 h3">
+                      <Link href={`/blog/${blog.slug}`}>{blog.heading}</Link>
+                    </div>
 
                     {blog.excerpt && (
                       <p className="blog-card-excerpt flex-grow-1" style={{ marginBottom: "1.5rem" }}>
@@ -131,7 +131,7 @@ export default function RelatedBlogs({ title, destination, trip }) {
                         <div className="blog-author-avatar">TP</div>
                         Tour Pickkars
                       </div>
-                      <Link href={`/blog/${createSlug(blog.slug)}`} className="blog-read-link">
+                      <Link href={`/blog/${blog.slug}`} className="blog-read-link">
                         Read More <ArrowIcon />
                       </Link>
                     </div>

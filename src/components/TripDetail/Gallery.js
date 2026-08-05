@@ -45,7 +45,7 @@ export default function Gallery({gallery}) {
   return (
     <div className="min_box-detail Age_limit container my-4">
       <div className="title">
-        <h2 className="text-start fw-bold mb-4">Gallery</h2>
+        <h3>Gallery</h3>
       </div>
       <div className="container my-5">
         <div className="row g-2">

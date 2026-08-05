@@ -48,7 +48,7 @@ export default function TripSummary({selectedDate}) {
   return (
     <div className="min_box-detail container my-4 p-4">
       <div className="detail-section-header mb-4">
-        <h3 className="section-title-premium">Trip Summary</h3>
+        <div className="section-title-premium h3">Trip Summary</div>
       </div>
 
       <div className="tour-page-single mt-3">
@@ -58,9 +58,9 @@ export default function TripSummary({selectedDate}) {
               <span className="fs-3">🌍</span>
             </div>
             <div>
-              <h4 className="fw-bold text-dark m-0">
+              <div className="fw-bold text-dark m-0 h4">
                 {trip.title}
-              </h4>
+              </div>
               <span className="badge bg-primary-soft text-primary rounded-pill px-3 py-1 mt-1">
                 {trip.duration}
               </span>

@@ -38,9 +38,9 @@ export default function TestimonialSection() {
           <div className="testi-eyebrow">
             {mainpage.section[0].data.Text}
           </div>
-          <h2 className="testi-heading">
+          <div className="testi-heading h2">
             {mainpage.section[1].data.Text}
-          </h2>
+          </div>
         </div>
 
         {/* ── Slider ── */}
@@ -94,7 +94,7 @@ export default function TestimonialSection() {
                       />
                     </div>
                     <div className="testi-profile-info">
-                      <h3 className="testi-name">{item.name}</h3>
+                      <div className="testi-name h3">{item.name}</div>
                       <span className="testi-role">{item.type}</span>
                     </div>
                   </div>

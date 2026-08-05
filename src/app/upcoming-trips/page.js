@@ -5,6 +5,7 @@ import UpcomingTripSection from "@/components/UpcomingTripSection/UpcomingTripSe
 import { getPagewithSection } from "@/services/pageSection";
 import { tripsWithPackagecount } from "@/services/tripsApi";
 import UpcomingTripMain from "@/components/UpcomingTripSection/UpcomingTripMain";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -34,24 +35,24 @@ export async function generateMetadata() {
   }
 
   return {
-    title: data.meta_title,
-    description: data.meta_description,
-    keywords: data.meta_description,
+    title: data?.meta_title || "Tourpickkars",
+    description: data?.meta_description || "",
+    keywords: data?.meta_description || "",
     alternates: {
-      canonical: `/upcoming-trips`,
+      canonical: getCanonicalUrl(`/upcoming-trips`),
     },
 
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/upcoming-trips`,
-      title: data.meta_title,
-      description: data.meta_description,
-      keywords: data.meta_description,
+      title: data?.meta_title || "Tourpickkars",
+      description: data?.meta_description || "",
+      keywords: data?.meta_description || "",
     },
     twitter: {
       card: "summary_large_image",
-      title: data.meta_title,
-      description: data.meta_description,
+      title: data?.meta_title || "Tourpickkars",
+      description: data?.meta_description || "",
       // images: [...]
     },
   };
@@ -67,7 +68,7 @@ export default async function UpcomingTrips() {
         className="breadcumb-wrapper"
         style={{
           backgroundImage: `url('${process.env.NEXT_PUBLIC_MEDIA_PATH +
-            mainpage.sections[0].section[0].data.image
+            (mainpage?.sections?.[0]?.section?.[0]?.data?.image || '')
             }')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -76,13 +77,13 @@ export default async function UpcomingTrips() {
         <div className="container">
           <div className="breadcumb-content">
             <h1 className="breadcumb-title">
-              {mainpage.sections[0].section[1].data.Text}
+              {mainpage?.sections?.[0]?.section?.[1]?.data?.Text || 'Upcoming Trips'}
             </h1>
             <ul className="breadcumb-menu">
               <li>
                 <Link href="/">Home</Link>
               </li>
-              <li>{mainpage.sections[0].section[1].data.Text}</li>
+              <li>{mainpage?.sections?.[0]?.section?.[1]?.data?.Text || 'Upcoming Trips'}</li>
             </ul>
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function ThingsToPack({ things_to_pack }) {
   return (
     <div id="ThingsToPack" className="min_box-detail Age_limit container my-4">
       <div className="title">
-        <h2 className="text-start fw-bold mb-4 page-title">Things To Pack</h2>
+        <div className="h3">Things To Pack</div>
       </div>
 
       <div className="tour-page-single mt-3">

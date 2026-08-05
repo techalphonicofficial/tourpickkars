@@ -10,6 +10,7 @@ import { getBlogs } from "@/services/blogApi";
 import { headers } from "next/headers";
 import { getPagewithSection } from "@/services/pageSection";
 import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 
 // const mainpage = await getPagewithSection(2);
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }) {
     description: mainpage.meta_description,
     keywords: mainpage.meta_description,
     alternates: {
-      canonical: `/blog`,
+      canonical: getCanonicalUrl(`/blog`),
     },
     openGraph: {
       type: "article",
@@ -84,7 +85,7 @@ export default async function Blog({ searchParams }) {
           <div className="row">
             {/* Blog List */}
             <div className="col-xxl-12 col-lg-12">
-              <h2 className="visually-hidden">Blog Content</h2>
+              <div className="visually-hidden h2">Blog Content</div>
               <div className="row">
                 {blogPosts.data.map((post) => (
                   <div className="col-xxl-4 col-lg-4 col-md-6" key={post.id}>
@@ -160,7 +161,7 @@ export default async function Blog({ searchParams }) {
                   </form>
                 </div>
                 <div className="widget widget_categories">
-                  <h3 className="widget_title">Categories</h3>
+                  <div className="widget_title h3">Categories</div>
                   <ul>
                     <li><Link href="#">City Tour</Link><span>(8)</span></li>
                     <li><Link href="#">Beach Tours</Link><span>(6)</span></li>

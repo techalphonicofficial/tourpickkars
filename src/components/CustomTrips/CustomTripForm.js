@@ -99,7 +99,7 @@ export default function CustomTripForm() {
       <form ref={formRef} onSubmit={handleSubmit} className="ajax-contact position-relative z-1">
         <div className="text-center mb-5">
           <span className="badge bg-light text-theme px-3 py-2 rounded-pill mb-2 fw-semibold" style={{ color: '#00ba9d', position: 'inherit' }}>Craft Your Journey</span>
-          <h3 className="fw-bolder text-capitalize m-0 mt-2 display-6" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Plan Your Custom Trip</h3>
+          <div className="fw-bolder text-capitalize m-0 mt-2 display-6 h3" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Plan Your Custom Trip</div>
           <p className="text-muted mt-3 fs-5" style={{ maxWidth: '600px', margin: '0 auto' }}>Tell us your preferences and let our experts design the perfect itinerary just for you.</p>
         </div>
 

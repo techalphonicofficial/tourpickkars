@@ -995,7 +995,7 @@ function BookingFormInner() {
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
               </svg>
             </div>
-            <h2 className="display-6 fw-bold text-danger mb-3">Missing Booking ID</h2>
+            <div className="display-6 fw-bold text-danger mb-3 h2">Missing Booking ID</div>
             <p className="lead mb-4">No booking ID was provided in the URL.</p>
             <div className="alert alert-warning d-inline-block mx-auto" role="alert" style={{ maxWidth: '500px' }}>
               <strong>Please check:</strong>
@@ -1042,7 +1042,7 @@ function BookingFormInner() {
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
               </svg>
             </div>
-            <h2 className="display-6 fw-bold text-danger mb-3">Invalid Booking URL</h2>
+            <div className="display-6 fw-bold text-danger mb-3 h2">Invalid Booking URL</div>
             <p className="lead mb-4">{error || 'The booking ID provided is invalid or does not exist.'}</p>
             <div className="alert alert-warning d-inline-block mx-auto" role="alert" style={{ maxWidth: '500px' }}>
               <strong>Please check:</strong>
@@ -1071,7 +1071,7 @@ function BookingFormInner() {
     return (
       <div className="container py-5">
         <div className="alert alert-danger" role="alert">
-          <h4 className="alert-heading">Error!</h4>
+          <div className="alert-heading h4">Error!</div>
           <p>{error}</p>
           <hr />
           <p className="mb-0">Please try again or contact support.</p>
@@ -1085,7 +1085,7 @@ function BookingFormInner() {
     return (
       <div className="mb-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h5 className="mb-0">Member Progress</h5>
+          <div className="mb-0 h5">Member Progress</div>
           <span className="text-muted">
             Step {currentStep + 1} of {members.length}
           </span>
@@ -1129,17 +1129,17 @@ function BookingFormInner() {
     <div className="container py-4">
       <div className="card shadow-sm border-0">
         <div className="card-header text-white py-3" style={{ backgroundColor: '#00ba9d' }}>
-          <h3 className="mb-0 fs-3 text-white">
+          <div className="mb-0 fs-3 text-white h3">
             Update Booking Member Details
             {id && <span className="ms-2 badge bg-light rounded-1 text-primary">ID: {bookingDetail?.id}</span>}
-          </h3>
+          </div>
         </div>
 
         <div className="card-body p-4">
           {/* Package Summary */}
           {bookingDetail && (
             <div className="alert alert-info mb-4">
-              <h5 className="alert-heading">Package: {bookingDetail.package_title}</h5>
+              <div className="alert-heading h5">Package: {bookingDetail.package_title}</div>
               <p className="mb-0">
                 <strong>Duration:</strong> {bookingDetail.duration} |
                 <strong> Pickup:</strong> {bookingDetail.pickup} |
@@ -1152,7 +1152,7 @@ function BookingFormInner() {
           {/* Activity Allocation Summary */}
           {(activityAllocation.quad > 0 || activityAllocation.double > 0 || activityAllocation.triple > 0) && (
             <div className="mb-4 p-3 bg-light rounded">
-              <h6 className="fw-bold">Booking Summary</h6>
+              <div className="fw-bold h6">Booking Summary</div>
               <div className="row">
                 {activityAllocation.quad > 0 && (
                   <div className="col-auto">
@@ -1228,7 +1228,7 @@ function BookingFormInner() {
               index === currentStep && (
                 <div className="card mb-4 border" key={index}>
                   <div className="card-header bg-light d-flex justify-content-between align-items-center flex-wrap">
-                    <h5 className="mb-0">
+                    <div className="mb-0 h5">
                       Member {index + 1} Details
                       {member.allocatedActivity && (
                         <span className="badge bg-info rounded-2 p-2 ms-3" style={{ position: 'inherit' }}>
@@ -1238,7 +1238,7 @@ function BookingFormInner() {
                       {completedSteps.includes(index) && (
                         <span className="ms-2 badge bg-success">Completed</span>
                       )}
-                    </h5>
+                    </div>
                     <div>
                       {/* Load saved data button for current member */}
                       {id && storageDataAvailable.includes(index) && !dataLoadedFromStorage && (
@@ -1269,7 +1269,7 @@ function BookingFormInner() {
                     <div className="row g-3">
                       {/* Personal Details Section */}
                       <div className="col-12">
-                        <h6 className="text-primary border-bottom pb-2">Personal Information</h6>
+                        <div className="text-primary border-bottom pb-2 h6">Personal Information</div>
                       </div>
 
                       <div className="col-md-6">
@@ -1367,7 +1367,7 @@ function BookingFormInner() {
 
                       {/* ID Proof Section */}
                       <div className="col-12 mt-3">
-                        <h6 className="text-primary border-bottom pb-2">Identity Proof</h6>
+                        <div className="text-primary border-bottom pb-2 h6">Identity Proof</div>
                       </div>
 
                       <div className="col-md-4">
@@ -1445,7 +1445,7 @@ function BookingFormInner() {
 
                       {/* Emergency Contact Section */}
                       <div className="col-12 mt-3">
-                        <h6 className="text-primary border-bottom pb-2">Emergency Contact</h6>
+                        <div className="text-primary border-bottom pb-2 h6">Emergency Contact</div>
                       </div>
 
                       <div className="col-md-4">

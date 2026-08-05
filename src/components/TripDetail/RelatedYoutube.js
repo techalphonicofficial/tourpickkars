@@ -64,13 +64,13 @@ export default function RelatedYoutube({ related_youtube_video }) {
       <div className="container th-container">
         <div className="title-area text-center">
           <span className="sub-title">Travelers On Youtube</span>
-          <h2 className="sec-title">
+          <div className="h3">
             <i>
               <FontAwesomeIcon icon={faYoutube} />
             </i>{" "}
             Captured Journeys
-          </h2>
-          <h3 className="h5">Reviews that make me Blush</h3>
+          </div>
+          <div className="h5 h3">Reviews that make me Blush</div>
           <p className="text-center smp">
             Testimonials, Reviews, Experiences, Virtual Tours & Much More
           </p>

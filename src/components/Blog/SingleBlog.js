@@ -27,7 +27,7 @@ export default function SingleBlog({post}) {
     <div className="blog-card" style={{ marginBottom: "30px", height: "calc(100% - 30px)" }}>
       {/* Image */}
       <div className="blog-card-img">
-        <Link href={`/blog/${createSlug(post.slug)}`} style={{ display: "block", width: "100%", height: "100%" }}>
+        <Link href={`/blog/${post.slug}`} style={{ display: "block", width: "100%", height: "100%" }}>
           <img
             src={post.image}
             alt={post.heading}
@@ -45,9 +45,9 @@ export default function SingleBlog({post}) {
 
       {/* Body */}
       <div className="blog-card-body">
-        <h3 className="blog-card-title">
-          <Link href={`/blog/${createSlug(post.slug)}`}>{post.heading}</Link>
-        </h3>
+        <div className="blog-card-title h3">
+          <Link href={`/blog/${post.slug}`}>{post.heading}</Link>
+        </div>
 
         {post.excerpt && (
           <p className="blog-card-excerpt">{post.excerpt}</p>
@@ -58,7 +58,7 @@ export default function SingleBlog({post}) {
             <div className="blog-author-avatar">TP</div>
             Tour Pickkars
           </div>
-          <Link href={`/blog/${createSlug(post.slug)}`} className="blog-read-link">
+          <Link href={`/blog/${post.slug}`} className="blog-read-link">
             Read More <ArrowIcon />
           </Link>
         </div>

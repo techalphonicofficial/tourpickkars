@@ -18,7 +18,7 @@
 //           <span className="sub-title">
 //             {mainpage.section[0].data.Text}
 //           </span>
-//           <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+//           <div className="sec-title h2">{mainpage.section[1].data.Text}</div>
 //         </div>
 
 //         <CurveSlider trips={trips} />
@@ -65,17 +65,17 @@ export default async function TourCategories() {
           <span className="sub-title">
             {mainpage.section[0].data.Text}
           </span>
-          <h2 className="sec-title">
+          <div className="sec-title h2">
             {mainpage.section[1].data.Text}
-          </h2>
+          </div>
         </div>
 
         {/* 🌍 International Trips */}
         {internationalTrips.length > 0 && (
           <>
-            <h3 className="text-center mt-4 mb-3">
+            <div className="text-center mt-4 mb-3 h3">
               International Trips
-            </h3>
+            </div>
             <CurveSlider trips={internationalTrips} />
           </>
         )}
@@ -83,9 +83,9 @@ export default async function TourCategories() {
         {/* 🇮🇳 National Trips */}
         {nationalTrips.length > 0 && (
           <>
-            <h3 className="text-center mt-5 mb-3">
+            <div className="text-center mt-5 mb-3 h3">
               Domestic Trips
-            </h3>
+            </div>
             <CurveSlider trips={nationalTrips} />
           </>
         )}

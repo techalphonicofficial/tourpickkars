@@ -13,39 +13,6 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // We only want to clean segments that might be dirty slugs (e.g., /kashmir%20divine%20journey)
-  // Split by '/' and clean each segment (except the first empty one from split)
-  const segments = pathname.split('/');
-  
-  let hasChanges = false;
-  const cleanSegments = segments.map(segment => {
-    if (!segment) return segment; // keep empty string for root '/'
-    
-    // Decode first to handle %20 etc, then apply createSlug
-    let decodedSegment = segment;
-    try {
-      decodedSegment = decodeURIComponent(segment);
-    } catch (e) {
-      // Ignore decoding errors
-    }
-    
-    const cleanSegment = createSlug(decodedSegment);
-    if (segment !== cleanSegment && decodeURIComponent(segment) !== cleanSegment) {
-      hasChanges = true;
-    }
-    return cleanSegment;
-  });
-
-  if (hasChanges) {
-    const cleanPathname = cleanSegments.join('/');
-    
-    // Construct the new URL with the clean pathname, preserving search params
-    const newUrl = request.nextUrl.clone();
-    newUrl.pathname = cleanPathname;
-    
-    return NextResponse.redirect(newUrl, 301); // 301 Permanent Redirect for SEO
-  }
-
   return NextResponse.next();
 }
 

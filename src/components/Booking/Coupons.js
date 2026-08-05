@@ -14,7 +14,7 @@ export default function Coupons({ showPaymentSteps, setShowPaymentSteps }) {
       {/* <RequestCallback/> */}
       {/* Title */}
       <div className="title d-flex justify-content-between gap-5">
-        <h6 className="text-start fw-bold mb-4 page-title">Coupons & Offers</h6>
+        <div className="text-start fw-bold mb-4 page-title h6">Coupons & Offers</div>
       </div>
 
       {/* Coupons Row */}
@@ -90,7 +90,7 @@ export default function Coupons({ showPaymentSteps, setShowPaymentSteps }) {
           <div className="bg-white p-4 rounded-3 shadow-lg">
             {/* Header */}
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <h6 className="fw-bold mb-0">Coupons And Offers</h6>
+              <div className="fw-bold mb-0 h6">Coupons And Offers</div>
               <FontAwesomeIcon
                 icon={faTimes}
                 style={{ cursor: "pointer" }}

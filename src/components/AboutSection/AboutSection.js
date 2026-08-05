@@ -135,7 +135,7 @@ export default function AboutSection() {
                       />
                     </div>
                     <div>
-                      <h5 className="about-feature-title">{item.data.section[1].data.Text}</h5>
+                      <div className="about-feature-title h5">{item.data.section[1].data.Text}</div>
                       <p className="about-feature-text">{item.data.section[2].data.content}</p>
                     </div>
                   </div>

@@ -9,7 +9,7 @@ export const CategoriesCard = ({ image, title, slug }) => {
     <div className="category-card single">
       <div className="category-card-inner">
         <div className="category-image-wrapper">
-          <Link href={`/trips/${createSlug(slug)}`}>
+          <Link href={`/trips/${slug || ''}`}>
             <Image
               src={image}
               alt={title}
@@ -20,10 +20,10 @@ export const CategoriesCard = ({ image, title, slug }) => {
           <div className="category-overlay"></div>
         </div>
         <div className="category-content">
-          <h3 className="category-title">
-            <Link href={`/trips/${createSlug(slug)}`}>{title}</Link>
-          </h3>
-          <Link href={`/trips/${createSlug(slug)}`} className="category-btn">
+          <div className="category-title h3">
+            <Link href={`/trips/${slug || ''}`}>{title}</Link>
+          </div>
+          <Link href={`/trips/${slug || ''}`} className="category-btn">
             <span>Explore Now</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </Link>

@@ -79,7 +79,7 @@ const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag }) => {
                     <img src="/img/favicon.webp" alt="" aria-hidden="true" width={32} height={32} />
                 </div>
                 <div className="title">
-                    <h3>{tag}</h3>
+                    <div className="h3">{tag}</div>
                 </div>
             </div>
         </>
@@ -113,13 +113,13 @@ export default function VideosSection() {
             <div className="container th-container">
                 <div className="title-area text-center pt-5">
                     <span className="sub-title">Real Experiences</span>
-                    <h2 className="sec-title">
+                    <div className="sec-title h2">
                         <i>
                             <FontAwesomeIcon icon={faPlayCircle} />
                         </i>{" "}
                         Video Reviews
-                    </h2>
-                    <h3 className="h5">Reviews that make me Blush</h3>
+                    </div>
+                    <div className="h5 h3">Reviews that make me Blush</div>
                     <p className="text-center smp">Testimonials, Reviews, Experiences, Virtual Tours & Much More</p>
                 </div>
 

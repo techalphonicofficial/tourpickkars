@@ -28,7 +28,7 @@ export default function TestimonialPackageSection({testimonials}) {
       <div className="container-fluid p-0">
         <div className="title-area mb-20 text-center">
           <span className="sub-title">{mainpage.section[0].data.Text}</span>
-          <h2 className="sec-title">{mainpage.section[1].data.Text}</h2>
+          <div className="sec-title h3">{mainpage.section[1].data.Text}</div>
         </div>
 
         <div className="slider-area">
@@ -72,7 +72,7 @@ export default function TestimonialPackageSection({testimonials}) {
                         />
                       </div>
                       <div className="media-body">
-                        <h3 className="box-title">{item.name}</h3>
+                        <div className="box-title h3">{item.name}</div>
                         <span className="testi-card_desig">{item.type}</span>
                       </div>
                     </div>

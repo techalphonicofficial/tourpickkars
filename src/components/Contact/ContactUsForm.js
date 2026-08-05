@@ -63,7 +63,7 @@ export default function ContactUsForm({ heading, banner, video }) {
           <div className="col-lg-6">
             <div className="text-lg-start text-center">
               <span className="sub-title text-white">Watch Our Journey</span>
-              <h2 className="display-5 fw-800 mb-4 lh-sm text-white">See the Adventure Through Our Eyes</h2>
+              <div className="display-5 fw-800 mb-4 lh-sm text-white h2">See the Adventure Through Our Eyes</div>
               <p className="text-white mb-5 pe-lg-5">We don't just organize trips — we craft unforgettable moments. Check out our latest travels and find inspiration for your next great adventure with Tour Pickkars.</p>
 
               <div className="d-flex justify-content-lg-start justify-content-center">
@@ -87,7 +87,7 @@ export default function ContactUsForm({ heading, banner, video }) {
                 className="ajax-contact"
               >
                 <div className="text-center mb-4">
-                  <h3 className="fw-bold text-capitalize m-0">{heading}</h3>
+                  <div className="fw-bold text-capitalize m-0 h3">{heading}</div>
                   <div className="h-1 bg-theme mx-auto mt-2" style={{ width: '50px', height: '3px' }}></div>
                 </div>
 

@@ -34,7 +34,7 @@ export default function RelatedTrips({trips}) {
           <div className="col-lg-6 offset-lg-3">
             <div className="title-area text-center">
               <span className="sub-title">Related</span>
-              <h2 className="sec-title"> Backpacking Trips</h2>
+              <div className="h3"> Backpacking Trips</div>
               {/* <p className="sec-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.

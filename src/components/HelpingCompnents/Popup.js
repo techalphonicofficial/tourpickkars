@@ -95,9 +95,9 @@ const Popup = () => {
 
                 {/* Right Form */}
                 <div className="col-md-6 p-4 py-5">
-                  <h4 className="mb-4 border-bottom pb-2 sec-title">
+                  <div className="mb-4 border-bottom pb-2 sec-title h4">
                     Plan your Next Trip
-                  </h4>
+                  </div>
 
                   {message && (
                     <div className="col-12">

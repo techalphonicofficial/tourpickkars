@@ -11,9 +11,9 @@ export default function BookNow({ id, title, slug, starting_price, bookingButton
       <div className="package-booking-price mb-4">
         <span className="booking-price-label">Starting From</span>
         <div className="d-flex align-items-end justify-content-between gap-3 mt-2">
-          <h3 className="fw-bold text-primary mb-0">
+          <div className="fw-bold text-primary mb-0 h3">
             Rs {Number(starting_price)}/-
-          </h3>
+          </div>
           <span className="booking-price-unit bg-light text-dark rounded-pill px-3 py-2">
             Per Person
           </span>

@@ -34,13 +34,13 @@ export default function Instavideo({ related_insta_video }) {
       <div className="container th-container">
         <div className="title-area text-center pt-5">
           <span className="sub-title">Travelers On Instagram</span>
-          <h2 className="sec-title">
+          <div className="h3">
             <i>
               <FontAwesomeIcon icon={faInstagram} />
             </i>{" "}
             Travel Reels
-          </h2>
-          <h3 className="h5">Reviews that make me Blush</h3>
+          </div>
+          <div className="h5 h3">Reviews that make me Blush</div>
           <p className='text-center smp'>Testimonials, Reviews, Experiences, Virtual Tours & Much More</p>
         </div>
 

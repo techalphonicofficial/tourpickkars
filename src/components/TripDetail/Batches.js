@@ -93,13 +93,13 @@ export default function Batches({ package_dates, drop, pickup }) {
     );
     setData(selectedGroup.dates);
   }, [selectedFilter, groupedDates]);
-  if (package_dates.length == 0) {
-    return;
+  if (!package_dates || package_dates.length === 0) {
+    return null;
   }
   return (
     <div className="min_box-detail batch_item container my-4 p-4">
       <div className="d-flex flex-sm-row flex-column justify-content-between align-items-center border-bottom pb-3 mb-4 gap-3">
-        <h2 className="section-title-premium m-0">Available Batches</h2>
+        <div className="h3">Available Batches</div>
         <div className="d-flex gap-2 bg-smoke p-1 rounded-3 w-100" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
           {groupedDates.map((filter, index) => (
             <span

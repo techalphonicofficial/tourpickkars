@@ -23,15 +23,13 @@ export function normaliseSlug(value = "") {
 export function getPackageUrl(packageItem) {
   if (!packageItem) return "/";
 
-  // Use the best available source field
-  const sourceSlug =
-    packageItem?.slug ||
-    packageItem?.package_slug ||
-    packageItem?.seo_slug ||
-    packageItem?.title ||
-    packageItem?.name ||
-    "";
+  // Use the exact slug if available from the backend
+  if (packageItem.slug) return `/${packageItem.slug}`;
+  if (packageItem.package_slug) return `/${packageItem.package_slug}`;
+  if (packageItem.seo_slug) return `/${packageItem.seo_slug}`;
 
+  // Fallback to title normalization only if no slug exists
+  const sourceSlug = packageItem.title || packageItem.name || "";
   const slug = normaliseSlug(sourceSlug);
 
   return slug ? `/${slug}` : "/";

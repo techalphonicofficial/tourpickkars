@@ -8,7 +8,7 @@ export default function AboutItem({ icon, title, text }) {
         <Image src={icon} alt={title} width={40} height={40} />
       </div>
       <div className="about-item_centent">
-        <h5 className="box-title">{title}</h5>
+        <div className="box-title h5">{title}</div>
         <p className="about-item_text">{text}</p>
       </div>
     </div>

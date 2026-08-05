@@ -57,7 +57,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                   {mainpage.sections[0].section[2].data.trip_items.map(
                     (item, index) => (
                       <li key={index}>
-                        <Link href={`/trips/${createSlug(item.slug)}`}>
+                        <Link href={`/trips/${item.slug}`}>
                           {item.heading}
                         </Link>
                       </li>
@@ -101,7 +101,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                   {mainpage.sections[1].section[1].data.trip_items.map(
                     (item, index) => (
                       <li key={index}>
-                        <Link href={`/trips/${createSlug(item.slug)}`}>
+                        <Link href={`/trips/${item.slug}`}>
                           {item.heading}
                         </Link>
                       </li>
@@ -117,7 +117,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                         .filter((item) => item.international === 0)
                         .map((item) => (
                           <li key={item.id}>
-                            <Link href={`/trips/${createSlug(item.slug)}`}>
+                            <Link href={`/trips/${item.slug}`}>
                               {item.heading}
                             </Link>
                           </li>
@@ -131,7 +131,7 @@ export default function Header({ mainpage, tripsWithcount }) {
                         .filter((item) => item.international === 1)
                         .map((item) => (
                           <li key={item.id}>
-                            <Link href={`/trips/${createSlug(item.slug)}`}>
+                            <Link href={`/trips/${item.slug}`}>
                               {item.heading}
                             </Link>
                           </li>

@@ -175,7 +175,7 @@
 //   return (
 //     <div className="min_box-detail Age_limit book_Amount container my-4">
 //       <div className="title d-flex justify-content-between gap-5">
-//         <h6 className="text-start flex-wrap fw-bold mb-4 page-title">
+//         <div className="text-start flex-wrap fw-bold mb-4 page-title h6">
 //           Amount to Pay{" "}
 //           {paybleType == "full" ? (
 //             <span>₹{totals.grandTotal.toFixed(0)}/-</span>
@@ -189,7 +189,7 @@
 //               /-
 //             </span>
 //           )}
-//         </h6>
+//         </div>
 //       </div>
 
 //       <div className="pricing_box">
@@ -520,7 +520,7 @@ export default function Pricing({
   return (
     <div className="pricing-sidebar-premium">
       <div className="mb-4 text-center">
-        <h4 className="fw-bold mb-1">Booking Summary</h4>
+        <div className="fw-bold mb-1 h4">Booking Summary</div>
         <div className="d-flex justify-content-center gap-2 mt-2">
           {[1, 2, 3].map((s) => (
             <div
@@ -622,7 +622,7 @@ export default function Pricing({
           style={{ backgroundColor: 'rgba(255, 255, 255, 1)', zIndex: 9999, backdropFilter: 'blur(5px)' }}>
           <div className="text-center text-white">
             <div className="spinner-grow text-primary mb-3" style={{ width: '3rem', height: '3rem' }} role="status"></div>
-            <h4 className="fw-bold">Securing Your Trip...</h4>
+            <div className="fw-bold h4">Securing Your Trip...</div>
             <p className="opacity-75">Please complete the payment to confirm your booking</p>
           </div>
         </div>

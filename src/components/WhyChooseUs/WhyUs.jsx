@@ -62,10 +62,10 @@ const WhyUs = () => {
           <div className="whyus-eyebrow">
             {data.section[0].data.Text}
           </div>
-          <h2 className="whyus-title">
+          <div className="whyus-title h2">
             {titleWords.slice(0, -2).join(" ")}{" "}
             <span>{titleWords.slice(-2).join(" ")}</span>
-          </h2>
+          </div>
         </div>
 
         <div className="whyus-grid">
@@ -87,7 +87,7 @@ const WhyUs = () => {
                   />
                 </div>
                 <div className="whyus-card-content">
-                  <h3 className="whyus-card-title">{item[1].Text.Text}</h3>
+                  <div className="whyus-card-title h3">{item[1].Text.Text}</div>
                   <p className="whyus-card-description">
                     {item[2].content.content}
                   </p>

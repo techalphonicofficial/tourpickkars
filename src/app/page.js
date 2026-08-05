@@ -12,6 +12,7 @@ import AdvertisementSectionCard from "@/components/AdvertisementSection/Advertis
 import VideosSection from "@/components/VideosSection/VideosSection";
 import { getPagewithSection } from "@/services/pageSection";
 import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -45,7 +46,7 @@ export async function generateMetadata() {
     description: data.meta_description,
     keywords: data.meta_description,
     alternates: {
-      canonical: `/`,
+      canonical: getCanonicalUrl(`/`),
     },
     openGraph: {
       type: "website",

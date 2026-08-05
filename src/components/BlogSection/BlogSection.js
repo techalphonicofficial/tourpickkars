@@ -46,10 +46,10 @@ export default function BlogSection() {
         <div className="blog-section-header">
           <div className="blog-header-left">
             <div className="blog-eyebrow">{mainpage.section[0].data.Text}</div>
-            <h2 className="blog-section-title">
+            <div className="blog-section-title h2">
               {titleWords.slice(0, -2).join(" ")}{" "}
               <span>{titleWords.slice(-2).join(" ")}</span>
-            </h2>
+            </div>
           </div>
           <Link href="blog" className="blog-see-all-btn">
             See All Articles <ArrowIcon />
@@ -102,9 +102,9 @@ export default function BlogSection() {
 
                   {/* Body */}
                   <div className="blog-card-body">
-                    <h3 className="blog-card-title">
-                      <Link href={`/blog/${createSlug(blog.slug)}`}>{blog.heading}</Link>
-                    </h3>
+                    <div className="blog-card-title h3">
+                      <Link href={`/blog/${blog.slug}`}>{blog.heading}</Link>
+                    </div>
 
                     {blog.excerpt && (
                       <p className="blog-card-excerpt">{blog.excerpt}</p>
@@ -115,7 +115,7 @@ export default function BlogSection() {
                         <div className="blog-author-avatar">TP</div>
                         Tour Pickkars
                       </div>
-                      <Link href={`/blog/${createSlug(blog.slug)}`} className="blog-read-link">
+                      <Link href={`/blog/${blog.slug}`} className="blog-read-link">
                         Read More <ArrowIcon />
                       </Link>
                     </div>

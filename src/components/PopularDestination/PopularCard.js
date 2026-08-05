@@ -15,12 +15,12 @@ export default function PopularCard({ image, title, subtitle, slug }) {
         />
         <div className="destination-content">
           <div className="media-left">
-            <h4 className="box-title">{title}</h4>
+            <div className="box-title h4">{title}</div>
             <span className="destination-subtitle">{subtitle} Packages</span>
           </div>
           <div className="btn-wrap">
             <Link
-              href={`/destination/${createSlug(slug)}`}
+              href={`/destination/${slug}`}
               className="th-btn"
             >
               Explore

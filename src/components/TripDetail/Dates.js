@@ -15,13 +15,13 @@ function Dates({ active_costs, package_dates }) {
   return (
     <div className="min_box-detail Age_limit package-pricing-section container my-4 mt-24">
       <div className="dates-section my-4">
-        <h2 className="visually-hidden">Pricing Details</h2>
+        <div className="h3">Pricing Details</div>
         {/* Regular Dates */}
         <div className="package-price-heading d-flex align-items-center mb-4 pb-3 border-bottom border-light">
           <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#e9f9ee' }}>
             <img src="/img/icon/regular_date.png" alt="Regular Date" style={{ width: '28px', objectFit: 'contain' }} />
           </div>
-          <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</h3>
+          <div className="m-0 fw-bold h3" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Regular Price</div>
         </div>
 
         <div className="row g-4 mb-5">
@@ -44,10 +44,10 @@ function Dates({ active_costs, package_dates }) {
                     {Number(activity.cost)}
                   </span>
 
-                  <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#00ba9d', fontSize: '1.8rem' }}>
+                  <div className="package-price-amount fw-bolder m-0 h3" style={{ color: '#00ba9d', fontSize: '1.8rem' }}>
                     <FontAwesomeIcon icon={faIndianRupee} className="me-1 fa-sm" />
                     {Number(activity.total_with_discount)}
-                  </h3>
+                  </div>
 
                   <span className="badge bg-light text-secondary mt-3 px-3 py-2 rounded-pill fw-medium border" style={{ fontSize: '0.75rem', position: 'inherit' }}>
                     + {Number(activity.gst_percent)}% GST
@@ -65,7 +65,7 @@ function Dates({ active_costs, package_dates }) {
               <div className="icon-box rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', backgroundColor: '#fff5e6' }}>
                 <img src="/img/icon/party_emoji.png" alt="Special Dates" style={{ width: '28px', objectFit: 'contain' }} />
               </div>
-              <h3 className="m-0 fw-bold" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</h3>
+              <div className="m-0 fw-bold h3" style={{ color: '#2c3e50', letterSpacing: '-0.5px' }}>Special Dates Price</div>
             </div>
 
             <div className="row justify-content-center">
@@ -94,24 +94,24 @@ function Dates({ active_costs, package_dates }) {
                           <div className="price-display d-flex flex-column align-items-center justify-content-center">
                             {Number(item.increase_amount_by_percent) > 0 ? (
                               <>
-                                <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+                                <div className="package-price-amount fw-bolder m-0 h3" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
                                   <FontAwesomeIcon icon={faIndianRupee} className="me-1 fa-sm" />
                                   {Number(activity.total_with_discount) + (Number(activity.total_with_discount) * Number(item.increase_amount_by_percent) / 100)}
-                                </h3>
+                                </div>
                               </>
                             ) : Number(item.decrease_amount_by_percent) > 0 ? (
                               <>
-                                <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+                                <div className="package-price-amount fw-bolder m-0 h3" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
                                   <FontAwesomeIcon icon={faIndianRupee} className="me-1 fa-sm" />
                                   {Number(activity.total_with_discount) - (Number(activity.total_with_discount) * Number(item.decrease_amount_by_percent) / 100)}
-                                </h3>
+                                </div>
                               </>
                             ) : (
                               <>
-                                <h3 className="package-price-amount fw-bolder m-0" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
+                                <div className="package-price-amount fw-bolder m-0 h3" style={{ color: '#fb8c00', fontSize: '1.8rem' }}>
                                   <FontAwesomeIcon icon={faIndianRupee} className="me-1 fa-sm" />
                                   {Number(activity.total_with_discount)}
-                                </h3>
+                                </div>
                               </>
                             )}
                             <span className="badge bg-light text-secondary mt-3 px-3 py-2 rounded-pill fw-medium border" style={{ fontSize: '0.75rem' }}>

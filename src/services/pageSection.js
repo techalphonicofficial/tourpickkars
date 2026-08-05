@@ -36,15 +36,8 @@ export async function getPagewithSection(pageId, sectionKey = false) {
   } catch (error) {
     console.error(`Error fetching page ${pageId} (section: ${sectionKey}): ${error.message}`);
     console.error(`Base URL: ${api.defaults.baseURL}`);
-    if (error.response) {
-      console.error(`Status: ${error.response.status}`);
-      console.error(`Response data:`, JSON.stringify(error.response.data));
-      throw new Error(error.response.data?.message || `API Error: ${error.response.status}`);
-    } else if (error.request) {
-      throw new Error(`No response from server: ${error.message}`);
-    } else {
-      throw new Error(`Request setup error: ${error.message}`);
-    }
+    // Do not throw so build doesn't crash on _not-found page rendering
+    return { sections: [] }; // Fallback
   }
 }
 

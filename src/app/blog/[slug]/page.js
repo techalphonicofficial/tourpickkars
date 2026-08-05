@@ -10,6 +10,7 @@ import { getSingleBlog } from "@/services/blogApi";
 import { notFound } from "next/navigation";
 import { createSlug } from "@/functions/createSlug";
 import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -24,12 +25,14 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const blog = await getblog(slug);
 
+  if (!blog || !blog.blog) return {};
+
   return {
     title: blog.blog.meta_title,
     description: blog.blog.meta_description,
     keywords: blog.blog.meta_description,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: getCanonicalUrl(`/blog/${slug}`),
     },
     openGraph: {
       type: "article",
@@ -37,13 +40,13 @@ export async function generateMetadata({ params }) {
       title: blog.blog.meta_title,
       description: blog.blog.meta_description,
       keywords: blog.blog.meta_description,
-      images: [{ url: blog.blog.image }],
+      images: [{ url: blog.blog.image || "" }],
     },
     twitter: {
       card: "summary_large_image",
       title: blog.blog.meta_title,
       description: blog.blog.meta_description,
-      images: [blog.blog.image],
+      images: [blog.blog.image || ""],
     },
   };
 }
@@ -61,9 +64,9 @@ export default async function PageDetail({ params }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: blog.blog.meta_title,
-    description: blog.blog.meta_description,
-    image: blog.blog.image,
+    headline: blog?.blog?.meta_title || "",
+    description: blog?.blog?.meta_description || "",
+    image: blog?.blog?.image || "",
     author: {
       "@type": "Organization",
       name: "tourpickkars",
@@ -76,8 +79,8 @@ export default async function PageDetail({ params }) {
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/logo.png`,
       },
     },
-    datePublished: blog.blog.created_at,
-    dateModified: blog.blog.updated_at || blog.blog.created_at,
+    datePublished: blog?.blog?.created_at || "",
+    dateModified: blog?.blog?.updated_at || blog?.blog?.created_at || "",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
@@ -139,14 +142,14 @@ export default async function PageDetail({ params }) {
                     dangerouslySetInnerHTML={{ __html: blog.blog.content }}
                   /> */}
 
-                  {blog.blog.content && (
+                  {blog?.blog?.content && (
                     <div
                       id="blogMainContent"
                       dangerouslySetInnerHTML={{ __html: sanitizeCmsHtml(blog.blog.content) }}
                     />
                   )}
 
-                  {blog.blog.details && blog.blog.details.length > 0 && (
+                  {blog?.blog?.details && blog.blog.details.length > 0 && (
                     <>
                       <div id="blogDetailsContent">
                         {blog.blog.details.map((detail, index) => (
@@ -213,26 +216,26 @@ export default async function PageDetail({ params }) {
               <aside className="sidebar-area">
 
                 <div className="widget">
-                  <h3 className="widget_title">Recent Posts</h3>
+                  <div className="widget_title h3">Recent Posts</div>
                   <div className="recent-post-wrap">
-                    {blog.recentBlog.map((post) => (
+                    {blog?.recentBlog?.map((post) => (
                       <div className="recent-post" key={post.id}>
                         <div className="media-img">
-                          <Link href={`/blog/${createSlug(post.slug)}`}>
+                          <Link href={`/blog/${createSlug(post.slug || '')}`}>
                             <img src={post.image} alt="Blog Image" />
                           </Link>
                         </div>
                         <div className="media-body">
-                          <h4 className="post-title">
+                          <div className="post-title h4">
                             <Link
                               className="text-inherit"
-                              href={`/blog/${createSlug(post.slug)}`}
+                              href={`/blog/${createSlug(post.slug || '')}`}
                             >
                               {post.heading}
                             </Link>
-                          </h4>
+                          </div>
                           <div className="recent-post-meta">
-                            <Link href={`/blog/${createSlug(post.slug)}`}>
+                            <Link href={`/blog/${createSlug(post.slug || '')}`}>
                               <i>
                                 <FontAwesomeIcon icon={faCalendarDays} />
                               </i>
@@ -254,14 +257,14 @@ export default async function PageDetail({ params }) {
                 >
                   <div className="offer-banner">
                     <div className="offer">
-                      <h6 className="box-title">
+                      <div className="box-title h6">
                         Need Help? We Are Here To Help You
-                      </h6>
+                      </div>
                       <div className="banner-logo">
                         <img src="/img/logo2.svg" alt="Tourm" />
                       </div>
                       <div className="offer">
-                        <h6 className="offer-title">You Get Online support</h6>
+                        <div className="offer-title h6">You Get Online support</div>
                         <Link className="offter-num" href="%2b256214203215">
                           +256 214 203 215
                         </Link>

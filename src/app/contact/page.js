@@ -64,7 +64,7 @@
 //         {/* Title Area */}
 //         <div className="title-area text-center">
 //           <span className="sub-title">Get In Touch</span>
-//           <h2 className="sec-title">Our Contact Information</h2>
+//           <div className="sec-title h2">Our Contact Information</div>
 //         </div>
 
 //         {/* Contact Info Grid */}
@@ -81,7 +81,7 @@
 //                 />
 //               </div>
 //               <div className="about-contact-details">
-//                 <h6 className="box-title">Our Address</h6>
+//                 <div className="box-title h6">Our Address</div>
 //                 <p className="about-contact-details-text">
 //                   {mainpage.sections[1].section[0].data.Text}
 //                 </p>
@@ -101,7 +101,7 @@
 //                 />
 //               </div>
 //               <div className="about-contact-details">
-//                 <h6 className="box-title">Phone Number</h6>
+//                 <div className="box-title h6">Phone Number</div>
 //                 <p className="about-contact-details-text">
 //                   <Link href={mainpage.sections[1].section[1].data.button_link}>{mainpage.sections[1].section[1].data.button_label}</Link>
 //                 </p>
@@ -124,7 +124,7 @@
 //                 />
 //               </div>
 //               <div className="about-contact-details">
-//                 <h6 className="box-title">Email Address</h6>
+//                 <div className="box-title h6">Email Address</div>
 //                 <p className="about-contact-details-text">
 //                   <Link href={mainpage.sections[1].section[3].data.button_link}>{mainpage.sections[1].section[3].data.button_label}</Link>
 //                 </p>
@@ -154,6 +154,7 @@ import Image from "next/image";
 import ContactUsForm from "@/components/Contact/ContactUsForm";
 import Link from "next/link";
 import { getPagewithSection } from "@/services/pageSection";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 const replaceOldPhone = (value = "") =>
   String(value).replace(/9876543210/g, "9679945077");
@@ -173,7 +174,7 @@ export async function generateMetadata({ params }) {
       description: mainpage?.meta_description || "Contact Tour Pickkars",
       keywords: mainpage?.meta_description || "",
       alternates: {
-        canonical: `/contact`,
+        canonical: getCanonicalUrl(`/contact`),
       },
       openGraph: {
         type: "website",
@@ -210,7 +211,7 @@ export default async function Contact() {
         <div className="container">
           <div className="title-area text-center">
             <span className="sub-title">Get In Touch</span>
-            <h2 className="sec-title">Our Contact Information</h2>
+            <div className="sec-title h2">Our Contact Information</div>
             <p className="text-danger mt-3">
               Unable to load contact information. Please try again later.
             </p>
@@ -273,7 +274,7 @@ export default async function Contact() {
             <div className="col-xl-4 col-lg-6">
               <div className="contact-info-card">
                 <div className="contact-icon-wrapper">📍</div>
-                <h4 className="fw-bold mb-3">Our Office</h4>
+                <div h4></div>
                 <p className="text-muted lh-lg mb-0">{address}</p>
                 <div className="mt-4 pt-3 border-top border-light">
                   <Link
@@ -291,7 +292,7 @@ export default async function Contact() {
             <div className="col-xl-4 col-lg-6">
               <div className="contact-info-card">
                 <div className="contact-icon-wrapper">📞</div>
-                <h4 className="fw-bold mb-3">Call Support</h4>
+                <div h4></div>
                 <Link href={phone1.button_link || "tel:"} className="contact-details-link fs-5">{phone1.button_label || "No Phone Found"}</Link>
                 <Link href={phone2.button_link || "tel:"} className="contact-details-link fs-5">{phone2.button_label || ""}</Link>
                 <div className="mt-4 pt-3 border-top border-light">
@@ -304,7 +305,7 @@ export default async function Contact() {
             <div className="col-xl-4 col-lg-6">
               <div className="contact-info-card">
                 <div className="contact-icon-wrapper">✉️</div>
-                <h4 className="fw-bold mb-3">Email Us</h4>
+                <div h4></div>
                 <Link href={email1.button_link || "mailto:"} className="contact-details-link fs-5">{email1.button_label || "No Email Found"}</Link>
                 <Link href={email2.button_link || "mailto:"} className="contact-details-link fs-5">{email2.button_label || ""}</Link>
                 <div className="mt-4 pt-3 border-top border-light">

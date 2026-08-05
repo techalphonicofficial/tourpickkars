@@ -38,7 +38,7 @@
 //     description: single_package.meta_description,
 //     keywords: single_package.meta_description,
 //     alternates: {
-//       canonical: `/${slug}`,
+//       canonical: getCanonicalUrl(`/${slug}`),
 //     },
 //     openGraph: {
 //       type: "article",
@@ -229,6 +229,7 @@ import { singleTrips } from "@/services/tripsApi";
 import { notFound } from "next/navigation";
 import { permanentRedirect } from "next/navigation";
 import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -246,25 +247,27 @@ export async function generateMetadata({ params }) {
   const single_package = await getSinglePackage(slug);
   // console.log("ggggggg",slug);
 
+  if (!single_package) return {};
+
   return {
     title: single_package.meta_title,
     description: single_package.meta_description,
     keywords: single_package.meta_description,
     alternates: {
-      canonical: `/${slug}`,
+      canonical: getCanonicalUrl(`/${slug}`),
     },
     openGraph: {
       type: "article",
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
       title: single_package.meta_title,
       description: single_package.meta_description,
-      images: [{ url: single_package.banner }],
+      images: [{ url: single_package.banner || "" }],
     },
     twitter: {
       card: "summary_large_image",
       title: single_package.meta_title,
       description: single_package.meta_description,
-      images: [single_package.banner],
+      images: [single_package.banner || ""],
     },
   };
 }
@@ -279,7 +282,7 @@ export default async function Tripdetail({ params }) {
   const trips = single_package?.trips?.length > 0 ? await singleTrips(single_package.trips[0].slug) : { packages: [] };
   const redirection = await packageRedirection(single_package.slug);
 
-  if (redirection.hasOwnProperty("id")) {
+  if (redirection?.hasOwnProperty?.("id") || redirection?.id) {
     if (redirection.to_type == "trip") {
       return permanentRedirect(`/trips/${redirection.to_url}`);
     } else {

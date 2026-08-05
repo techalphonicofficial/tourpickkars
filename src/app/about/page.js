@@ -7,6 +7,7 @@ import { getPagewithSection } from "@/services/pageSection";
 import { sanitizeCmsHtml } from "@/functions/sanitizeCmsHtml";
 import Image from "next/image";
 import Link from "next/link";
+import { getCanonicalUrl } from "@/utils/getCanonical";
 
 async function getAboutData() {
   try {
@@ -33,7 +34,7 @@ export async function generateMetadata() {
     description: data.meta_description,
     keywords: data.meta_description,
     alternates: {
-      canonical: `/about`,
+      canonical: getCanonicalUrl(`/about`),
     },
     openGraph: {
       type: "website",
@@ -56,7 +57,7 @@ export default async function About() {
   if (error || !mainpage) {
     return (
       <div className="p-10 text-center min-h-screen flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold mb-4">Error Loading Content</h1>
+        <div className="text-3xl font-bold mb-4 h1">Error Loading Content</div>
         <p className="text-lg mb-6">{error || "Please try again later or contact support."}</p>
         <Link href="/" className="th-btn style3">
           Return to Home

@@ -52,7 +52,7 @@ export default function BookingPage() {
   }, [slug]);
 
   const groupedDates = useMemo(() => {
-    if (data.length == 0) return [];
+    if (!data || !data.packageDates) return [];
     const groups = data.packageDates.reduce((acc, item) => {
       const date = new Date(item.start_date);
       const month = monthNames[date.getMonth()];
@@ -71,7 +71,7 @@ export default function BookingPage() {
 
   const handleSetDates = (id) => {
     // console.log("run handleSetDates");
-    if (data.length == 0) return;
+    if (!data || !data.packageDates) return;
     const selectedDate = data.packageDates.filter((itm) => itm.id == id);
     setSelectedDate(selectedDate[0]);
     setSelectedCosts([]);
