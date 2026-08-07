@@ -129,13 +129,12 @@ export default function VideosSection() {
                         touchRatio={1.2}
                         speed={1000}
                         modules={[Autoplay, Pagination, Navigation]}
-                        autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
                         spaceBetween={20}
                         navigation={true}
                         breakpoints={{
-                            0: { slidesPerView: 1.1 },
-                            576: { slidesPerView: 2 },
-                            768: { slidesPerView: 2 },
+                            0: { slidesPerView: 1.1, autoplay: false },
+                            576: { slidesPerView: 2, autoplay: false },
+                            768: { slidesPerView: 2, autoplay: { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true } },
                             992: { slidesPerView: 3 },
                             1200: { slidesPerView: 4 },
                             1400: { slidesPerView: 6 },
