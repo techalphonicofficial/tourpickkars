@@ -10,37 +10,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeMute, faVolumeUp, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import { apiEndpoint } from "@/services/config";
 
-const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag }) => {
-    const [isHovered, setIsHovered] = useState(false);
+const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag, isActive, onActivate, onDeactivate, onToggle }) => {
     const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef(null);
 
     useEffect(() => {
         let isMounted = true;
-        if (isHovered && videoRef.current) {
+        if (isActive && videoRef.current) {
             videoRef.current.play().catch((e) => {
                 if (isMounted) console.log("Video play failed:", e);
             });
-        } else if (!isHovered && videoRef.current) {
+        } else if (!isActive && videoRef.current) {
             videoRef.current.pause();
             videoRef.current.currentTime = 0;
         }
         return () => { isMounted = false; };
-    }, [isHovered]);
+    }, [isActive]);
 
     return (
         <>
             <div
-                className={`gallery-thumb2 custom-video-thumb w-100 ${isHovered ? 'is-hovered' : ''}`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                className={`gallery-thumb2 custom-video-thumb w-100 ${isActive ? 'is-hovered' : ''}`}
+                onMouseEnter={onActivate}
+                onMouseLeave={onDeactivate}
+                onClick={onToggle}
             >
                 {/* Thumbnail Image */}
                 <img
                     src={thumbnailSrc}
                     alt="Video Thumbnail"
                     className="video-thumb-img"
-                    style={{ opacity: isHovered ? 0 : 1 }}
+                    style={{ opacity: isActive ? 0 : 1 }}
                 />
 
                 {/* Video Element */}
@@ -51,7 +51,7 @@ const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag }) => {
                     muted={isMuted}
                     playsInline
                     className="video-thumb-video"
-                    style={{ opacity: isHovered ? 1 : 0 }}
+                    style={{ opacity: isActive ? 1 : 0 }}
                 />
 
                 {/* Volume Toggle Button */}
@@ -62,14 +62,14 @@ const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag }) => {
                         setIsMuted(!isMuted);
                     }}
                     className="vol-btn"
-                    style={{ opacity: isHovered ? 1 : 0 }}
+                    style={{ opacity: isActive ? 1 : 0 }}
                 >
                     <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} size="sm" />
                 </button>
 
                 <div
                     className="insta-icon-overlay"
-                    style={{ opacity: isHovered ? 0 : 1 }}
+                    style={{ opacity: isActive ? 0 : 1 }}
                 >
                     <FontAwesomeIcon icon={faPlayCircle} />
                 </div>
@@ -88,6 +88,7 @@ const HoverVideoPlayer = ({ videoSrc, thumbnailSrc, tag }) => {
 
 export default function VideosSection() {
     const [videos, setVideos] = useState([]);
+    const [activeVideoId, setActiveVideoId] = useState(null);
 
     useEffect(() => {
         fetch(apiEndpoint("/banner-videos"))
@@ -142,15 +143,30 @@ export default function VideosSection() {
                         className="has-shadow videos-swiper"
                         style={{ paddingBottom: "30px", paddingTop: "10px" }}
                     >
-                        {videos.map((video, index) => (
-                            <SwiperSlide key={video.id || index}>
-                                <HoverVideoPlayer
-                                    thumbnailSrc={video.banner}
-                                    videoSrc={video.video}
-                                    tag={video.tage}
-                                />
-                            </SwiperSlide>
-                        ))}
+                        {videos.map((video, index) => {
+                            const id = video.id || index;
+                            return (
+                                <SwiperSlide key={id}>
+                                    <HoverVideoPlayer
+                                        thumbnailSrc={video.banner}
+                                        videoSrc={video.video}
+                                        tag={video.tage}
+                                        isActive={activeVideoId === id}
+                                        onActivate={() => setActiveVideoId(id)}
+                                        onDeactivate={() => {
+                                            if (activeVideoId === id) setActiveVideoId(null);
+                                        }}
+                                        onToggle={() => {
+                                            if (activeVideoId === id) {
+                                                setActiveVideoId(null);
+                                            } else {
+                                                setActiveVideoId(id);
+                                            }
+                                        }}
+                                    />
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                 </div>
             </div>
